@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/authentication/sign_up_screen.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const TikTokApp());
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class TikTokApp extends StatelessWidget {
+  const TikTokApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tiktok Clone',
+      title: 'TikTok Clone',
       theme: ThemeData(
+        useMaterial3: false,
+        scaffoldBackgroundColor: Colors.white,
         primaryColor: const Color(0xFFE9435A),
-      ),
-      home: const Padding(
-        padding: EdgeInsets.all(Sizes.size14),
-        child: Row(
-          children: [
-            Text('hello'),
-            Gaps.h96,
-            Text('bye'),
-          ],
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
+      home: const SignUpScreen(),
     );
   }
 }
