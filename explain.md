@@ -28,3 +28,50 @@
 - Controller는 widget을 컨트롤 할 수 있게 함
 - controller 생성을 위해 statefulwidget으로 변경
 - state 클래스 안에 controller 선언
+- AnimatedContainer 위젯은 컨테이너 장식에 대한 모든 변화를 애니메이션화 함
+
+### 4.5 FormButton
+
+- AnimateDefaultTextStyle
+  - duration과 style을 가짐
+- Button을 widget function으로 뺐을때
+  - 생성자는 \_로 시작하는 변수명을 가질 수 없음
+  - 따라서 이상한 구조의 생성자가 나옴
+  - 상태 값만 받는 클래스로 수정
+
+```dart
+// Before
+  const FormButton({
+    super.key,
+    required String username,
+  }) : _username = username;
+
+  final String _username;
+
+// After
+  const FormButton({
+    super.key,
+    required this.disabled,
+  });
+
+  final bool disabled;
+
+//생성자의 매개변수 이름과 멤버 변수의 이름이 같을 때 this 키워드를 사용하여 멤버 변수를 가리킬 수 있습니다.
+```
+
+- Controller의 삭제
+  - widget이 사라질 때, 컨트롤러를 메모리에서 지움
+- StatefulWidget 안의 State 안에 있다면 어디서든 context를 사용할 수 있음
+- onTap 함수
+
+```dart
+GestureDetector(
+    onTap: () => _onLoginTap(context),
+    child: Text( 'Log in', ...))
+
+GestureDetector( onTap: _onNextTap,
+                child: FormButton( disabled: _username.isEmpty, ), ),
+```
+
+- () =>를 사용하는 것은 함수를 호출할 때 추가적인 매개변수를 전달하거나, 함수 호출을 지연시키는 등의 특별한 동작이 필요할 때 사용됩니다.
+- () =>가 없는 경우에는 함수를 직접 참조하여 호출합니다.
