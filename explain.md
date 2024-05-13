@@ -1,3 +1,8 @@
+## 0. Common
+
+- final은 지정한 후에 변경 불가능
+  - 변수를 먼저 지정하고 뒤에 기능을 할당하면 final로 먼저 지정되어 오류가 발생하는 경우 발생
+
 ## 4. Autentication
 
 ### 4.0 Sign Up Screen
@@ -78,4 +83,16 @@ GestureDetector( onTap: _onNextTap,
 
 ### 4.6 Email Screens
 
--
+- 힌트: hintText
+- 유효성검사: errorText
+- enabledBorder: 입력 필드가 활성화되어 있지만 현재 포커스를 받지 않은 상태일 때의 테두리 스타일을 정의
+  - UnderlineInputBorder를 사용하여 밑줄 스타일의 테두리
+  - BorderSide를 사용하여 테두리의 색상
+- focusedBorder: 입력 필드가 현재 포커스를 받고 있는 상태일 때의 테두리 스타일을 정의
+  - UnderlineInputBorder, BorderSide를 사용하여 테두리의 스타일과 색상을 동일하게 설정
+
+### 4.7 Password
+
+- 비밀번호 관련 아이콘들 추가
+- InputDecoration에 suffix, suffixIcon, prefix, prefixIcon을 이용
+- 비밀번호 스럽게 하려면 TextFiled에서 obsecureText를 ture로 설정

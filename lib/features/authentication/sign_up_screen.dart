@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
-import 'package:tictok_clone/features/authentication/email_screen.dart';
 import 'package:tictok_clone/features/authentication/login_screen.dart';
 import 'package:tictok_clone/features/authentication/username_screen.dart';
 import 'package:tictok_clone/features/authentication/widgets/auth_button.dart';
