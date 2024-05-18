@@ -44,7 +44,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
   void _onSubmit() {
-    if (_isPasswordValid()) return;
+    if (!_isPasswordValid()) return;
     Navigator.push(
       context,
       MaterialPageRoute(

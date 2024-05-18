@@ -96,3 +96,23 @@ GestureDetector( onTap: _onNextTap,
 - 비밀번호 관련 아이콘들 추가
 - InputDecoration에 suffix, suffixIcon, prefix, prefixIcon을 이용
 - 비밀번호 스럽게 하려면 TextFiled에서 obsecureText를 ture로 설정
+
+### 4.8 Birthday Screen
+
+- Textfield에서 enabled: false 시 보지만 비활성화 (입력 x)
+- Text vs TextField
+  - Text: 단순히 텍스트를 화면에 표시하는 데 사용되며 수정 불가능
+  - TextFiled: 텍스트를 입력하고 편집할 수 있는 텍스트 필드를 생성하는 데 사용
+- TextEditingController
+  - TextEditingController의 value 속성을 사용하면 텍스트 필드의 현재 텍스트와 선택된 텍스트를 가져오거나 변경할 수 있음
+  - 텍스트 필드(TextField)의 현재 텍스트와 선택된 텍스트를 제어하는 데 사용
+  - TextEditingController의 value 속성은 TextEditingValue 타입
+  - 텍스트 필드의 현재 텍스트와 선택된 텍스트의 정보를 포함
+- TextEditingValue 주요 속성
+  - text: 텍스트 필드의 현재 텍스트
+  - selection: 텍스트 필드에서 현재 선택된 텍스트의 범위를 나타내는 TextSelection 객체
+  - composing: IME(입력 메소드 에디터)에 의해 현재 구성 중인 텍스트의 범위를 나타내는 TextRange 객체
+- CupetinoDatePicker
+  - (\*) onDateTimeChanged: 유저가 날짜나 시간을 바꿀 때 출력됨
+- 함수 내에서의 final
+  - 함수 호출시 새로운 공간이 할당되기에 final 변수를 내부에 사용
