@@ -116,3 +116,8 @@ GestureDetector( onTap: _onNextTap,
   - (\*) onDateTimeChanged: 유저가 날짜나 시간을 바꿀 때 출력됨
 - 함수 내에서의 final
   - 함수 호출시 새로운 공간이 할당되기에 final 변수를 내부에 사용
+
+### 4.9 LoginForm Screen
+
+- stateless widget의 function에는 context를 전달해줘야 함
+  - context에 접근할 수 없음
