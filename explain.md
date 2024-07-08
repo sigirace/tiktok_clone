@@ -121,3 +121,18 @@ GestureDetector( onTap: _onNextTap,
 
 - stateless widget의 function에는 context를 전달해줘야 함
   - context에 접근할 수 없음
+- Form에는 global key가 필요함
+  - global key
+    - 고유 식별자 역할 수행
+    - form의 state에도 접근 가능
+    - form의 Method 실행 가능
+- \_formKey.currentState
+  - 있을수도 있고 없을수도 있기에 ?를 사용해서 없다면 아무것도 수행하지 않도록 함
+  - \_formKey.currentState가 null이 아니면 bool을 반환
+  - save함수는 모든 text입력에 onSaved 콜백 함수 실행
+  - state를 추적하지 않아도 되는 장점이 있음
+
+📍 **Super**
+
+- super 키워드 사용: 부모 클래스의 메서드를 재정의한 경우, 자식 클래스에서 부모 클래스의 원래 메서드를 호출하기 위해 사용합니다. 이는 부모 클래스의 초기화 작업이나 기본 동작을 유지하면서 추가 작업을 수행하기 위해 필요합니다.
+- super 키워드 사용하지 않음: 재정의되지 않은 기본 메서드를 호출할 때는 super 키워드를 사용할 필요가 없습니다. 이 경우 자식 클래스에서 해당 메서드를 직접 호출하면 됩니다.

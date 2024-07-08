@@ -12,22 +12,22 @@ class UsernameScreen extends StatefulWidget {
 }
 
 class _UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _ussernameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   String _username = "";
 
   @override
   void initState() {
     super.initState();
-    _ussernameController.addListener(() {
+    _usernameController.addListener(() {
       setState(() {
-        _username = _ussernameController.text;
+        _username = _usernameController.text;
       });
     });
   }
 
   @override
   void dispose() {
-    _ussernameController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -73,7 +73,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             ),
             Gaps.v16,
             TextField(
-              controller: _ussernameController,
+              controller: _usernameController,
               decoration: InputDecoration(
                 hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
