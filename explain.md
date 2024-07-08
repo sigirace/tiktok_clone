@@ -136,3 +136,18 @@ GestureDetector( onTap: _onNextTap,
 
 - super 키워드 사용: 부모 클래스의 메서드를 재정의한 경우, 자식 클래스에서 부모 클래스의 원래 메서드를 호출하기 위해 사용합니다. 이는 부모 클래스의 초기화 작업이나 기본 동작을 유지하면서 추가 작업을 수행하기 위해 필요합니다.
 - super 키워드 사용하지 않음: 재정의되지 않은 기본 메서드를 호출할 때는 super 키워드를 사용할 필요가 없습니다. 이 경우 자식 클래스에서 해당 메서드를 직접 호출하면 됩니다.
+
+### 5.1 Interests Screen
+
+- Wrap
+  - 가로로 배치하는데 한줄안에 다 안들어가면 다음줄로 넘어감
+  - runSpacing으로 세로 간격 조정
+  - spacing으로 가로 간격 조정
+- rendering은 사용자가 보는 화면만 하는 것이 좋음
+  - collection for 보다는 Listview 사용
+- BottomAppBar
+  - elevation은 떠있는듯한 효과를 줌
+
+📌 **Ui tip**
+
+- Singlechildscrollview > paddig > column > wrap 의 구조가 좋아보임
