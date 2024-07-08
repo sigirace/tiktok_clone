@@ -151,3 +151,8 @@ GestureDetector( onTap: _onNextTap,
 📌 **Ui tip**
 
 - Singlechildscrollview > paddig > column > wrap 의 구조가 좋아보임
+
+### 5.2 Scroll Animations
+
+- controller를 만드려면 stateful로 변경해야함
+- scroll controller 사용시 Singlechildscrollview를 scrollbar로 감쌈
