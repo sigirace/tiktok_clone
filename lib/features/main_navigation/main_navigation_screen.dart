@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tictok_clone/constants/gaps.dart';
+import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/main_navigation/widgets/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -11,24 +14,6 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
-  final screens = [
-    const Center(
-      child: Text("Home"),
-    ),
-    const Center(
-      child: Text("Search"),
-    ),
-    const Center(
-      child: Text("Home"),
-    ),
-    const Center(
-      child: Text("Home"),
-    ),
-    const Center(
-      child: Text("Search"),
-    ),
-  ];
-
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -38,27 +23,39 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: screens[_selectedIndex],
-        bottomNavigationBar: NavigationBar(
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: _onTap,
-          destinations: const [
-            NavigationDestination(
-              icon: FaIcon(
-                FontAwesomeIcons.house,
-                color: Colors.teal,
-              ),
-              label: 'home',
+      bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.all(Sizes.size12),
+        color: Colors.black,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            NavTab(
+              icon: FontAwesomeIcons.house,
+              text: "Home",
+              isSelected: _selectedIndex == 0,
+              onTap: () => _onTap(0),
             ),
-            NavigationDestination(
-              icon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: Colors.amber,
-              ),
-              label: 'search',
-            )
+            NavTab(
+              icon: FontAwesomeIcons.magnifyingGlass,
+              text: "Search",
+              isSelected: _selectedIndex == 1,
+              onTap: () => _onTap(1),
+            ),
+            NavTab(
+              icon: FontAwesomeIcons.message,
+              text: "Inbox",
+              isSelected: _selectedIndex == 2,
+              onTap: () => _onTap(2),
+            ),
+            NavTab(
+              icon: FontAwesomeIcons.user,
+              text: "Profile",
+              isSelected: _selectedIndex == 3,
+              onTap: () => _onTap(3),
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

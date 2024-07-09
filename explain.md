@@ -221,3 +221,10 @@ AnimatedSwitcher(
 
 - BottomNavigationBar의 item이 destiantion이 됨
 - meterial3를 따름
+
+### 6.5 Custom NavigationBar
+
+- Column은 기본적으로 세로 공간을 최대한 차지하려고 함
+  - children의 공간만 차지하라고 선언
+  - mainAxisSize: MainAxisSize.min,
+- Expanded는 가능한만큼 확장시킴
