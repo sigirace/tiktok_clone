@@ -156,3 +156,17 @@ GestureDetector( onTap: _onNextTap,
 
 - controller를 만드려면 stateful로 변경해야함
 - scroll controller 사용시 Singlechildscrollview를 scrollbar로 감쌈
+
+### 5.3 Tutorial Screen
+
+- Scafold body appbar
+  - no appbar ☞ SafeArea > Padding > Column > children
+  - appbar ☞ Padding > Column > childern
+- TabBarView
+  - TabController 필요
+    - controller를 따로 명시하거나
+    - DefaultTabController를 사용
+      - contents 개수를 지정해야함
+      - scafold를 감싸서 사용
+- TabPageSelector를 bottom에 추가하여 위치 표현 가능
+  - TabBarView를 TabPageSelector로 감싸는 형식
