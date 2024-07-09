@@ -238,3 +238,8 @@ AnimatedSwitcher(
   - 위젯의 위치 추적
   - stateful widget은 상태를 가지고 있고 이는 변경될 수 있기에 사용
   - stateless는 정적이라 상관없음
+- scafold의 body를 변경하는 과정
+- globalkey로 고유한 instance들을 생성하였으나 setstate함수로 인해 빌드될 때마다 다시 생성됨
+- 다시 생성되는 과정에서 이전의 widget은 삭제함 (dispose)
+
+### 6.7 Stateful Navigation part 2

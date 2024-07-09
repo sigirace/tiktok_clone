@@ -21,18 +21,29 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     });
   }
 
-  final screens = [
-    StfScreen(key: GlobalKey()),
-    StfScreen(key: GlobalKey()),
-    Container(),
-    StfScreen(key: GlobalKey()),
-    StfScreen(key: GlobalKey()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens.elementAt(_selectedIndex),
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: _selectedIndex != 0,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: const StfScreen(),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.all(Sizes.size12),
         color: Colors.black,
@@ -53,19 +64,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               isSelected: _selectedIndex == 1,
               onTap: () => _onTap(1),
             ),
+            Gaps.h24,
             NavTab(
               icon: FontAwesomeIcons.message,
               selectedIcon: FontAwesomeIcons.solidMessage,
               text: "Inbox",
-              isSelected: _selectedIndex == 2,
-              onTap: () => _onTap(2),
+              isSelected: _selectedIndex == 3,
+              onTap: () => _onTap(3),
             ),
             NavTab(
               icon: FontAwesomeIcons.user,
               selectedIcon: FontAwesomeIcons.solidUser,
               text: "Profile",
-              isSelected: _selectedIndex == 3,
-              onTap: () => _onTap(3),
+              isSelected: _selectedIndex == 4,
+              onTap: () => _onTap(4),
             ),
           ],
         ),
