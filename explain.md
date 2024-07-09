@@ -228,3 +228,13 @@ AnimatedSwitcher(
   - children의 공간만 차지하라고 선언
   - mainAxisSize: MainAxisSize.min,
 - Expanded는 가능한만큼 확장시킴
+
+### 6.6 Stateful Navigation part 1
+
+- Globalkey: 위젯 생성시 고유한 키를 할당하여 식별할 수 있게 함
+  - 다른 위젯의 상태에 접근
+  - 위젯 간 데이터 전달
+  - 위젯의 고유성 보장
+  - 위젯의 위치 추적
+  - stateful widget은 상태를 가지고 있고 이는 변경될 수 있기에 사용
+  - stateless는 정적이라 상관없음
