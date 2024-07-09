@@ -243,3 +243,13 @@ AnimatedSwitcher(
 - 다시 생성되는 과정에서 이전의 widget은 삭제함 (dispose)
 
 ### 6.7 Stateful Navigation part 2
+
+- offstage는 화면이 사라지지 않고 계속 유지되게 함
+- offstage child가 많으면 모두 동시에 활성화되어 rendering되기에 매우느려짐
+
+### 6.8 Post Video Button
+
+- Positionsed widget
+  - stack 된 widget들을 control 하기 위해서 사용
+  - positioned들은 stack 안에서 정해진 크기가 있어야함 > 기준점(어디서부터~) 필요
+- Navigator의 fullscreenDialog를 설정하면 화면이 아래에서 위로 올라감
