@@ -159,6 +159,8 @@ GestureDetector( onTap: _onNextTap,
 
 ### 5.3 Tutorial Screen
 
+💥 AnimatedCrossFade로 기능 대체
+
 - Scafold body appbar
   - no appbar ☞ SafeArea > Padding > Column > children
   - appbar ☞ Padding > Column > childern
@@ -170,3 +172,29 @@ GestureDetector( onTap: _onNextTap,
       - scafold를 감싸서 사용
 - TabPageSelector를 bottom에 추가하여 위치 표현 가능
   - TabBarView를 TabPageSelector로 감싸는 형식
+
+### 5.4 AnimatedCrossFade
+
+- 화면을 넘기는 swipe를 pand이라고 함 in GestureDetector
+  - onPanUpdate는 DragUpdateDetails를 인자로 받음
+    - DragUpdateDetails는 터치 포인트에 대한 Offset 제공
+      - 왼쪽으로 가면 -
+      - 오른쪽으로 가면 +
+    - DragEndDetails는 drag가 끝났을때 하는 callback 함수
+- cupertino button의 oppacity를 조절해서 보였다 안보였다 할 수 있음
+
+💥 AnimatedCrossFade는 2개의 화면에 대상함
+💥 AnimatedSwitcher를 통해 여러개로 변경
+
+```dart
+AnimatedSwitcher(
+  duration: const Duration(seconds: 1),
+  child: _myWidget, // 여기서 _myWidget은 현재 화면에 표시할 위젯 변수입니다.
+  transitionBuilder: (Widget child, Animation<double> animation) {
+    return FadeTransition(
+      opacity: animation,
+      child: child,
+    );
+  },
+)
+```
