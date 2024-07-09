@@ -198,3 +198,26 @@ AnimatedSwitcher(
   },
 )
 ```
+
+### 6.1 pushAndRemoveUntil
+
+- Navigator.of(context).push는 기존 화면 위에 새로운 화면을 올려놓는 개념
+- pushAndRemoveUntil은 이전 내역을 지울 수 있음
+  - 개수 선택 가능
+  - stack 후 이전을 지우는 개념
+
+### 6.2 BottomNavigationBar
+
+- BottomNavigationBar는 최소 2개의 아이템을 가져야함
+- meterial2를 따름
+
+📍 **static, const, final**
+
+- static: 인스턴스 생성하지 않고도 접근 간으
+- const: 컴파일시 생성 > 변경 불가
+- final: 1회 할당 후 변경 불가
+
+### 6.3 NavigationBar
+
+- BottomNavigationBar의 item이 destiantion이 됨
+- meterial3를 따름
