@@ -263,3 +263,7 @@ AnimatedSwitcher(
   - itembuilder는 context와 현재 render할 항목의 index를 argument로 받음
   - onPageChaged는 pageview에서 스크롤로 이동한 곳의 정보
   - itemcount는 초기에 지정되어 생성되나 setstate를 사용하여 늘려가며 사용 가능
+
+### 7.2 PageController
+
+- Controller의 animateToPage 강제로 사용자를 지정된 페이지로 보냄
