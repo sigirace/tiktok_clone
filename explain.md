@@ -253,3 +253,13 @@ AnimatedSwitcher(
   - stack 된 widget들을 control 하기 위해서 사용
   - positioned들은 stack 안에서 정해진 크기가 있어야함 > 기준점(어디서부터~) 필요
 - Navigator의 fullscreenDialog를 설정하면 화면이 아래에서 위로 올라감
+
+### 7.1 Infinite Scrolling
+
+- PageView
+  - 여러 widget을 스크롤하면서 보여주게함
+  - 많아질수록 성능저하
+  - Listview의 builder와 같이 pageview의 builder가 있음 > itembuilder
+  - itembuilder는 context와 현재 render할 항목의 index를 argument로 받음
+  - onPageChaged는 pageview에서 스크롤로 이동한 곳의 정보
+  - itemcount는 초기에 지정되어 생성되나 setstate를 사용하여 늘려가며 사용 가능
