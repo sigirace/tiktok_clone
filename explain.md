@@ -3,6 +3,10 @@
 - final은 지정한 후에 변경 불가능
   - 변수를 먼저 지정하고 뒤에 기능을 할당하면 final로 먼저 지정되어 오류가 발생하는 경우 발생
 
+📍 **render**
+
+- 위젯이나 UI 요소를 화면에 그리는 과정
+
 ## 4. Autentication
 
 ### 4.0 Sign Up Screen
@@ -267,3 +271,10 @@ AnimatedSwitcher(
 ### 7.2 PageController
 
 - Controller의 animateToPage 강제로 사용자를 지정된 페이지로 보냄
+
+### 7.3 Video Player
+
+- assets 폴더를 pubspec.yaml에서 명시해줘야함
+- positionedwidiget은 stack 속에 들어가는 widget
+  - stack 위에 위젯들을 조정함
+- video_player는 flutter에서 만든 비디오 재생 패키지
