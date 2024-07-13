@@ -278,3 +278,36 @@ AnimatedSwitcher(
 - positionedwidiget은 stack 속에 들어가는 widget
   - stack 위에 위젯들을 조정함
 - video_player는 flutter에서 만든 비디오 재생 패키지
+- state에서 property에 접근하기 위해 widget.~를 사용함
+
+### 7.4 Visibility Detector
+
+- visibility detector는 한번에 영상이 1개만 재생됨을 구현할 수 있음
+  - 화면이 완전히 화면에 나올때만 재생시킴
+- onVisibilityChanged는 visibility가 바뀔 때 호출할 callback
+  - info를 parameter로 받음
+- Stack으로 positioned.fill을 쌓을 시 이벤트는 가장 늦게 추가된 곳부터 하위로 전파
+  - 아이콘은 이벤트 전파를 차단함
+  - 따라서 아이콘은 ignorePointer로 감싸줌
+  - 단, stack의 child는 모두 positioned.fill이어야 하기 때문에 positioned.fill의 child를 감쌈
+
+### 7.5 AnimationController
+
+- animation widget
+  - opacity나 container 같은걸 사용함
+  - 애니메이션 위젯에 대해서 커스텀을 하고싶으면 controller 필요
+- lowerbound, upeprbound, value
+  - value는 default
+  - default to lowerbound, upperbound
+
+### 7.6 AnimationBuilder
+
+- 값을 animate하는 방법
+  - animation controller를 만듦
+  - lower, upper bound 설정
+  - forward, reverse 사용
+  - 값이 변경되었을 때 build method에 전달하는 방식을 다양하게 사용 가능
+    - controller에 eventlistner를 추가하고 setstate로 build 재실행
+      - listner가 없다면 setstate가 이루어지지 않아 뚝 뚝 끊김
+    - transform sclae을 animationbuilder로 감쌈
+      - builder는 함수인데, controller의 값이 변할때 마다 수행됨
