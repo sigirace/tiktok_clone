@@ -311,3 +311,41 @@ AnimatedSwitcher(
       - listner가 없다면 setstate가 이루어지지 않아 뚝 뚝 끊김
     - transform sclae을 animationbuilder로 감쌈
       - builder는 함수인데, controller의 값이 변할때 마다 수행됨
+
+### 7.7 SingleTickerProviderStateMixin
+
+1. extends
+
+   - extends는 클래스가 다른 클래스로부터 상속을 받을 때 사용됩니다.
+   - 상속을 통해 하위 클래스는 상위 클래스의 메서드와 속성을 재사용할 수 있습니다.
+   - Dart에서는 단일 상속만 지원되므로, 하나의 클래스는 오직 하나의 다른 클래스만 상속받을 수 있습니다.
+
+2. with:
+   - with 키워드는 믹스인(mixin)을 클래스에 적용할 때 사용됩니다.
+   - 믹스인은 클래스의 코드를 여러 클래스에 재사용하기 위한 방법으로, 메서드와 속성을 다른 클래스에 "혼합"할 수 있게 해줍니다.
+   - 하나의 클래스는 여러 믹스인을 사용할 수 있으며, with 키워드 뒤에 여러 믹스인을 나열할 수 있습니다.
+
+☞ 믹스인은 특정 메서드만 담긴 클래스로 다른 클래스와는 달리 그 자체로 쓰이는 경우는 없으며 다른 클래스에 상속되어 쓰일 목적으로 만들어진 상속 전용 클래스라고 생각하면 쉽다.
+
+- [설명](https://code-anthropoid.tistory.com/265)
+
+- vsync
+
+  - offscreen animation의 불필요한 리소스 사용을 막음
+  - 위젯이 안보일때는 작동하지 않도록함
+  - SingleTickerProviderStateMixin와 같이써야함
+
+- SingleTickerProviderStateMixin
+
+  - 화면이 동작중일때만 ticker를 줌
+  - 애니메이션에 callback을 제공하는 것이 ticker
+  - vsync:this에서 this에는 현재 클래스에 mixin된 SingleTickerProviderStateMixin가 있고, 여기에 ticker를 가져오는 개념
+  - 즉, 위젯이 위젯 트리에 있을때만 Ticker를 유지
+
+- TickerProviderStateMixin
+  - 여러개의 controller가 있을 경우 여러개의 ticker를 생성함
+
+📍 **widget on widget tree**
+
+- 위젯이 위젯 트리에 있다는 것은, Flutter 애플리케이션에서 해당 위젯이 현재 활성화되어 화면에 표시되기 위해 구성된 위젯의 계층 구조에 포함되어 있다는 의미입니다.
+- Flutter의 UI는 위젯으로 구성되며, 이러한 위젯들은 부모-자식 관계를 통해 트리 구조를 형성합니다. 이 트리 구조를 '위젯 트리'라고 합니다.
