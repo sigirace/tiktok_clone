@@ -399,3 +399,15 @@ Positioned.fill(
 - extend state 안의 변수들은 반드시 초기화가 되어야함
   - 초기화 되지 않는 경우 late를 넣어 setSta시에 initialize 됨
 - 일반적인 class의 변수들은 final, const를 통해 정의
+
+### 7.9 RefreshIndicator
+
+- 유저가 당겨서 타임라인을 새로고침
+- onRefresh callback이 필요함
+  - 화면을 당길 때 실행되는 callback
+  - 반드시 Future를 반환해야함
+  - 즉, async 혹은 future를 반환
+  - displacement는 화면을 당긴 뒤 indicator의 위치를 정함
+    - 뱅글뱅글이 도는 위치
+  - edgeOffset: 화면을 당겼을때 이제 리프레시 될거야를 나타내는 위치
+  -

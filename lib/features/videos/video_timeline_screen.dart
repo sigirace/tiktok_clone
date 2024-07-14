@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/videos/widgets/video_post.dart';
 
 class VideoTimelineScreen extends StatefulWidget {
@@ -43,15 +44,28 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     super.dispose();
   }
 
+  Future<void> _onRefresh() async {
+    return Future.delayed(
+      const Duration(
+        seconds: 5,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _pageController,
-      scrollDirection: Axis.vertical,
-      onPageChanged: _onPageChanged,
-      itemCount: _itemCount,
-      itemBuilder: (context, index) =>
-          VideoPost(onVideoFinished: _onVideoFinished, index: index),
+    return RefreshIndicator(
+      displacement: Sizes.size32,
+      edgeOffset: Sizes.size32,
+      onRefresh: _onRefresh,
+      child: PageView.builder(
+        controller: _pageController,
+        scrollDirection: Axis.vertical,
+        onPageChanged: _onPageChanged,
+        itemCount: _itemCount,
+        itemBuilder: (context, index) =>
+            VideoPost(onVideoFinished: _onVideoFinished, index: index),
+      ),
     );
   }
 }
