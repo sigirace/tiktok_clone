@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
@@ -13,8 +10,11 @@ class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
   final int index;
 
-  const VideoPost(
-      {super.key, required this.onVideoFinished, required this.index});
+  const VideoPost({
+    super.key,
+    required this.onVideoFinished,
+    required this.index,
+  });
 
   @override
   State<VideoPost> createState() => _VideoPostState();

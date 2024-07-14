@@ -251,6 +251,33 @@ AnimatedSwitcher(
 - offstage는 화면이 사라지지 않고 계속 유지되게 함
 - offstage child가 많으면 모두 동시에 활성화되어 rendering되기에 매우느려짐
 
+📍 **OffStage**
+
+- 이 위젯을 사용하여 특정 조건에 따라 자식 위젯을 화면에서 보이거나 보이지 않게 할 수 있습니다.
+- Offstage 위젯의 offstage 속성은 이 기능을 제어합니다.
+
+- offstage: true
+  - Offstage 위젯의 자식(child)은 레이아웃에서 제외되며 화면에 보이지 않습니다.
+  - 하지만, 자식 위젯은 여전히 상태를 유지하고, 백그라운드에서 작업을 수행할 수 있습니다(예: 애니메이션).
+- offstage: false
+  - 자식 위접은 정상적으로 화면에 표시되고 레이아웃에 포함됩니다.
+
+```dart
+  Offstage(
+    offstage: _selectedIndex != 4,
+    child: const StfScreen(),
+  ),
+```
+
+- 여기서 제공된 코드에서는 \_selectedIndex != 4 조건을 사용하여 offstage 속성을 설정하고 있습니다.
+- 이는 \_selectedIndex 변수의 값이 4가 아닐 때 StfScreen() 위젯을 화면에서 숨기는 데 사용됩니다.
+- 즉, \_selectedIndex가 4일 경우에만 StfScreen() 위젯이 화면에 표시됩니다.
+
+- onTap
+  - main_navigation_screen에 정의된 함수를 NavTab widget에 넘겨 생성함
+  - 각 widget이 클릭되면 main_navigation_screen의 함수를 수행
+  - 수행된 함수는 main_navigation_screen에서 index를 변경
+
 ### 6.8 Post Video Button
 
 - Positionsed widget
@@ -267,6 +294,45 @@ AnimatedSwitcher(
   - itembuilder는 context와 현재 render할 항목의 index를 argument로 받음
   - onPageChaged는 pageview에서 스크롤로 이동한 곳의 정보
   - itemcount는 초기에 지정되어 생성되나 setstate를 사용하여 늘려가며 사용 가능
+
+📍 **PageView vs PageView.builder**
+
+1. PageView
+
+- PageView는 모든 페이지를 미리 생성합니다.
+- 이는 페이지의 수가 적고, 모든 페이지를 미리 로드해두어야 할 때 유용합니다.
+- PageView를 사용하면 children 속성을 통해 페이지들을 직접 정의할 수 있습니다.
+
+```dart
+PageView(
+  children: <Widget>[
+    Page1(),
+    Page2(),
+    Page3(),
+  ],
+)
+```
+
+2. PageView.builder
+
+- PageView.builder는 필요할 때 페이지를 동적으로 생성합니다.
+- 이는 페이지의 수가 많거나, 사용자가 스크롤할 때 페이지를 생성해야 할 때 메모리 사용량을 줄이는 데 유용합니다.
+- PageView.builder는 itemBuilder 콜백을 사용하여 페이지를 생성합니다. 이 콜백은 현재 인덱스를 기반으로 해당 위치에 표시할 위젯을 반환합니다.
+- return되는 page는 callback에 따라 동적으로 생성됨
+
+```dart
+PageView.builder(
+  itemCount: 10, // 페이지 수
+  itemBuilder: (context, index) {
+    return Page(index); // 인덱스에 해당하는 페이지 반환
+  },
+)
+```
+
+📍 **onPageChanged**
+
+- PageView.builder 위젯의 onPageChanged 콜백은 페이지 뷰가 스크롤되어 새 페이지가 중앙에 위치할 때마다 호출됩니다.
+- page 매개변수는 현재 중앙에 위치한 페이지의 인덱스를 나타냅니다.
 
 ### 7.2 PageController
 
