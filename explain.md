@@ -349,3 +349,53 @@ AnimatedSwitcher(
 
 - 위젯이 위젯 트리에 있다는 것은, Flutter 애플리케이션에서 해당 위젯이 현재 활성화되어 화면에 표시되기 위해 구성된 위젯의 계층 구조에 포함되어 있다는 의미입니다.
 - Flutter의 UI는 위젯으로 구성되며, 이러한 위젯들은 부모-자식 관계를 통해 트리 구조를 형성합니다. 이 트리 구조를 '위젯 트리'라고 합니다.
+
+### 7.8 Video UI
+
+- video controller에 set Lopping 기능을 사용하면 반복재생 가능
+
+📍 **Position vs Positioned.fill**
+
+- Positioned.fill과 Positioned 위젯은 Flutter에서 Stack 위젯 내에서 자식 위젯의 위치를 조정할 때 사용됩니다.
+- 두 위젯의 주요 차이점은 위치와 크기를 지정하는 방식에 있습니다.
+
+1. Positioned 위젯
+
+- Positioned 위젯을 사용하면, 자식 위젯의 정확한 위치(top, right, bottom, left)와 크기(width, height)를 수동으로 지정할 수 있습니다.
+- 이를 통해 Stack 내에서 위젯의 정확한 위치와 크기를 제어할 수 있습니다.
+
+```dart
+Positioned(
+  top: 10, // 상단에서 10픽셀 떨어진 위치
+  left: 20, // 왼쪽에서 20픽셀 떨어진 위치
+  child: SomeWidget(), // 위치를 지정할 자식 위젯
+)
+```
+
+2. Positioned.fill 위젯
+
+- Positioned.fill은 Positioned의 특수한 경우로, Stack의 가능한 전체 영역을 채우도록 자식 위젯을 확장합니다.
+- top, right, bottom, left 속성을 모두 0으로 설정하는 것과 동일한 효과를 가지며, 이를 통해 자식 위젯이 부모 Stack의 모든 공간을 차지하도록 할 수 있습니다.
+- Positioned.fill은 주로 배경, 블러 효과, 클릭 이벤트 영역 확장 등에 사용됩니다.
+
+```dart
+Positioned.fill(
+  child: SomeWidget(), // `Stack`의 전체 영역을 채울 자식 위젯
+)
+```
+
+3. 요약
+
+- Positioned는 자식 위젯의 위치와 크기를 상세하게 지정할 수 있게 해줍니다.
+- Positioned.fill은 자식 위젯이 Stack의 전체 영역을 채우도록 확장합니다. 위치를 별도로 지정할 필요 없이, Stack의 모든 공간을 차지하게 합니다.
+
+- circleAvatar는 이미지가 있는 원을 제공
+- background는 배경 foreground는 글씨색
+- foreground Image > NetworkImage로 이미지 넣을 수 있음
+- FaIcon의 데이터타입은 IconData
+
+📍 **extend State vs Constructor**
+
+- extend state 안의 변수들은 반드시 초기화가 되어야함
+  - 초기화 되지 않는 경우 late를 넣어 setSta시에 initialize 됨
+- 일반적인 class의 변수들은 final, const를 통해 정의

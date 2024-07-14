@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -18,13 +22,11 @@ class VideoPost extends StatefulWidget {
 
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset('assets/videos/video_sample.mp4');
-
   bool _isPaused = false;
-
   final Duration _animationDuration = const Duration(milliseconds: 300);
+
   late final AnimationController _animationController;
+  late final VideoPlayerController _videoPlayerController;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -36,9 +38,12 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void initVideoPlayer() async {
+    _videoPlayerController =
+        VideoPlayerController.asset('assets/videos/video_sample.mp4');
     await _videoPlayerController.initialize();
-    setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+    setState(() {});
   }
 
   @override
@@ -127,6 +132,65 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
+          const Positioned(
+            bottom: Sizes.size10,
+            left: Sizes.size10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "@시기",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Sizes.size24,
+                  ),
+                ),
+                Gaps.v16,
+                Text(
+                  "This is my house in ulgiro",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: Sizes.size20,
+            right: Sizes.size10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: Sizes.size24,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                    "https://avatars.githubusercontent.com/u/31294995?v=4",
+                  ),
+                  child: Text(
+                    "Sigi",
+                  ),
+                ),
+                Gaps.v32,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: "2.9M",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: "33K",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: "share",
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
