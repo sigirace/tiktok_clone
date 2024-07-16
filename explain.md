@@ -483,6 +483,9 @@ Positioned.fill(
 - sheet는 navigation bar까지 덮음
 - showModalBottomSheet
   - Future를 반환 > await 사용 가능
+  - barriorColor는 bottom sheet 뒷 배경을 바꿈
+  - bottom sheet와 builder로 생성된 widget은 부모-자식 개념
+    - background color를 Colors.transparent로 설정한다면 부모가 투명해지게 설정
 - Scafold의 automaticallyImplyLeading는 뒤로가기 버튼을 지움
 - action을 통해서 버튼을 달고 함수를 지정할 수 있음
 
@@ -500,3 +503,8 @@ Positioned.fill(
   - 에러: Future.catchError() 메소드로 처리
 - Future는 await와 async 키워드를 사용함
   - await를 사용하면 dart 코드의 실행을 일시적으로 중지하고 Future가 resolve 될 때 까지 대기
+
+📍 **Clip behavior**
+
+- 자식이 부모영역을 침범하는 것을 제어함
+- Container를 둥글게 하였으나 자식인 widget이 이를 넘어서 표시된다면 잘라주는 역할
