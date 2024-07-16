@@ -477,3 +477,26 @@ Positioned.fill(
     - 뱅글뱅글이 도는 위치
   - edgeOffset: 화면을 당겼을때 이제 리프레시 될거야를 나타내는 위치
   -
+
+### 8.0 showModalBottomSheet
+
+- sheet는 navigation bar까지 덮음
+- showModalBottomSheet
+  - Future를 반환 > await 사용 가능
+- Scafold의 automaticallyImplyLeading는 뒤로가기 버튼을 지움
+- action을 통해서 버튼을 달고 함수를 지정할 수 있음
+
+📍 **함수 호출 방식**
+
+- 추가적인 인자가 (ex, context) 필요한 경우
+  - () => Function(context)
+- 그렇지 않은경우
+  - Function
+
+📍 **Future resolve**
+
+- Future가 Resolve된다는 것은 Future 객체가 비동기 연산의 완료를 나타냄
+  - 성공적 완료: Future.then() method로 접근 가능
+  - 에러: Future.catchError() 메소드로 처리
+- Future는 await와 async 키워드를 사용함
+  - await를 사용하면 dart 코드의 실행을 일시적으로 중지하고 Future가 resolve 될 때 까지 대기
