@@ -538,7 +538,7 @@ Positioned.fill(
 - bottomsheet의 크기를 늘리려면 showModalBottomSheet의 isscrolled를 true로 변경
   - listview를 사용할 경우
 
-📍 **Iphone 스타일의 입력폼**
+📍 **Iphone 스타일의 입력폼(채팅)**
 
 ```dart
 TextField(
@@ -588,3 +588,10 @@ TextField(
 - Listview에서 scroll을 두려면 컨드롤러가 필요
   - Scrollbar 위젯으로 감쌈
   - controller를 scrollbar와 listview 둘 다 삽입
+
+📍 **VisibilityInfo**
+
+- visibleFraction: 위젯의 가시적인 부분이 전체 대비 얼마나 차지하는지를 나타냅니다.
+  - 이 값은 0.0(전혀 보이지 않음)에서 1.0(완전히 보임) 사이의 값을 가집니다.
+- size: 위젯의 크기를 나타내는 Size 객체입니다.
+- offset: 화면에서 위젯의 위치를 나타내는 Offset 객체입니다.
