@@ -99,14 +99,14 @@ GestureDetector( onTap: _onNextTap,
 
 - 비밀번호 관련 아이콘들 추가
 - InputDecoration에 suffix, suffixIcon, prefix, prefixIcon을 이용
-- 비밀번호 스럽게 하려면 TextFiled에서 obsecureText를 ture로 설정
+- 비밀번호 스럽게 하려면 textfield에서 obsecureText를 ture로 설정
 
 ### 4.8 Birthday Screen
 
 - Textfield에서 enabled: false 시 보지만 비활성화 (입력 x)
 - Text vs TextField
   - Text: 단순히 텍스트를 화면에 표시하는 데 사용되며 수정 불가능
-  - TextFiled: 텍스트를 입력하고 편집할 수 있는 텍스트 필드를 생성하는 데 사용
+  - textfield: 텍스트를 입력하고 편집할 수 있는 텍스트 필드를 생성하는 데 사용
 - TextEditingController
   - TextEditingController의 value 속성을 사용하면 텍스트 필드의 현재 텍스트와 선택된 텍스트를 가져오거나 변경할 수 있음
   - 텍스트 필드(TextField)의 현재 텍스트와 선택된 텍스트를 제어하는 데 사용
@@ -151,6 +151,10 @@ GestureDetector( onTap: _onNextTap,
   - collection for 보다는 Listview 사용
 - BottomAppBar
   - elevation은 떠있는듯한 효과를 줌
+
+📍 **BottomAppbar**
+
+- bottomappbar는 일반적으로 화면 전체 너비를 차지하는 특성을 가짐
 
 📌 **Ui tip**
 
@@ -361,7 +365,6 @@ PageView.builder(
 - Stack으로 positioned.fill을 쌓을 시 이벤트는 가장 늦게 추가된 곳부터 하위로 전파
   - 아이콘은 이벤트 전파를 차단함
   - 따라서 아이콘은 ignorePointer로 감싸줌
-  - 단, stack의 child는 모두 positioned.fill이어야 하기 때문에 positioned.fill의 child를 감쌈
 
 ### 7.5 AnimationController
 
@@ -518,3 +521,42 @@ Positioned.fill(
 ### 8.1 Comments
 
 - 댓글창을 만드는 과정 > 이전 강의 내용 활용
+
+### 8.2 Add Comment
+
+- Textfield는 제한되지 않은 가로 크기를 가지기에 Expanded 혹은 flexible로 감싸줘야함
+  - 이전 예제에선 Padding을 통해 전체 길이를 제한했었음
+- keyboard가 나타나면 main에서 body를 조절함
+  - resizeToAvoidBottomInset: false 로 해결
+- bottomnavigationbar는 키보드가 나타났을때 숨겨지기 때문에 입력에 좋지 못함
+- Positioned widget은 자식의 크기가 명확히 지정되어있으면 width나 height를 쓰지 않아도 무방
+  - width: MediaQuery.of(context).size.width,
+- positioned에 width를 주는 이유
+  - bottomappbar는 일반적으로 화면 전체의 너비를 차지하는 특성을 가짐
+  - 그런데 부모가 poisitioned이고 명시적으로 너비를 설정하지 않으면 bottomappbar는 유한한 너비 제약을 받지 못함
+  - 이에 따라 row의 expanded가 터지게 됨
+- bottomsheet의 크기를 늘리려면 showModalBottomSheet의 isscrolled를 true로 변경
+  - listview를 사용할 경우
+
+📍 **Iphone 스타일의 입력폼**
+
+```dart
+TextField(
+    cursorColor: Theme.of(context).primaryColor,
+    decoration: InputDecoration(
+      hintText: "Add a comment...",
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          Sizes.size12,
+        ),
+        borderSide: BorderSide.none,
+      ),
+      filled: true,
+      fillColor: Colors.grey.shade200,
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: Sizes.size10,
+        horizontal: Sizes.size10,
+      ),
+    ),
+  ),
+```
