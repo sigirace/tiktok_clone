@@ -156,6 +156,12 @@ GestureDetector( onTap: _onNextTap,
 
 - Singlechildscrollview > paddig > column > wrap 의 구조가 좋아보임
 
+📍 **Wrap, Expanded**
+
+- wrap은 자식 위젯들의 배열이 부모의 길이를 넘어갈 때, 자동으로 다음 줄로 내려가게 하는 레이아웃
+  - 여러개의 버튼, 칩, 태그 등 유연하게 배치할때 사용
+- Text 위젯 내의 글이 넘칠 경우 Expanded, Flexible 등으로 감싸서 해결
+
 ### 5.2 Scroll Animations
 
 - controller를 만드려면 stateful로 변경해야함
@@ -217,7 +223,7 @@ AnimatedSwitcher(
 
 📍 **static, const, final**
 
-- static: 인스턴스 생성하지 않고도 접근 간으
+- static: 인스턴스 생성하지 않고도 접근 가능
 - const: 컴파일시 생성 > 변경 불가
 - final: 1회 할당 후 변경 불가
 
@@ -508,3 +514,7 @@ Positioned.fill(
 
 - 자식이 부모영역을 침범하는 것을 제어함
 - Container를 둥글게 하였으나 자식인 widget이 이를 넘어서 표시된다면 잘라주는 역할
+
+### 8.1 Comments
+
+- 댓글창을 만드는 과정 > 이전 강의 내용 활용
