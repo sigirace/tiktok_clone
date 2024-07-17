@@ -560,3 +560,23 @@ TextField(
     ),
   ),
 ```
+
+### 8.3 Text Input Action
+
+- TextField의 높이를 키우려면 SizedBox로 감싸야함
+- TextField에서 enter 키를 통해 줄바꿈 선언
+  - sizedbox 필요
+  - minLines, maxLines 지정
+  - expands: true
+  - 해당세팅 후 bottomsheet 를 클릭해도 반응이 없음
+    - GestureDetector를 통해 함수 새로 구성하여 해결
+- TextField 안에 아이콘을 넣으려면 suffixIcon
+- suffixIcon은 아이콘들을 오른쪽에 붙여넣으려고함
+- prefixIcon은 아이콘들을 왼쪽 시작점에 붙여넣으려고 함
+
+📍 **Row**
+
+- Row 안에 조건문을 넣으면 그 다음 child에 대한 컨트롤 가능
+- MainAixsSize
+  - MainAxisSize.max: 부모 위젯이 허용하는 최대 넓이까지 확장 (default)
+  - MainAxisSize.min: 위젯이 자식 위젯들이 필요로하는 최소한의 가로만을 차지하도록 함
