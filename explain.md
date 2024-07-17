@@ -580,3 +580,11 @@ TextField(
 - MainAixsSize
   - MainAxisSize.max: 부모 위젯이 허용하는 최대 넓이까지 확장 (default)
   - MainAxisSize.min: 위젯이 자식 위젯들이 필요로하는 최소한의 가로만을 차지하도록 함
+
+### 8.4 Conclusions
+
+- ListView.separated에서 padding은 리스트의 전체를 패딩하는 개념
+  - 각각의 리스트를 떨어뜨리는것이 아님
+- Listview에서 scroll을 두려면 컨드롤러가 필요
+  - Scrollbar 위젯으로 감쌈
+  - controller를 scrollbar와 listview 둘 다 삽입
