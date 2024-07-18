@@ -63,7 +63,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.all(Sizes.size12),
-        color: Colors.black,
+        color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -73,6 +73,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               text: "Home",
               isSelected: _selectedIndex == 0,
               onTap: () => _onTap(0),
+              selectedIndex: _selectedIndex,
             ),
             NavTab(
               icon: FontAwesomeIcons.magnifyingGlass,
@@ -80,10 +81,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               text: "Search",
               isSelected: _selectedIndex == 1,
               onTap: () => _onTap(1),
+              selectedIndex: _selectedIndex,
             ),
             Gaps.h24,
             GestureDetector(
-                onTap: _onPostVideoButtonTap, child: const PostVideoButton()),
+                onTap: _onPostVideoButtonTap,
+                child: PostVideoButton(
+                  inverted: _selectedIndex != 0,
+                )),
             Gaps.h24,
             NavTab(
               icon: FontAwesomeIcons.message,
@@ -91,6 +96,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               text: "Inbox",
               isSelected: _selectedIndex == 3,
               onTap: () => _onTap(3),
+              selectedIndex: _selectedIndex,
             ),
             NavTab(
               icon: FontAwesomeIcons.user,
@@ -98,6 +104,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               text: "Profile",
               isSelected: _selectedIndex == 4,
               onTap: () => _onTap(4),
+              selectedIndex: _selectedIndex,
             ),
           ],
         ),

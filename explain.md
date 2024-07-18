@@ -595,3 +595,7 @@ TextField(
   - 이 값은 0.0(전혀 보이지 않음)에서 1.0(완전히 보임) 사이의 값을 가집니다.
 - size: 위젯의 크기를 나타내는 Size 객체입니다.
 - offset: 화면에서 위젯의 위치를 나타내는 Offset 객체입니다.
+
+### 9.1 Light Navigation
+
+- Navigation의 색을 click 상태에 따라 바꿔줌
