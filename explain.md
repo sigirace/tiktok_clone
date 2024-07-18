@@ -599,3 +599,46 @@ TextField(
 ### 9.1 Light Navigation
 
 - Navigation의 색을 click 상태에 따라 바꿔줌
+
+### 9.2 TabBar
+
+- appbar의 property 중 하나인 bottom
+  - container 같은 위젯은 사용할 수 없음
+  - preferredSizeWidget이란 특정한 크기를 가지려고 하지만 자식요소의 크기를 제한하지 않음
+    - 이 위젯 자체는 특정 크기를 가지나 하위 자식에게 강요하지 않음
+  - TabBar
+    - 이미 preferredSizeWidget
+    - TabBar는 tab이 필요
+      - tab은 widget의 list
+      - Tab widget으로 사용 가능
+      - tab widget은 tabcontroller가 필요함
+
+📌 **Tab controller를 만드는 간단한 방법**
+
+- DefaultTabController 사용
+- length 지정해줘야함
+- 아래는 defualttabcontroller로 만드는 틀
+
+```dart
+bottom: TabBar(
+            elevation: 1,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size16,
+            ),
+            splashFactory: NoSplash.splashFactory,
+            isScrollable: true,
+            labelStyle: const TextStyle(
+              fontSize: Sizes.size16,
+              fontWeight: FontWeight.w600,
+            ),
+            indicatorColor: Colors.black,
+            unselectedLabelColor: Colors.grey.shade500,
+            labelColor: Colors.black,
+            tabs: [
+              for (var tab in tabs)
+                Tab(
+                  text: tab,
+                ),
+            ],
+          ),
+```
