@@ -703,3 +703,10 @@ textSelectionTheme: const TextSelectionThemeData(
 
 - 별도의 초기화 인자가 필요 없을시에는 인스턴스화 될때 바로 수행 가능함 ☞ final
 - 초기화 인자가 필요할 경우 state 객체가 트리에 추가되고 완전히 초기화 된 후 호출해야함 ☞ late final
+
+### 10.0 ListTile
+
+- ListTile
+  - trailing: 뒷쪽의 아이콘
+  - leading: 앞쪽의 아이콘
+  - listview에 있는 하나의 아이템으로 활용할 수 있음
