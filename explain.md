@@ -603,6 +603,7 @@ TextField(
 ### 9.2 TabBar
 
 - appbar의 property 중 하나인 bottom
+  - elevation은 appbar 밑의 음영을 지정
   - container 같은 위젯은 사용할 수 없음
   - preferredSizeWidget이란 특정한 크기를 가지려고 하지만 자식요소의 크기를 제한하지 않음
     - 이 위젯 자체는 특정 크기를 가지나 하위 자식에게 강요하지 않음
@@ -642,3 +643,16 @@ bottom: TabBar(
             ],
           ),
 ```
+
+### 9.3 GridView
+
+- Gridview
+  - gridDelegate
+    - controller랑은 다른 서포터
+    - SliverGridDelegateWithFixedCrossAxisCount
+      - crossAxisCount: 몇개의 열을 가질지 지정
+      - crossAxisSpacing: 가로 간격
+      - mainAxisSpacing: 세로 간격
+      - childAspectRatio: 정사각형의 비율 (가로/ 세로)
+  - padding
+  - itemcount
