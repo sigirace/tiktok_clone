@@ -656,3 +656,12 @@ bottom: TabBar(
       - childAspectRatio: 정사각형의 비율 (가로/ 세로)
   - padding
   - itemcount
+
+### 9.5 Grid Item
+
+- FadeInImage
+  - network에서 이미지를 불러올 동안 대신 나오는 이미지
+- AspectRatio
+  - 특정한 비율을 따르는 위젯을 만들 수 있게 함
+  - aspectRatio를 지정하고 child에서 fit 적용
+- widget을 DefaultTextStyle로 감싸면 모든 text에 적용 가능
