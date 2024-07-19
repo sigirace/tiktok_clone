@@ -67,11 +67,14 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   void dispose() {
+    _animationController.dispose();
     _videoPlayerController.dispose();
     super.dispose();
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return;
+
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
@@ -95,7 +98,7 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
-  void _onCommnetsTap(BuildContext context) async {
+  void _onCommentsTap(BuildContext context) async {
     if (_videoPlayerController.value.isPlaying) {
       _onTogglePause();
     }
@@ -121,7 +124,7 @@ class _VideoPostState extends State<VideoPost>
             child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
                 : Container(
-                    color: Colors.teal,
+                    color: Colors.white,
                   ),
           ),
           Positioned.fill(
@@ -201,7 +204,7 @@ class _VideoPostState extends State<VideoPost>
                 ),
                 Gaps.v24,
                 GestureDetector(
-                  onTap: () => _onCommnetsTap(context),
+                  onTap: () => _onCommentsTap(context),
                   child: const VideoButton(
                     icon: FontAwesomeIcons.solidComment,
                     text: "33K",
