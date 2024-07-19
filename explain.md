@@ -389,6 +389,15 @@ PageView.builder(
 
 ### 7.7 SingleTickerProviderStateMixin
 
+👀 **Definition**
+
+> SingleTickerProviderStateMixin은 TickerProvider를 구현하는 mixin입니다. 이 mixin은 단일 Ticker 객체를 제공하며, 애니메이션 컨트롤러가 필요로 하는 동기화를 제공합니다. Ticker는 애니메이션의 각 프레임을 생성하는 역할을 합니다.
+
+- 화면이 동작중일때만 ticker를 줌
+- 애니메이션에 callback을 제공하는 것이 ticker
+- vsync:this에서 this에는 현재 클래스에 mixin된 SingleTickerProviderStateMixin가 있고, 여기에 ticker를 가져오는 개념
+- 즉, 위젯이 위젯 트리에 있을때만 Ticker를 유지
+
 1. extends
 
    - extends는 클래스가 다른 클래스로부터 상속을 받을 때 사용됩니다.
@@ -406,16 +415,11 @@ PageView.builder(
 
 - vsync
 
+  - vsync: this는 controller가 현재 상태 객체(\_[screen_name]State)를 동기화 대상으로 사용하도록 설정
+  - 이를 통해 애니메이션이 디바이스의 디스플레이 주사율에 맞춰 부드럽게 실행될 수 있음
   - offscreen animation의 불필요한 리소스 사용을 막음
   - 위젯이 안보일때는 작동하지 않도록함
   - SingleTickerProviderStateMixin와 같이써야함
-
-- SingleTickerProviderStateMixin
-
-  - 화면이 동작중일때만 ticker를 줌
-  - 애니메이션에 callback을 제공하는 것이 ticker
-  - vsync:this에서 this에는 현재 클래스에 mixin된 SingleTickerProviderStateMixin가 있고, 여기에 ticker를 가져오는 개념
-  - 즉, 위젯이 위젯 트리에 있을때만 Ticker를 유지
 
 - TickerProviderStateMixin
   - 여러개의 controller가 있을 경우 여러개의 ticker를 생성함
@@ -657,7 +661,7 @@ bottom: TabBar(
   - padding
   - itemcount
 
-### 9.5 Grid Item
+### 9.4 Grid Item
 
 - FadeInImage
   - network에서 이미지를 불러올 동안 대신 나오는 이미지
@@ -665,3 +669,37 @@ bottom: TabBar(
   - 특정한 비율을 따르는 위젯을 만들 수 있게 함
   - aspectRatio를 지정하고 child에서 fit 적용
 - widget을 DefaultTextStyle로 감싸면 모든 text에 적용 가능
+
+### 9.5 CupertinoSearchTextField
+
+- TextEditingController
+  - inital text
+  - controller를 만들땐 dispose를 잊지마
+- 쿠페티노 서치버튼의 커서색은 main.dart에서 변경 가능
+
+```dart
+// main.dart
+textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Color(0xFFE9435A),
+          ),
+```
+
+📌 **키보드가 나올시 scafold의 body가 resize 되는 문제**
+
+- resizeToAvoidBottominset: false
+
+📌 **Gridview에서 스크롤시 키보드가 내려가도록**
+
+- keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+
+💡 **Code challenge**
+
+> 탭뷰를 변경시 keyboard를 내려가는 기능 개발
+
+- 부드러운 애니메이션을 위해 현재 state 객체와 ticker 동기화
+- 스와이프시 키보드가 내려가는 반응이 느린것은 완전하게 인덱스가 변하는 시점을 체크하는 것 때문인듯
+
+📍 **Controller 생성 시점**
+
+- 별도의 초기화 인자가 필요 없을시에는 인스턴스화 될때 바로 수행 가능함 ☞ final
+- 초기화 인자가 필요할 경우 state 객체가 트리에 추가되고 완전히 초기화 된 후 호출해야함 ☞ late final

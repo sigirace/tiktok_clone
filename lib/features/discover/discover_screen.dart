@@ -1,25 +1,57 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 
 final tabs = ["Top", "Users", "Videos", "Sounds", "LIVE", "Shopping"];
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
+
+  @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _textEditingController = TextEditingController();
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(
+      length: tabs.length,
+      vsync: this,
+    );
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        FocusScope.of(context).unfocus(); // 탭 전환 시 키보드 비활성화
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
-          title: const Text("Discover"),
+          title: CupertinoSearchTextField(
+            controller: _textEditingController,
+          ),
           bottom: TabBar(
+            controller: _tabController,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
             ),
@@ -41,8 +73,10 @@ class DiscoverScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             GridView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: Sizes.size10,
@@ -51,13 +85,21 @@ class DiscoverScreen extends StatelessWidget {
               ),
               itemBuilder: (context, index) => Column(
                 children: [
-                  AspectRatio(
-                    aspectRatio: 9 / 16,
-                    child: FadeInImage.assetNetwork(
-                        fit: BoxFit.cover,
-                        placeholder: "assets/images/maru.jpg",
-                        image:
-                            "https://plus.unsplash.com/premium_photo-1686090449200-57266c6623a6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Sizes.size4,
+                      ),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 9 / 16,
+                      child: FadeInImage.assetNetwork(
+                          fit: BoxFit.cover,
+                          placeholder: "assets/images/maru.jpg",
+                          image:
+                              "https://plus.unsplash.com/premium_photo-1686090449200-57266c6623a6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                    ),
                   ),
                   Gaps.v8,
                   const Text(
