@@ -710,3 +710,39 @@ textSelectionTheme: const TextSelectionThemeData(
   - trailing: 뒷쪽의 아이콘
   - leading: 앞쪽의 아이콘
   - listview에 있는 하나의 아이템으로 활용할 수 있음
+
+### 10.1 RichText
+
+- Listview paddig
+  - 전체 내부의 여백 설정
+  - Listview의 경계와 그 안에 포함된 첫번째 및 마지막 항목 사이의 간격 정의
+  - (ex) 모든 측면에서 항목들이 일정한 간격을 유지하도록
+- ListTile contentPadding
+  - 지정하지 않으면 기본 여백을 사용함
+  - zero를 지정하면 listtile 내부의 모든 여백이 제거
+    - leading, title, subtitle, trailing 위젯들이 ListTile의 경계에 바직 붙게됨
+    - 즉, listtile 내부에 패딩이 없어짐
+- RichText
+  - main TextSpan이외에 children으로 textspan들의 리스트를 가질 수 있음
+
+📌 **클릭에 대한 효과를 제거하고 싶을 때**
+
+```dart
+// Main > ThemeData
+splashColor: Colors.transparent,
+highlightColor: Colors.transparent,
+```
+
+📍 **Text vs TextSpan**
+
+- Text
+
+  - 단순한 텍스트 문자열을 화면에 표시하는 데 사용됨
+  - 스타일링 옵션을 통해 텍스트의 폰트, 크기, 색상 등을 설정
+  - 하지만, Text 위젯 내에서 다양한 스타일의 텍스트를 혼합하여 표시하는 것은 제한적
+
+- TextSpan
+  - RichText 위젯 내에서 사용됨
+  - 하나의 RichText 위젯 안에서 여러 스타일의 텍스트를 혼합하여 표시할 수 있게 해줌
+  - TextSpan을 사용하면, 텍스트의 일부분만 다른 스타일로 표시하는 것이 가능함
+  - 각 TextSpan 객체는 자식으로 더 많은 TextSpan 객체를 가질 수 있어, 복잡한 텍스트 스타일링이 가능함

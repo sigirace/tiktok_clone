@@ -3,12 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/inbox/activity_screen.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
 
   void _onDmPressed() {
     return;
+  }
+
+  void _onActivityTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return const ActivityScreen();
+        },
+      ),
+    );
   }
 
   @override
@@ -30,7 +41,7 @@ class InboxScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            onTap: () => {print("sigi")},
+            onTap: () => _onActivityTap(context),
             title: const Text(
               "Activity",
               style: TextStyle(
