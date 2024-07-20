@@ -746,3 +746,13 @@ highlightColor: Colors.transparent,
   - 하나의 RichText 위젯 안에서 여러 스타일의 텍스트를 혼합하여 표시할 수 있게 해줌
   - TextSpan을 사용하면, 텍스트의 일부분만 다른 스타일로 표시하는 것이 가능함
   - 각 TextSpan 객체는 자식으로 더 많은 TextSpan 객체를 가질 수 있어, 복잡한 텍스트 스타일링이 가능함
+
+### 10.2 Dismissible
+
+- Dismissible
+  - key가 필요함
+  - background(왼), secondbackground(오)로 스와이프 이벤트를 줄 수 있음
+
+📍 **Container**
+
+- alignment: Container 안에 있는 아이템들을 정렬 할 수 있게 해줌
