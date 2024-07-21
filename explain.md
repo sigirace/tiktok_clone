@@ -794,7 +794,7 @@ highlightColor: Colors.transparent,
    - 위 작업을 Animation builder 가 수행함
 3. 세번째 방법
    - Animation class 사용
-     - .animate~~ 같은것
+     - .animate(animationController)를 사용해서 모든 애니메이션이 수행되게 함
 
 ### 10.5 SlideTransition
 
@@ -805,3 +805,17 @@ highlightColor: Colors.transparent,
     - -1이면 완전히 숨김
 - SlideTransition
   - Animation<Offset> 필요
+
+### 10.6 AnimatedModalBarrier
+
+- overlay
+  - 사용자가 보고싶어하는 것 뒤에 배치함
+- animatemodalbarrier
+  - overlay를 위한 widget
+  - modal 뒤의 이벤트를 무시하게 함
+  - color: Animation<Color>
+  - dismissible: bool
+  - onDissmiss: 패널 클릭시 수행할 function
+- modal barrier를 시각적으로 숨기는것 외에 위젯 트리상에서 컨트롤하게 해야함
+  - 상태값을 지정할 수 있는 변수를 만들어 toggle 시에 반전
+  - widget tree에서 if 문을 통해 상태값에 따라 추가하는 방식

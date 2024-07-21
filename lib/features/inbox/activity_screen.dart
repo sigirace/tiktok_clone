@@ -48,11 +48,15 @@ class _ActivityScreenState extends State<ActivityScreen>
     }
   ];
 
+  bool _showBarrier = false;
+
   late final AnimationController _animationController;
 
   late final Animation<double> _arrowAnimation;
 
   late final Animation<Offset> _pannelAnimation;
+
+  late final Animation<Color?> _barrierAnimation;
 
   @override
   void initState() {
@@ -72,6 +76,11 @@ class _ActivityScreenState extends State<ActivityScreen>
       begin: const Offset(0, -1),
       end: Offset.zero,
     ).animate(_animationController);
+
+    _barrierAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: Colors.black38,
+    ).animate(_animationController);
   }
 
   @override
@@ -85,12 +94,16 @@ class _ActivityScreenState extends State<ActivityScreen>
     setState(() {});
   }
 
-  void _onTitleTap() {
+  void _toggleAnimations() async {
     if (_animationController.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
+
+    setState(() {
+      _showBarrier = !_showBarrier;
+    });
   }
 
   @override
@@ -98,7 +111,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _toggleAnimations,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -217,6 +230,12 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ),
             ],
           ),
+          if (_showBarrier)
+            AnimatedModalBarrier(
+              color: _barrierAnimation,
+              dismissible: true,
+              onDismiss: _toggleAnimations,
+            ),
           SlideTransition(
             position: _pannelAnimation,
             child: Container(
@@ -251,7 +270,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
