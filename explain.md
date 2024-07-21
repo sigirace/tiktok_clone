@@ -793,4 +793,15 @@ highlightColor: Colors.transparent,
 2. Animation Builder
    - 위 작업을 Animation builder 가 수행함
 3. 세번째 방법
-   - RotationTransition Widget에 Animation class 사용
+   - Animation class 사용
+     - .animate~~ 같은것
+
+### 10.5 SlideTransition
+
+- widget이 다른 widget 위에 보이는 것은 stack
+- Offset
+  - dx: x축으로부터 떨어진 거리 (비율)
+  - dy: y축으로 부터 떨어진 거리 (비율)
+    - -1이면 완전히 숨김
+- SlideTransition
+  - Animation<Offset> 필요
