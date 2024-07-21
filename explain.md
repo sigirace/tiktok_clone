@@ -830,3 +830,24 @@ highlightColor: Colors.transparent,
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
   crossAxisAlignment: CrossAxisAlignment.end,
 ```
+
+### 11.2 AnimatedList
+
+- AnimatedList
+  - 리스트의 아이템을 animate 해줌
+  - 아이템이 리스트에 추가되거나 리스트에서 제거될 때 animate하도록 함
+  - children이 아닌 itembuilder 사용
+  - initialItemCount
+    - 리스트가 몇개의 아이템을 가지고 시작할 것인가
+  - GlobalKey
+    - AnimatedListState에 접근할 수 있도록 함
+    - GloablKey의 상태를 확인해서 AddItem을 할 수 있도록 함
+  - ListTile에 모두 동일하게 적용되는것을 방지하기위해 unique key 추가
+- FadeTransition
+  - 서서히 나타남
+  - opacity: Animation<double> 사용해야함
+    - AnimatedList에서 기본적으로 제공함
+- SizeTransition
+  - 아래로 밀면서 생김
+  - sizeFactor: Animation<double> 사용해야함
+    - AnimatedList에서 기본적으로 제공함
