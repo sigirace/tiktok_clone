@@ -851,3 +851,12 @@ highlightColor: Colors.transparent,
   - 아래로 밀면서 생김
   - sizeFactor: Animation<double> 사용해야함
     - AnimatedList에서 기본적으로 제공함
+
+### 11.3 AnimatedList part Two
+
+- ListTile
+  - onLongPress
+    - ListTile을 길게 눌렀을때 나타나게함
+- removeItem
+  - animation을 받기 때문에 widget을 감싸서 animation 활용 가능
+  - 아이템을 만들때 동일한 것을 사용하면 자연스러운 효과 가능
