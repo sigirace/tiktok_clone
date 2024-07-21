@@ -869,3 +869,32 @@ highlightColor: Colors.transparent,
 
 - Custom scroll view를 사용하는 방법을 배움
   - 지금까지는 easy
+
+### 12.1 CustomScrollView
+
+- CustomScrollView
+  - slivers
+    - CustomScrollView에 들어갈 elements
+    - type이 List<Widget>이어도 아무거나 넣을 순 없음
+  - SliverAppBar
+    - 일반적인 app bar 처럼 app bar가 줄 수 있는 것들을 제공함
+    - expand 가능
+      - collapseHeight: appbar가 줄어들 수 있는 지점
+      - expandedHeight: appbar의 길이를 조절
+    - flexibleSpace: FlexibleSpaceBar
+      - image.asset이라는 배경을 가짐
+      - 이 위젯 자체로도 title을 가짐 (defualt: Colors.white)
+    - stretchModes
+      - 늘이거나 줄였을때 어떤 액션을 수행할 수 있게 함
+      - SliverAppBar의 floating:true, stretch:true 필요
+    - floating
+      - floating 속성이 true로 설정되면, 사용자가 스크롤을 아래로 내릴 때 SliverAppBar가 바로 보이게 됩니다.
+      - 즉, 사용자가 스크롤 뷰의 맨 위로 가까워질 필요 없이, 어느 위치에서든 위로 스크롤하기 시작하면 SliverAppBar가 나타납니다.
+      - floating 속성이 false로 설정되면, 사용자가 스크롤 뷰의 상단 근처로 스크롤해야만 SliverAppBar가 나타납니다.
+
+⛔️ **slivers에 잘못된 widget이 들어갈 경우 에러**
+
+```
+FlutterError (A RenderViewport expected a child of type RenderSliver but received a child of type RenderLimitedBox.
+RenderObjects expect specific types of children because they coordinate with their children during layout and paint. For example, a RenderSliver cannot be the child of a RenderBox because a RenderSliver does not understand the RenderBox layout protocol. ...)
+```
