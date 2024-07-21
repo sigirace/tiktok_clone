@@ -860,3 +860,7 @@ highlightColor: Colors.transparent,
 - removeItem
   - animation을 받기 때문에 widget을 감싸서 animation 활용 가능
   - 아이템을 만들때 동일한 것을 사용하면 자연스러운 효과 가능
+
+### 11.4 Chat Detail
+
+- 앞서 배운 내용들에 대한 응용
