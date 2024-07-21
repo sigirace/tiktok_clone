@@ -1,18 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/inbox/activity_screen.dart';
+import 'package:tictok_clone/features/inbox/chats_screen.dart';
 
-class InboxScreen extends StatelessWidget {
+class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
 
+  @override
+  State<InboxScreen> createState() => _InboxScreenState();
+}
+
+class _InboxScreenState extends State<InboxScreen> {
   void _onDmPressed() {
-    return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return const ChatsScreen();
+        },
+      ),
+    );
   }
 
-  void _onActivityTap(BuildContext context) {
+  void _onActivityTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
@@ -41,7 +51,7 @@ class InboxScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            onTap: () => _onActivityTap(context),
+            onTap: _onActivityTap,
             title: const Text(
               "Activity",
               style: TextStyle(

@@ -819,3 +819,14 @@ highlightColor: Colors.transparent,
 - modal barrier를 시각적으로 숨기는것 외에 위젯 트리상에서 컨트롤하게 해야함
   - 상태값을 지정할 수 있는 변수를 만들어 toggle 시에 반전
   - widget tree에서 if 문을 통해 상태값에 따라 추가하는 방식
+
+### 11.1 Direct Message
+
+- Listtile
+  - traling은 가운데에 배치됨
+  - 만약 trailing에 대한 배치를 좀 더 세밀하게 하고싶으면 Row 안에다 아래 코드 적용
+
+```dart
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  crossAxisAlignment: CrossAxisAlignment.end,
+```
