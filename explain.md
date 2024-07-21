@@ -394,7 +394,8 @@ PageView.builder(
 > SingleTickerProviderStateMixin은 TickerProvider를 구현하는 mixin입니다. 이 mixin은 단일 Ticker 객체를 제공하며, 애니메이션 컨트롤러가 필요로 하는 동기화를 제공합니다. Ticker는 애니메이션의 각 프레임을 생성하는 역할을 합니다.
 
 - 화면이 동작중일때만 ticker를 줌
-- 애니메이션에 callback을 제공하는 것이 ticker
+- 기능1: ticker는 모든 애니메이션 프레임에서 callback function을 호출하는 시계 같은 것
+- 기능2: widget이 widget tree에 없을 때, resource를 낭비하지 않게 함
 - vsync:this에서 this에는 현재 클래스에 mixin된 SingleTickerProviderStateMixin가 있고, 여기에 ticker를 가져오는 개념
 - 즉, 위젯이 위젯 트리에 있을때만 Ticker를 유지
 
@@ -769,3 +770,27 @@ highlightColor: Colors.transparent,
     - onDismissed 파라미터에 function 지정
     - (direction)는 고정
     - return인 \_onDissmissed(notification)는 커스텀
+
+### 10.4 RotationTransition
+
+- animation controller를 만든 후 animation을 만들어야함
+- Tween
+  - 제일 이해하기 쉬운 애니메이션
+  - begin, end를 받음
+  - 애니메이션 효과를 넣을 값의 type이 무엇인지 명시해줘야함
+- RotationTransition
+  - turns에 Animation<double> 인스턴스가 필요
+  - turns는 어떻게 회전 애니메이션할지에 대한 내용임
+- Tween
+  - begin부터 end까지 회전
+
+📌 **animation을 보여주기 위한 방법들**
+
+1. AnimationController
+   - AnimationController의 value를 수정
+   - controller에 eventListener를 추가
+   - evnetListener에서 setState를 수행하면 build 실행 후 애니메이션 단계가 보임
+2. Animation Builder
+   - 위 작업을 Animation builder 가 수행함
+3. 세번째 방법
+   - RotationTransition Widget에 Animation class 사용
