@@ -887,10 +887,6 @@ highlightColor: Colors.transparent,
     - stretchModes
       - 늘이거나 줄였을때 어떤 액션을 수행할 수 있게 함
       - SliverAppBar의 floating:true, stretch:true 필요
-    - floating
-      - floating 속성이 true로 설정되면, 사용자가 스크롤을 아래로 내릴 때 SliverAppBar가 바로 보이게 됩니다.
-      - 즉, 사용자가 스크롤 뷰의 맨 위로 가까워질 필요 없이, 어느 위치에서든 위로 스크롤하기 시작하면 SliverAppBar가 나타납니다.
-      - floating 속성이 false로 설정되면, 사용자가 스크롤 뷰의 상단 근처로 스크롤해야만 SliverAppBar가 나타납니다.
 
 ⛔️ **slivers에 잘못된 widget이 들어갈 경우 에러**
 
@@ -898,3 +894,25 @@ highlightColor: Colors.transparent,
 FlutterError (A RenderViewport expected a child of type RenderSliver but received a child of type RenderLimitedBox.
 RenderObjects expect specific types of children because they coordinate with their children during layout and paint. For example, a RenderSliver cannot be the child of a RenderBox because a RenderSliver does not understand the RenderBox layout protocol. ...)
 ```
+
+### 12.2 SliverAppBar
+
+- SliverFixedExtentList
+  - 여러 item들의 리스트를 만들어 냄
+  - itemExtent
+    - item들은 100 unit 만큼의 크기가 됨
+    - 키가 얼마인지 나타냄
+  - delegate
+    - SliverChildBuilderDelegate
+      - childcount로 개수 지정가능/ 지정 안하면 스크롤 하는만큼 아이템을 만들어냄
+
+📍 **SliverAppBar Scrolling Mode**
+
+- floating
+  - true: 스크롤이 많이 되어 appbar가 숨김 상태여도, 조금만 올리면 다시 appbar가 나타나게 됨
+- pinned
+  - ture: 스크롤을 내리면 appbar가 사라지지 않고, 배경 색깔과 flexible space bar의 title을 보여줌
+- snap
+  - floating과 함께 사용하면 아주 조금만 위로 올려도 모든 appbar가 나타나게 됨
+- stretch
+  - FlexibleSpaceBar의 stretchModes와 함께 app bar가 여러 효과로 아래로 스트레칭 가능
