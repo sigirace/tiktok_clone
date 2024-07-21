@@ -763,3 +763,9 @@ highlightColor: Colors.transparent,
   - Dismissible 위젯이 화면에서 제거되었음에도 불구하고 여전히 위젯 트리에 남아 있는 상황
   - Dismissible 위젯은 사용자가 화면에서 항목을 스와이프하여 제거할 수 있게 해주는 위젯
   - 사용자가 항목을 스와이프하여 제거한 후, 해당 위젯은 위젯 트리에서 즉시 제거되어야 함
+- 동적으로 처리
+  - Dismissible에 key 할당
+  - onDismissed: (direction) => \_onDissmissed(notification)
+    - onDismissed 파라미터에 function 지정
+    - (direction)는 고정
+    - return인 \_onDissmissed(notification)는 커스텀
