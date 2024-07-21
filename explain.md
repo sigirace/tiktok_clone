@@ -864,3 +864,8 @@ highlightColor: Colors.transparent,
 ### 11.4 Chat Detail
 
 - 앞서 배운 내용들에 대한 응용
+
+### 12.0 Introduction
+
+- Custom scroll view를 사용하는 방법을 배움
+  - 지금까지는 easy
