@@ -1043,3 +1043,9 @@ Viewports expand in the cross axis to fill their container and constrain their c
     - maxExtent, minExtent를 몰라서 에러가날텐데 에러를 기반으로 수정하면 됨
   - 단, 이상태로 적용하면 tabbar가 상단바 위(시계 등이 있는 곳)로 올라감
     - SafeArea를 감싸서 해결
+
+### 13.0 ListWheelScrollView
+
+- Loading
+  - ios style: CupertinoActivityIndicator()
+  - Android style: CircularProgressIndicator()
