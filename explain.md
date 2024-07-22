@@ -984,3 +984,43 @@ RenderObjects expect specific types of children because they coordinate with the
   - color: 색상
   - indent: 부모에서부터 구분선 시작까지 떨어진 거리
   - endIndent: 부모에서부터 구분선 끝까지 떨어진 거리
+
+### 12.6 TabBar
+
+- TabBar는 Controller가 필요함
+  - 명시적으로 controller를 생성하거나
+  - DefaultTabController를 사용
+    - tab을 몇개 둘건지 Length 지정 필요
+  - tabs: widget의 List
+  - labelColor: widget의 Main color
+  - labelPadding: widget을 감싸고 있는 패딩
+  - indicatorColor: 밑줄의 색
+  - indicatorSize
+    - label: widget의 크기 만큼 > widget을 Padding으로 감싸서 길이를 조절 가능
+    - tab: 하나의 tab 길이만큼
+
+⛔️ **TabBarView error**
+
+1. Scaffold에서 사용하는 경우
+
+> discover_screen.dart
+
+- Scaffold의 body에 TabBarView를 직접 사용하는 경우, TabBarView는 Scaffold의 가용 공간을 모두 차지
+- TabBarView는 부모 위젯(Scaffold)로부터 명확한 크기 제약을 받기 때문에 문제 없이 동작
+- 즉, 전체 화면은 그대로고 안에 내용만 스크롤 되는 느낌임
+
+2. CustomScrollView에서 사용하는 경우
+
+- CustomScrollView는 스크롤 가능한 영역을 제공하는 위젯
+- 자식 위젯들에게 크기 제약을 명확하게 제공하지 않기 때문에 문제가 발생
+- 특히, CustomScrollView 내에 TabBarView를 넣으면 TabBarView는 무한한 높이를 가지게 되어 에러 발생
+
+```dart
+FlutterError (Horizontal viewport was given unbounded height.
+Viewports expand in the cross axis to fill their container and constrain their children to match their extent in the cross axis. In this case, a horizontal viewport was given an unlimited amount of vertical space in which to expand.)
+```
+
+📍 **Scaffold 제약**
+
+1. Scaffold의 크기: Scaffold는 화면 전체를 차지합니다. 따라서 Scaffold의 body에 직접 들어가는 TabBarView는 기본적으로 화면 전체의 크기를 차지하게 됩니다.
+2. AppBar와 Bottom Navigation Bar의 존재: AppBar와 Bottom Navigation Bar가 있는 경우, Scaffold의 body는 이들 위젯을 제외한 나머지 공간을 차지하게 됩니다. 즉, TabBarView는 AppBar와 Bottom Navigation Bar의 높이를 뺀 나머지 영역의 크기 제약을 받습니다.

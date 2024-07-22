@@ -142,10 +142,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                         Gaps.h2,
                         const Text(
                           "2.5M",
-                        )
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
               itemCount: 20,
