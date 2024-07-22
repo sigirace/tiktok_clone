@@ -972,3 +972,15 @@ RenderObjects expect specific types of children because they coordinate with the
 
 - 일반적인 flutter widget을 렌더할 때 쓰는 것
 - 하나의 box widget을 포함하는 sliver를 만듦
+
+### 12.5 VerticalDivider
+
+- verticaldivider
+  - 수직 구분선을 만듦
+  - verticaldivider는 특정 높이를 가진 father를 필요로 함
+  - 따라서 sizedbox로 감싸서 사용 > 클론코딩에선 row 전체를 감쌈
+  - width: 양 옆 widget과의 거리
+  - thickness: 선 두께
+  - color: 색상
+  - indent: 부모에서부터 구분선 시작까지 떨어진 거리
+  - endIndent: 부모에서부터 구분선 끝까지 떨어진 거리
