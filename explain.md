@@ -888,6 +888,13 @@ highlightColor: Colors.transparent,
       - 늘이거나 줄였을때 어떤 액션을 수행할 수 있게 함
       - SliverAppBar의 floating:true, stretch:true 필요
 
+👀 **sliver**
+
+> 스크롤 가능한 구역
+
+- slivers 안에는 widget을 그냥 갖다 넣을 수 없음, 오직 sliver만 가능
+- custom scroll view는 스크롤 가능한 구역을 가져다가 다 같이 넣어서 한번에 scroll 가능하게 함
+
 ⛔️ **slivers에 잘못된 widget이 들어갈 경우 에러**
 
 ```
@@ -929,3 +936,39 @@ RenderObjects expect specific types of children because they coordinate with the
     - delegate
       - item을 만들어줄 function
       - SliverChildBuilderDelegate
+
+### 12.4 SliverPersistentHeader
+
+- list의 section 안에 title 혹은 header를 만들어줌
+- 현재까지의 list는 vertical list와 grid view를 가지고 있음
+- 각각을 분리하도록 title을 만듦
+- SliverPersistentHeader
+  - SliverPersistentHeaderDelegate 클래스에서 extend 된 delegate를 직접 만들어 줘야 함 > custom class 생성필요
+  - pinned: true
+    - 스크롤해도 상단 appbar에 붙어있음
+  -
+
+📍 **SliverPersistentHeaderDelegate**
+
+- shouldRebuild
+  - flutter에게 persistent header가 보여져야 되는지 알려줌
+  - maxExtent와 minExtent의 값을 변경하고 싶다면 return true
+  - darkmode 강의에서 다시 알려줌
+- maxExtent, minExtent
+  - 최대 높이, 최저 높이
+  - getter이기 때문에 double을 return해줘야 함
+  - min은 스크롤시에 줄어드는 크기
+  - max는 기본 크기
+- build
+  - user들이 보게 될 widget
+
+📍 **FractionallySizedBox**
+
+- 부모로부터 최대한 많은 공간을 차지
+- SliverPersistentHeaderDelegate에서 부모의 크기는 maxExtent
+- heightFactor: 1 > 모든 부분을 차지
+
+📍 **SliverToBoxAdapter**
+
+- 일반적인 flutter widget을 렌더할 때 쓰는 것
+- 하나의 box widget을 포함하는 sliver를 만듦
