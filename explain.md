@@ -946,7 +946,6 @@ RenderObjects expect specific types of children because they coordinate with the
   - SliverPersistentHeaderDelegate 클래스에서 extend 된 delegate를 직접 만들어 줘야 함 > custom class 생성필요
   - pinned: true
     - 스크롤해도 상단 appbar에 붙어있음
-  -
 
 📍 **SliverPersistentHeaderDelegate**
 
@@ -1024,3 +1023,23 @@ Viewports expand in the cross axis to fill their container and constrain their c
 
 1. Scaffold의 크기: Scaffold는 화면 전체를 차지합니다. 따라서 Scaffold의 body에 직접 들어가는 TabBarView는 기본적으로 화면 전체의 크기를 차지하게 됩니다.
 2. AppBar와 Bottom Navigation Bar의 존재: AppBar와 Bottom Navigation Bar가 있는 경우, Scaffold의 body는 이들 위젯을 제외한 나머지 공간을 차지하게 됩니다. 즉, TabBarView는 AppBar와 Bottom Navigation Bar의 높이를 뺀 나머지 영역의 크기 제약을 받습니다.
+
+### 12.7 PersistentTabBar
+
+- NestedScrollView
+  - 여러개의 스크롤 가능한 View들을 넣을 수 있게 함
+  - 같은 Scrollview 안에서, 하나 옆에 하나 이런 식
+  - 안의 모든 scroll position을 연결함
+  - 가장 흔하게 쓰이는 경우
+    - SliverAppBar와 TabBar를 같이 사용하는 경우
+  - slivers가 없음
+  - headerSliverBuilder
+    - sliver들로 이뤄진 List 반환
+  - body
+    - TabBarView의 내용 (gridview, listview ..)
+- TabBar 고정
+  - SliverPersistentHeader로 감쌈
+    - delegate를 위해 SliverPersistentHeaderDelegate를 따로 생성함
+    - maxExtent, minExtent를 몰라서 에러가날텐데 에러를 기반으로 수정하면 됨
+  - 단, 이상태로 적용하면 tabbar가 상단바 위(시계 등이 있는 곳)로 올라감
+    - SafeArea를 감싸서 해결
