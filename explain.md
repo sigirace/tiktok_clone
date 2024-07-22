@@ -916,3 +916,16 @@ RenderObjects expect specific types of children because they coordinate with the
   - floating과 함께 사용하면 아주 조금만 위로 올려도 모든 appbar가 나타나게 됨
 - stretch
   - FlexibleSpaceBar의 stretchModes와 함께 app bar가 여러 효과로 아래로 스트레칭 가능
+
+### 12.3 SliverGrid
+
+- SliverGrid
+  - gridDelegate
+    - SliverGridDelegateWithMaxCrossAxisExtent
+      - maxCrossAxisExtent
+      - mainAxisSpacing: 그리드의 각 아이템이 차지할 수 있는 최대 교차 축 크기입니다. 이 값은 각 아이템의 최대 너비(가로 모드) 또는 최대 높이(세로 모드)를 결정합니다.
+      - crossAxisSpacing: 그리드의 주 축 방향(세로 스크롤에서는 수직, 가로 스크롤에서는 수평)에 있는 아이템들 사이의 공간입니다.
+      - childAspectRatio: 그리드의 각 아이템의 가로 세로 비율입니다. 예를 들어, 값이 2이면 아이템의 너비가 높이의 두 배가 됩니다.
+    - delegate
+      - item을 만들어줄 function
+      - SliverChildBuilderDelegate
