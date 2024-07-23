@@ -1306,3 +1306,22 @@ supportedLocales: const [
 ```
 
 - 이후 텍스트들에 대해 codeaction으로 intl_en.arb로 extract 가능
+- S는 extention 설치해서 생긴 것
+
+### 16.5 Pluralize and Select
+
+```dart
+//main.dart
+Widget build(BuildContext context) {
+  S.load(const Locale("en"));
+}
+```
+
+- 이런식으로 빠르게 언어 설정 가능
+
+```yaml
+{videoCount, plural, =0 {no videos} =1 {video} other{videos}}
+```
+
+- plural 적용으로 복수형 표현
+- other는 필수

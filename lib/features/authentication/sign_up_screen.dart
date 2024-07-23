@@ -44,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   Text(
-                    S.of(context).signUpSubtitle,
+                    S.of(context).signUpSubtitle(10),
                     style: TextStyle(
                       fontSize: Sizes.size16,
                       color: isDarkMode(context)
