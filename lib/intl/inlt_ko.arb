@@ -1,3 +1,4 @@
 {
-  "singUpTitle": "TikTok에 가입하세요"
+  "@@locale": "ko",
+  "singUpTitle": "{nameOfTheApp}에 가입하세요"
 }

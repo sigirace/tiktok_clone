@@ -1243,3 +1243,38 @@ output-locaization-file: intl_ko.dart
 - .dart_toll > flutter_gen > gen_l10n
 - 위 경로로 파일 생성됨
 - main.dart에 생성된 파일 임포트
+
+```dart
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
+```
+
+### 16.3 AppLocalizations
+
+```dart
+//main.dart
+localizationsDelegates: AppLocalizations.localizationsDelegates,
+supportedLocales: AppLocalizations.supportedLocales,
+```
+
+```dart
+// package import at screen.dart
+AppLocalizations.of(context)!.singUpTitle,
+```
+
+- intl 파일에 function을 심고 그에 대한 Description도 달아줄 수 있음
+- 단, 변경후 flutter gen-l10n 수행
+
+```dart
+{
+  "@@locale": "en",
+  "singUpTitle": "Sign up for {nameOfTheApp}",
+  "@singUpTitle": {
+    "description": "The title people see when they open the app for the first time.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String"
+      }
+    }
+  }
+}
+```
