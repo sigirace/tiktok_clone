@@ -1100,3 +1100,9 @@ void main() async {
 - k를 입력하면 framework가 가지고 있는 모든 constant들을 확인할 수 있음
 - kIsWeb
   - 앱이 웹에서 작동하도록 compile 되었는지를 나타내는 constant
+
+### 14.3 MediaQuery
+
+- MediaQuery에 변화가 있을 때마다 build
+  - 변화를 감지할 수 있고 이에 따라 이벤트 수행 가능
+  - 변화가 있을 때마다 build하니 build 내에서 final로 지정
