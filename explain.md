@@ -1092,3 +1092,11 @@ void main() async {
   runApp(const TikTokApp());
 }
 ```
+
+### 14.2 kIsWeb
+
+- Web일 경우 첫 화면에 들어갔을때 음성이 포함된 영상은 재생 불가능
+  - 그냥 영상은 가능
+- k를 입력하면 framework가 가지고 있는 모든 constant들을 확인할 수 있음
+- kIsWeb
+  - 앱이 웹에서 작동하도록 compile 되었는지를 나타내는 constant

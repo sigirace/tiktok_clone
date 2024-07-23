@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/gaps.dart';
@@ -43,6 +44,9 @@ class _VideoPostState extends State<VideoPost>
         VideoPlayerController.asset('assets/videos/video_sample.mp4');
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+    }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -111,6 +115,15 @@ class _VideoPostState extends State<VideoPost>
     );
 
     _onTogglePause();
+  }
+
+  void _onVolumeChange(BuildContext context) async {
+    if (_videoPlayerController.value.volume == 0) {
+      await _videoPlayerController.setVolume(1);
+    } else {
+      await _videoPlayerController.setVolume(0);
+    }
+    setState(() {});
   }
 
   @override
@@ -186,6 +199,15 @@ class _VideoPostState extends State<VideoPost>
             right: Sizes.size10,
             child: Column(
               children: [
+                GestureDetector(
+                  onTap: () => _onVolumeChange(context),
+                  child: VideoButton(
+                    icon: _videoPlayerController.value.volume == 0
+                        ? FontAwesomeIcons.volumeOff
+                        : FontAwesomeIcons.volumeHigh,
+                    text: "",
+                  ),
+                ),
                 const CircleAvatar(
                   radius: Sizes.size24,
                   backgroundColor: Colors.black,
