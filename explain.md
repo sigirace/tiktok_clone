@@ -1418,3 +1418,12 @@ Widget build(~~){
 
 - as를 붙이지 않으면 args는 일반적인 object임
 - as를 써주지 않으면 args에 property로 접근 불가능
+
+### 18.0 Introduction
+
+- flutter 공식문서
+  - Don`t recommend using named routes for most applications.
+    - Navigator ver1은 web에서 호환성이 좋지 못함
+    - using named은 브라우저의 앞으로가기를 지원하지 않음
+    - Material은 url 기반으로 움직이지 않음
+  - go_router를 사용한 Migration 방식 사용
