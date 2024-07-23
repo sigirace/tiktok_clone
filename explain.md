@@ -1258,7 +1258,7 @@ supportedLocales: AppLocalizations.supportedLocales,
 
 ```dart
 // package import at screen.dart
-AppLocalizations.of(context)!.singUpTitle,
+AppLocalizations.of(context)!.signUpTitle,
 ```
 
 - intl 파일에 function을 심고 그에 대한 Description도 달아줄 수 있음
@@ -1267,8 +1267,8 @@ AppLocalizations.of(context)!.singUpTitle,
 ```dart
 {
   "@@locale": "en",
-  "singUpTitle": "Sign up for {nameOfTheApp}",
-  "@singUpTitle": {
+  "signUpTitle": "Sign up for {nameOfTheApp}",
+  "@signUpTitle": {
     "description": "The title people see when they open the app for the first time.",
     "placeholders": {
       "nameOfTheApp": {
@@ -1278,3 +1278,31 @@ AppLocalizations.of(context)!.singUpTitle,
   }
 }
 ```
+
+### 16.4 Flutter Intl
+
+- flutter intl (extention)설치
+- 프로젝트를 원상태로 돌림
+- cmd + shift + p > flutter intl initailize
+- generated, l10n 폴더 생성
+- l10n > intl_en.arb에 작성시 자동으로 messages_en.dart에 추가됨
+- cmd + shift + p > flutter intl Add locale > ko
+- intl_ko.arb 파일 만들어주고 안에 내용 채움
+
+```dart
+//main.dart
+import 'package:tictok_clone/generated/l10n.dart';
+
+localizationsDelegates: const [
+  S.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+],
+supportedLocales: const [
+  Locale('en'),
+  Locale('ko'),
+],
+```
+
+- 이후 텍스트들에 대해 codeaction으로 intl_en.arb로 extract 가능
