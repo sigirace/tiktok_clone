@@ -7,7 +7,9 @@ import 'package:tictok_clone/users/widgets/my_information.dart';
 import 'package:tictok_clone/users/widgets/persistent_tab_bar.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  final String? username;
+
+  const UserProfileScreen({super.key, this.username});
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -31,7 +33,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: const Text("시기"),
+                title: Text(widget.username ?? "sigikang"),
                 actions: [
                   IconButton(
                     onPressed: _onGearPressed,

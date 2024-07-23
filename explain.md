@@ -1462,3 +1462,22 @@ final router = GoRouter(
   - stack을 사용하지 않음
   - 브라우저는 뒤로가기가 있어서 가능하지만 app은 back이 없음
   - 사용자를 다른 곳으로 이동시키는 개념
+
+### 18.2 Parameters
+
+- url로 진입시 parameter를 전달하는 방법
+
+```dart
+GoRoute(
+      path: "/users/:username",
+      builder: (context, state) {
+        final username = state.params['username'];
+        return UserProfileScreen(username: username);
+      },
+    ),
+```
+
+📌 **회원가입 시 url로 다른 페이지 진입을 막으려면**
+
+- 화면을 바꾸나 url을 바꾸지 않는 경우 Navigator 1.0을 사용
+- 같은 url이나 다른 화면 표현 가능
