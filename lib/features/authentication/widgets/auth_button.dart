@@ -33,8 +33,18 @@ class AuthButton extends StatelessWidget {
       );
     } else {
       Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => link!,
+        PageRouteBuilder(
+          transitionDuration: const Duration(
+            seconds: 1,
+          ),
+          reverseTransitionDuration: const Duration(
+            seconds: 1,
+          ),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return link!;
+          },
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
         ),
       );
     }

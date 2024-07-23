@@ -1356,7 +1356,21 @@ Widget build(BuildContext context) {
 
 ### 17.1 await push
 
-📍 **다른 화면으로 push를 사용하여 넘어갔을 때**
+📌 **다른 화면으로 push를 사용하여 넘어갔을 때**
 
 - push는 future임
 - await를 통해 Pop되는 시점에 값을 return 받을 수 있음
+
+### 17.2 PageRouteBuilder
+
+📍 **PageRouteBuilder**
+
+- MaterialPageRoute 말고 화면 전환에 쓰이는 위젯
+- pageBuilder
+  - 이동할 화면을 return
+  - transitionsBuilder
+    - child: 이동할 화면
+  - transitionDuration
+    - 이동할때의 애니메이션 지속 시간
+  - reverseTransitionDuration
+    - 돌아갈때의 애니메이션 지속 시간
