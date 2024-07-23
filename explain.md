@@ -1378,4 +1378,43 @@ Widget build(BuildContext context) {
 ### 17.3 pushNamed
 
 - url 처럼 화면을 이동
-- 각 screen에 static route를 설정하고 해당 key로 왔다 갔다함
+- 각 screen에 static routeName를 설정하고 해당 string으로 왔다 갔다함
+
+```dart
+//main.dart
+initialRoute:
+routes:
+```
+
+```dart
+//screen.dart
+Navigator.pushNamed(context, Screen.routeName,);
+```
+
+### 17.4 pushNamed Args
+
+📌 **pushName을 사용해서 argument를 전달하고 싶을 때**
+
+```dart
+//target screen
+class ScreenArgs{
+  final T arg;
+
+  ScreenArgs({required this.arg});
+}
+
+//source screen
+Navigator.pushNamed(context, Screen.routeName,arguments: ScreenArgs(arg: _arg,),);
+```
+
+📌 **pushName을 사용해서 전달받은 argument를 사용할 때**
+
+```dart
+//target screen
+Widget build(~~){
+  final args = ModalRoute.of(context)!.settings.arguments as ScreenArgs;
+}
+```
+
+- as를 붙이지 않으면 args는 일반적인 object임
+- as를 써주지 않으면 args에 property로 접근 불가능
