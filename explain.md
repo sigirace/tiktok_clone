@@ -1342,3 +1342,14 @@ Widget build(BuildContext context) {
 ```
 
 - 이런 식으로 compact하게 숫자 표기 가능
+
+### 16.7 Date l10n
+
+```dart
+"value": {
+  "type": "DateTime",
+  "format": "y"
+}
+```
+
+- 이런 식으로 날짜 표기 가능
