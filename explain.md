@@ -1218,3 +1218,28 @@ intl: any
         Locale("ko"),
       ],
 ```
+
+### 16.2 l10n
+
+```yaml
+flutter:
+  generate: true
+```
+
+```yaml
+# 번역 파일 위치
+arb-dir: lib/intl
+# 마스터 위치
+# 마스터는 [filename]_[language].arb 형식
+template-arb-file: intl_en.arb
+# 번역 완료된 내용
+output-locaization-file: intl_ko.dart
+```
+
+- 각 파일 생성 및 내용 작성 후
+
+> flutter gen-l10n
+
+- .dart_toll > flutter_gen > gen_l10n
+- 위 경로로 파일 생성됨
+- main.dart에 생성된 파일 임포트
