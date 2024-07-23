@@ -1195,3 +1195,26 @@ TabBarTheme(
 ### 15.9 Flex Color Scheme
 
 - https://pub.dev/packages/flex_color_scheme
+
+### 16.1 Localizations
+
+- widget 들에 대한 번역 파일을 임포트
+
+```yaml
+flutter_localizations:
+  sdk: flutter
+
+intl: any
+```
+
+```dart
+// main.dart
+  GlobalMaterialLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+
+  supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+      ],
+```

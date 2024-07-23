@@ -1,10 +1,8 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tictok_clone/constants/sizes.dart';
-import 'package:tictok_clone/features/authentication/sign_up_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tictok_clone/features/main_navigation/main_navigation_screen.dart';
-import 'package:tictok_clone/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,50 +18,59 @@ class TikTokApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDarkMode(context)) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle.light,
-      );
-    } else {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle.dark,
-      );
-    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.teal,
-        textTheme: Typography.blackMountainView,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Color(0xFFE9435A),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+      ],
+      theme: FlexThemeData.light(
+        scheme: FlexScheme.green,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 7,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 10,
+          blendOnColors: false,
+          useTextTheme: true,
+          useM2StyleDividerInM3: true,
+          inputDecoratorIsFilled: false,
+          inputDecoratorBackgroundAlpha: 111,
+          inputDecoratorRadius: 40.0,
+          alignedDropdown: true,
+          useInputDecoratorThemeInDialogs: true,
+          tabBarItemSchemeColor: SchemeColor.primary,
         ),
-        splashColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: Sizes.size16 + Sizes.size2,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+        // To use the Playground font, add GoogleFonts package and uncomment
+        // fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
-      darkTheme: ThemeData(
-        textTheme: Typography.whiteMountainView,
-        brightness: Brightness.dark,
-        appBarTheme: AppBarTheme(
-          color: Colors.grey.shade900,
+      darkTheme: FlexThemeData.dark(
+        scheme: FlexScheme.green,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 13,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 20,
+          useTextTheme: true,
+          useM2StyleDividerInM3: true,
+          inputDecoratorIsFilled: false,
+          inputDecoratorRadius: 40.0,
+          alignedDropdown: true,
+          useInputDecoratorThemeInDialogs: true,
         ),
-        scaffoldBackgroundColor: Colors.black,
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: Colors.grey.shade900,
-        ),
-        primaryColor: const Color(0xFFE9435A),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+        // To use the Playground font, add GoogleFonts package and uncomment
+        // fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       home: const MainNavigationScreen(),
     );
