@@ -34,12 +34,12 @@ class SignUpScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Gaps.v80,
-                  Text(
-                    "Sign up for TikTok",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: Colors.red),
+                  const Text(
+                    "네잎클로버",
+                    style: TextStyle(
+                      fontSize: Sizes.size24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Gaps.v20,
                   Text(

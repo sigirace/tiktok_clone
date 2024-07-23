@@ -110,18 +110,16 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 duration: const Duration(milliseconds: 200)),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: Sizes.size48, horizontal: Sizes.size24),
-            child: AnimatedOpacity(
-              opacity: _showingPage == Page.first ? 0 : 1,
-              duration: const Duration(milliseconds: 200),
-              child: CupertinoButton(
-                onPressed: _onEnterAppTap,
-                color: Theme.of(context).primaryColor,
-                child: const Text("Enter the app!"),
-              ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size32, horizontal: Sizes.size24),
+          child: AnimatedOpacity(
+            opacity: _showingPage == Page.first ? 0 : 1,
+            duration: const Duration(milliseconds: 200),
+            child: CupertinoButton(
+              onPressed: _onEnterAppTap,
+              color: Theme.of(context).primaryColor,
+              child: const Text("Enter the app!"),
             ),
           ),
         ),

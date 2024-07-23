@@ -75,6 +75,11 @@ class _UsernameScreenState extends State<UsernameScreen> {
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.teal,
+                  ),
+                ),
                 hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(

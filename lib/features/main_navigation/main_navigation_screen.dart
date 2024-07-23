@@ -64,11 +64,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.all(Sizes.size12),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(
+          bottom: Sizes.size24,
+          top: Sizes.size20,
+        ),
         color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NavTab(
               icon: FontAwesomeIcons.house,

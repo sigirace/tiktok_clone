@@ -1133,6 +1133,12 @@ void main() async {
   - 다크모드를 만들어야함
 - utils에 \_isDarkMode 함수 생성
 
+```dart
+themeMode: ThemeMode.light
+```
+
+- 밝은색 유지
+
 📌 **모드에 따른 상태바 변화**
 
 ```dart
@@ -1165,3 +1171,23 @@ if (isDarkMode(context)) {
   - copyWidth는 null에 대한 처리가 반드시 필요하기에 ? 나 !를 사용하여 처리함
     - !일 경우 반드시 null 이아니기에 상관 없음
     - ?일 경우 null이 올 수 있기에 if else 처리
+
+### 15.3 Google Fonts
+
+- https://fonts.google.com/
+
+### 15.4 Typography
+
+- Typograph를 통해 size와 weight가 없는, 글씨체와 색만 지정된 폰트를 사용할 수 있음
+  - textTheme: Typography.~
+
+### 15.5 Dark Mode part One
+
+📌 **TabBar 밑줄 적용**
+
+```dart
+TabBarTheme(
+  // other code
+  indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
+)
+```

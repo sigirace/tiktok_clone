@@ -157,8 +157,16 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              child: BottomAppBar(
-                color: Colors.grey.shade50,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  bottom: 16,
+                  top: 16,
+                ),
                 child: Row(
                   children: [
                     Gaps.h10,

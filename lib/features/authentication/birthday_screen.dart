@@ -100,7 +100,14 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade50,
+        ),
+        padding: const EdgeInsets.only(
+          bottom: Sizes.size32,
+          top: Sizes.size1,
+        ),
         child: SizedBox(
           height: 300,
           child: CupertinoDatePicker(
