@@ -1325,3 +1325,20 @@ Widget build(BuildContext context) {
 
 - plural 적용으로 복수형 표현
 - other는 필수
+
+### 16.6 Numbers l10n
+
+```dart
+"likeCount": "{value}",
+  "@likeCount": {
+    "description": "The number of likes a video has",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  }
+```
+
+- 이런 식으로 compact하게 숫자 표기 가능
