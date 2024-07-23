@@ -1154,3 +1154,14 @@ if (isDarkMode(context)) {
 - 15.8 3분대에 나오는 강의(추후업뎃)
 - BottomAppBar -> Container
   - 패딩 지정 다시해줘야함
+
+### 15.2 TextTheme
+
+- https://m2.material.io/design/typography/the-type-system.html#type-scale
+- https://pub.dev/packages/google_fonts/install
+- Material 2에서 generate 해도 자동으로 3으로 변경함
+- Theme의 TextTheme은 그대로 사용하되 커스텀하는 방법
+  - copyWidth 사용
+  - copyWidth는 null에 대한 처리가 반드시 필요하기에 ? 나 !를 사용하여 처리함
+    - !일 경우 반드시 null 이아니기에 상관 없음
+    - ?일 경우 null이 올 수 있기에 if else 처리
