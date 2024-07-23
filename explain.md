@@ -1191,3 +1191,7 @@ TabBarTheme(
   indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
 )
 ```
+
+### 15.9 Flex Color Scheme
+
+- https://pub.dev/packages/flex_color_scheme
