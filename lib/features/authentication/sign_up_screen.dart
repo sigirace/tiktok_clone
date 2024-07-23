@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/authentication/login_screen.dart';
@@ -11,14 +12,11 @@ import 'package:tictok_clone/utils.dart';
 import 'package:tictok_clone/generated/l10n.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static const routeName = "/";
   const SignUpScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  void _onLoginTap(BuildContext context) async {
+    context.push(LoginScreen.routeName);
   }
 
   @override
@@ -58,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                     const AuthButton(
                       icon: FaIcon(FontAwesomeIcons.user),
                       text: "Use email & password",
-                      link: UsernameScreen(),
+                      link: UsernameScreen.routeName,
                     ),
                     Gaps.v16,
                     const AuthButton(
@@ -74,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
                           child: AuthButton(
                             icon: FaIcon(FontAwesomeIcons.user),
                             text: "Use email & password",
-                            link: UsernameScreen(),
+                            link: UsernameScreen.routeName,
                           ),
                         ),
                         Gaps.h16,

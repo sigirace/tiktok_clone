@@ -5,6 +5,7 @@ import 'package:tictok_clone/features/authentication/widgets/form_button.dart';
 import 'package:tictok_clone/features/onboarding/interests_screen.dart';
 
 class LoginFormScreen extends StatefulWidget {
+  static String routeName = "/login";
   const LoginFormScreen({super.key});
 
   @override

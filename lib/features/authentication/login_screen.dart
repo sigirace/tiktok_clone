@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/authentication/login_form_screen.dart';
 import 'package:tictok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const routeName = "/login";
   const LoginScreen({super.key});
 
   void _onSignUpTap(BuildContext context) {
-    Navigator.of(context).pop();
+    context.pop();
   }
 
   void _onEmailLoginTap(BuildContext context) {
@@ -51,10 +53,10 @@ class LoginScreen extends StatelessWidget {
               Gaps.v40,
               GestureDetector(
                 onTap: () => _onEmailLoginTap(context),
-                child: const AuthButton(
-                  icon: FaIcon(FontAwesomeIcons.user),
+                child: AuthButton(
+                  icon: const FaIcon(FontAwesomeIcons.user),
                   text: "Use email & password",
-                  link: LoginFormScreen(),
+                  link: LoginFormScreen.routeName,
                 ),
               ),
               Gaps.v16,

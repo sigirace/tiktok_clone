@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
-  final Widget? link;
+  final String? link;
 
   const AuthButton({
     super.key,
@@ -32,21 +33,7 @@ class AuthButton extends StatelessWidget {
         ),
       );
     } else {
-      Navigator.of(context).push(
-        PageRouteBuilder(
-          transitionDuration: const Duration(
-            seconds: 1,
-          ),
-          reverseTransitionDuration: const Duration(
-            seconds: 1,
-          ),
-          pageBuilder: (context, animation, secondaryAnimation) {
-            return link!;
-          },
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              FadeTransition(opacity: animation, child: child),
-        ),
-      );
+      context.push(link!);
     }
   }
 

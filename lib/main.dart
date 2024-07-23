@@ -7,6 +7,7 @@ import 'package:tictok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tictok_clone/features/authentication/username_screen.dart';
 import 'package:tictok_clone/features/main_navigation/main_navigation_screen.dart';
 import 'package:tictok_clone/generated/l10n.dart';
+import 'package:tictok_clone/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,8 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // S.load(const Locale("en"));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
@@ -78,11 +80,6 @@ class TikTokApp extends StatelessWidget {
         // To use the Playground font, add GoogleFonts package and uncomment
         // fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
-      initialRoute: "/",
-      routes: {
-        "/": (context) => const SignUpScreen(),
-        '/username': (context) => const UsernameScreen(),
-      },
     );
   }
 }

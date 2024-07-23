@@ -1427,3 +1427,38 @@ Widget build(~~){
     - using named은 브라우저의 앞으로가기를 지원하지 않음
     - Material은 url 기반으로 움직이지 않음
   - go_router를 사용한 Migration 방식 사용
+
+### 18.1 GoRouter
+
+- install go_router
+
+```yaml
+dependencies:
+  go_router: 6.0.2
+```
+
+- router.dart 파일 생성
+- router 생성
+
+```dart
+final router = GoRouter(
+  routes: [
+    GoRoute(
+      path: SignUpScreen.routeName,
+      builder: (context, state) => const SignUpScreen(),
+    ),
+  ],
+);
+```
+
+- routeName인 string 단위로 페이지 이동함
+
+📍 **화면 이동**
+
+- push, pop
+  - stack 구조로 사용
+  - 쌓였기 때문에 뒤로가기가 있는 것
+- go
+  - stack을 사용하지 않음
+  - 브라우저는 뒤로가기가 있어서 가능하지만 app은 back이 없음
+  - 사용자를 다른 곳으로 이동시키는 개념
