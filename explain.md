@@ -1374,3 +1374,8 @@ Widget build(BuildContext context) {
     - 이동할때의 애니메이션 지속 시간
   - reverseTransitionDuration
     - 돌아갈때의 애니메이션 지속 시간
+
+### 17.3 pushNamed
+
+- url 처럼 화면을 이동
+- 각 screen에 static route를 설정하고 해당 key로 왔다 갔다함
