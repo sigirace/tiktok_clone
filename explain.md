@@ -1049,3 +1049,46 @@ Viewports expand in the cross axis to fill their container and constrain their c
 - Loading
   - ios style: CupertinoActivityIndicator()
   - Android style: CircularProgressIndicator()
+
+### 14.1 OrientationBuilder
+
+- OrientationBuilder
+  - child를 가지지 않는 대신 builder 함수 실행
+  - orientation은 핸드폰의 방향을 알려줌
+
+📌 **Collection if, for**
+
+- Collection if, for 는 하나의 widget에만 작동함
+- 여러개를 사용하려면 리스트 안에 넣고 ... 를 사용함
+
+```dart
+if (orientation == Orientation.portrait) ...
+  [
+    const AuthButton(
+      icon: FaIcon(FontAwesomeIcons.user),
+      text: "Use email & password",
+      link: UsernameScreen(),
+    ),
+    Gaps.v16,
+    const AuthButton(
+      icon: FaIcon(FontAwesomeIcons.apple),
+      text: "Continue with Apple",
+    ),
+  ]
+```
+
+📌 **화면을 세로로 고정하기**
+
+- WidgetsFlutterBinding
+  - flutter engine과 framework를 묶는 접착제 역할
+
+```dart
+// main.dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  runApp(const TikTokApp());
+}
+```
