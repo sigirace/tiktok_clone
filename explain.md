@@ -1124,3 +1124,33 @@ void main() async {
 - widget에 따라 화면크기가 변할시 constrain 하는 것과 아닌 것이 있음
 - constrain하기 위해서는 box 크기만 제한하면 됨
 - container widget or constrainedBox widget을 사용
+
+### 15.1 ThemeMode
+
+- themeMode: ThemeMode.system
+  - 사용자의 시스템 모드에 맞춰서 설정
+  - 당장은 적용되지 않음
+  - 다크모드를 만들어야함
+- utils에 \_isDarkMode 함수 생성
+
+📌 **모드에 따른 상태바 변화**
+
+```dart
+// main builder
+
+if (isDarkMode(context)) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle.light,
+      );
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle.dark,
+      );
+    }
+```
+
+⛔️ **Meterial3에 따른 bottomappbar widget 변경**
+
+- 15.8 3분대에 나오는 강의(추후업뎃)
+- BottomAppBar -> Container
+  - 패딩 지정 다시해줘야함
