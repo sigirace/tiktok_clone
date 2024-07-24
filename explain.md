@@ -1717,3 +1717,13 @@ end
 permission_handler: ^10.2.0
 camera: ^0.10.3
 ```
+
+### 19.3 Selfie Mode
+
+```dart
+Future<void> _toggleSelfieMode() async {
+    _isSelfieMode = !_isSelfieMode;
+    await initCamera();
+    setState(() {});
+  }
+```
