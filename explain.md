@@ -1727,3 +1727,13 @@ Future<void> _toggleSelfieMode() async {
     setState(() {});
   }
 ```
+
+### 19.4 Flash Mode
+
+```dart
+Future<void> _setFlashMode(FlashMode flashMode) async {
+    await _cameraController.setFlashMode(flashMode);
+    _isFlashMode = !_isFlashMode;
+    setState(() {});
+  }
+```
