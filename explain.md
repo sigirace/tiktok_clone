@@ -1481,3 +1481,54 @@ GoRoute(
 
 - 화면을 바꾸나 url을 바꾸지 않는 경우 Navigator 1.0을 사용
 - 같은 url이나 다른 화면 표현 가능
+
+### 18.3 queryParams
+
+- post 방식의 query로 extra를 사용할 수 있음
+- get 방식은 url 과 유사하게 사용
+- 둘 다 router에서 state를 통해 접근함
+
+```dart
+// Source Screen
+context.go(
+  "${EmailScreen.routeName}?get_test=$_username",
+  extra: EmailScreenArgs(userName: _username),
+);
+
+// Target arg class
+class EmailScreenArgs {
+  final String username;
+
+  EmailScreenArgs({required this.username});
+}
+
+// Target Generator
+class EmailScreen extends StatefulWidget {
+  static const routeName = "/email";
+
+  final String userName;
+  final String? getTest;
+
+  const EmailScreen({
+    super.key,
+    required this.userName,
+    this.getTest,
+  });
+
+  @override
+  State<EmailScreen> createState() => _EmailScreenState();
+}
+
+// Router
+GoRoute(
+  path: EmailScreen.routeName,
+  builder: (context, state) {
+    final args = state.extra as EmailScreenArgs;
+    final getTest = state.queryParams['get_test'];
+    return EmailScreen(
+      userName: args.userName,
+      getTest: getTest,
+    );
+  },
+),
+```
