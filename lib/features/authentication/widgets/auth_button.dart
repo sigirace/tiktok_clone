@@ -33,7 +33,7 @@ class AuthButton extends StatelessWidget {
         ),
       );
     } else {
-      context.push(link!);
+      context.pushNamed(link!);
     }
   }
 

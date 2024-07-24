@@ -1440,6 +1440,8 @@ dependencies:
 - router.dart 파일 생성
 - router 생성
 
+🌈 **exmaple**
+
 ```dart
 final router = GoRouter(
   routes: [
@@ -1466,6 +1468,8 @@ final router = GoRouter(
 ### 18.2 Parameters
 
 - url로 진입시 parameter를 전달하는 방법
+
+🌈 **exmaple**
 
 ```dart
 GoRoute(
@@ -1532,3 +1536,50 @@ GoRoute(
   },
 ),
 ```
+
+### 18.4 CustomTransitionPage
+
+- 애니메이션을 사용하려면 Router에 PageBuilder 사용
+  - CustomTransitionPage
+    - child: 이동하고 싶은 곳
+    - transitionBuilder
+      - return으로 animation widget 지정
+
+👀 **Nested routes**
+
+> Nested Routing은 URL의 중첩된 표현을 단계별로 정의해서 관리 포인트를 줄임
+
+- 좀 더 고급스럽게..
+  - URL의 세그먼트들을 컴포넌트의 계층과 데이터에 연결해주는 보편적인 방식
+
+🌈 **exmaple**
+
+```dart
+// 상위
+class SignUpScreen extends StatelessWidget {
+  static const routeUrl = "/";
+  static const routeName = "signUp";
+}
+
+// 하위
+class UsernameScreen extends StatefulWidget {
+  static String routeUrl = "username";
+  static String routeName = "username";
+}
+
+// router
+GoRoute(
+  path: SignUpScreen.routeUrl,
+  name: SignUpScreen.routeName,
+  builder: (context, state) => const SignUpScreen(),
+  routes: [
+    GoRoute(
+      path: UsernameScreen.routeUrl,
+      name: UsernameScreen.routeName,
+      builder: (context, state) => const UsernameScreen(),
+    ),
+  ],
+)
+```
+
+- 결과: host/#/username

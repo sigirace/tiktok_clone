@@ -12,7 +12,8 @@ import 'package:tictok_clone/utils.dart';
 import 'package:tictok_clone/generated/l10n.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static const routeName = "/";
+  static const routeUrl = "/";
+  static const routeName = "signUp";
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
@@ -53,8 +54,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v40,
                   if (orientation == Orientation.portrait) ...[
-                    const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.user),
+                    AuthButton(
+                      icon: const FaIcon(FontAwesomeIcons.user),
                       text: "Use email & password",
                       link: UsernameScreen.routeName,
                     ),
@@ -65,18 +66,18 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                   if (orientation == Orientation.landscape)
-                    const Row(
+                    Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                           child: AuthButton(
-                            icon: FaIcon(FontAwesomeIcons.user),
+                            icon: const FaIcon(FontAwesomeIcons.user),
                             text: "Use email & password",
                             link: UsernameScreen.routeName,
                           ),
                         ),
                         Gaps.h16,
-                        Expanded(
+                        const Expanded(
                           child: AuthButton(
                             icon: FaIcon(FontAwesomeIcons.apple),
                             text: "Continue with Apple",
