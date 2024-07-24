@@ -10,7 +10,8 @@ import 'package:tictok_clone/features/videos/video_timeline_screen.dart';
 import 'package:tictok_clone/users/user_profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  static const routeName = "/main";
+  static const routeName = "main";
+  static const routeUrl = "main";
   const MainNavigationScreen({super.key});
 
   @override

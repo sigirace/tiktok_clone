@@ -1545,6 +1545,29 @@ GoRoute(
     - transitionBuilder
       - return으로 animation widget 지정
 
+🌈 **exmaple**
+
+```dart
+GoRoute(
+  name: "username_screen",
+  path: UsernameScreen.routeName,
+  pageBuilder: (context, state) {
+    return CustomTransitionPage(
+      child: const UsernameScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: animation,
+            child: child,
+          ),
+        );
+      },
+    );
+  },
+),
+```
+
 👀 **Nested routes**
 
 > Nested Routing은 URL의 중첩된 표현을 단계별로 정의해서 관리 포인트를 줄임

@@ -45,7 +45,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
   }
 
   void _onEnterAppTap() {
-    context.go(MainNavigationScreen.routeName);
+    context.goNamed(MainNavigationScreen.routeName);
   }
 
   @override
