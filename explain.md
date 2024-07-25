@@ -1984,3 +1984,13 @@ if (mounted) {
 📍 **CameraAwesome**
 
 - https://pub.dev/packages/camerawesome
+
+### 20.1 \_noCamera
+
+- debug mode이며 ios일 경우 카메라를 키지 않음
+
+```dart
+late final bool _noCamera = kDebugMode && Platform.isIOS;
+```
+
+- 세로 모드만 지원하려면 plist에서 landscape 관련 모두 지움

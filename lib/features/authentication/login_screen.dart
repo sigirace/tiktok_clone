@@ -8,7 +8,8 @@ import 'package:tictok_clone/features/authentication/login_form_screen.dart';
 import 'package:tictok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
-  static const routeName = "/login";
+  static String routeName = "login";
+  static String routeURL = "/login";
   const LoginScreen({super.key});
 
   void _onSignUpTap(BuildContext context) {
@@ -53,10 +54,10 @@ class LoginScreen extends StatelessWidget {
               Gaps.v40,
               GestureDetector(
                 onTap: () => _onEmailLoginTap(context),
-                child: AuthButton(
-                  icon: const FaIcon(FontAwesomeIcons.user),
+                child: const AuthButton(
+                  icon: FaIcon(FontAwesomeIcons.user),
                   text: "Use email & password",
-                  link: LoginFormScreen.routeName,
+                  link: LoginFormScreen(),
                 ),
               ),
               Gaps.v16,

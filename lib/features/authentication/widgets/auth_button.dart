@@ -6,7 +6,7 @@ import 'package:tictok_clone/constants/sizes.dart';
 class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
-  final String? link;
+  final Widget? link;
 
   const AuthButton({
     super.key,
@@ -33,7 +33,12 @@ class AuthButton extends StatelessWidget {
         ),
       );
     } else {
-      context.pushNamed(link!);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => link!,
+        ),
+      );
     }
   }
 

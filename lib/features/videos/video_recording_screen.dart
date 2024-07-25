@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,30 +27,69 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
   bool _isSelfieMode = false;
 
-  bool _isFlashMode = false;
-
-  late CameraController _cameraController;
+  late final bool _noCamera = kDebugMode && Platform.isIOS;
 
   late final AnimationController _buttonAnimationController =
       AnimationController(
     vsync: this,
-    duration: const Duration(
-      milliseconds: 300,
-    ),
+    duration: const Duration(milliseconds: 200),
   );
 
-  late final Animation<double> _buttonAnimation = Tween<double>(
-    begin: 1,
-    end: 1.3,
-  ).animate(_buttonAnimationController);
+  late final Animation<double> _buttonAnimation =
+      Tween(begin: 1.0, end: 1.3).animate(_buttonAnimationController);
 
   late final AnimationController _progressAnimationController =
       AnimationController(
     vsync: this,
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 10),
     lowerBound: 0.0,
     upperBound: 1.0,
   );
+
+  late FlashMode _flashMode;
+  late CameraController _cameraController;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!_noCamera) {
+      initPermissions();
+    } else {
+      setState(() {
+        _hasPermission = true;
+      });
+    }
+    WidgetsBinding.instance.addObserver(this);
+    _progressAnimationController.addListener(() {
+      setState(() {});
+    });
+    _progressAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _stopRecording();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _progressAnimationController.dispose();
+    _buttonAnimationController.dispose();
+    _cameraController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_hasPermission) return;
+    if (!_cameraController.value.isInitialized) return;
+    if (state == AppLifecycleState.inactive) {
+      print("inactive");
+      _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      print("resumed");
+      initCamera();
+    }
+  }
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
@@ -65,6 +107,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     await _cameraController.initialize();
 
     await _cameraController.prepareForVideoRecording();
+
+    _flashMode = _cameraController.value.flashMode;
+
+    setState(() {});
   }
 
   Future<void> initPermissions() async {
@@ -84,63 +130,20 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    initPermissions();
-    WidgetsBinding.instance.addObserver(this);
-    _progressAnimationController.addListener(
-      () {
-        setState(() {});
-      },
-    );
-    _progressAnimationController.addStatusListener(
-      (status) {
-        if (status == AnimationStatus.completed) {
-          _stopRecording();
-        }
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _cameraController.dispose();
-    _buttonAnimationController.dispose();
-    _progressAnimationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (!_hasPermission) return;
-    if (state == AppLifecycleState.inactive) {
-      if (!_cameraController.value.isInitialized) {
-        return;
-      }
-      _cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      await initCamera();
-      setState(() {});
-    }
-  }
-
   Future<void> _toggleSelfieMode() async {
     _isSelfieMode = !_isSelfieMode;
     await initCamera();
     setState(() {});
   }
 
-  Future<void> _setFlashMode(FlashMode flashMode) async {
-    await _cameraController.setFlashMode(flashMode);
-    _isFlashMode = !_isFlashMode;
+  Future<void> _setFlashMode(FlashMode newFlashMode) async {
+    await _cameraController.setFlashMode(newFlashMode);
+    _flashMode = newFlashMode;
     setState(() {});
   }
 
-  void _startRecording(TapDownDetails details) async {
-    if (_cameraController.value.isRecordingVideo) {
-      return;
-    }
+  Future<void> _starRecording(TapDownDetails _) async {
+    if (_cameraController.value.isRecordingVideo) return;
 
     await _cameraController.startVideoRecording();
 
@@ -149,9 +152,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _stopRecording() async {
-    if (!_cameraController.value.isRecordingVideo) {
-      return;
-    }
+    if (!_cameraController.value.isRecordingVideo) return;
+
     _buttonAnimationController.reverse();
     _progressAnimationController.reset();
 
@@ -162,13 +164,18 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => VideoPreviewScreen(video: video),
+        builder: (context) => VideoPreviewScreen(
+          video: video,
+          isPicked: false,
+        ),
       ),
     );
   }
 
   Future<void> _onPickVideoPressed() async {
-    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    final video = await ImagePicker().pickVideo(
+      source: ImageSource.gallery,
+    );
     if (video == null) return;
 
     if (!mounted) return;
@@ -189,9 +196,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox(
-        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: !_hasPermission || !_cameraController.value.isInitialized
+        child: !_hasPermission
             ? const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -208,68 +214,93 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size32,
-                    right: Sizes.size20,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          color: Colors.white,
-                          onPressed: _toggleSelfieMode,
-                          icon: const Icon(
-                            Icons.cameraswitch,
+                  if (!_noCamera && _cameraController.value.isInitialized)
+                    CameraPreview(_cameraController),
+                  if (!_noCamera)
+                    Positioned(
+                      top: Sizes.size20,
+                      right: Sizes.size20,
+                      child: Column(
+                        children: [
+                          IconButton(
+                            color: Colors.white,
+                            onPressed: _toggleSelfieMode,
+                            icon: const Icon(
+                              Icons.cameraswitch,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          color: Colors.white,
-                          onPressed: () => _setFlashMode(
-                              _isFlashMode ? FlashMode.off : FlashMode.torch),
-                          icon: _isFlashMode
-                              ? const Icon(
-                                  Icons.flash_off_rounded,
-                                )
-                              : const Icon(
-                                  Icons.flash_on_rounded,
-                                  color: Colors.amber,
-                                ),
-                        ),
-                      ],
+                          Gaps.v10,
+                          IconButton(
+                            color: _flashMode == FlashMode.off
+                                ? Colors.amber.shade200
+                                : Colors.white,
+                            onPressed: () => _setFlashMode(FlashMode.off),
+                            icon: const Icon(
+                              Icons.flash_off_rounded,
+                            ),
+                          ),
+                          Gaps.v10,
+                          IconButton(
+                            color: _flashMode == FlashMode.always
+                                ? Colors.amber.shade200
+                                : Colors.white,
+                            onPressed: () => _setFlashMode(FlashMode.always),
+                            icon: const Icon(
+                              Icons.flash_on_rounded,
+                            ),
+                          ),
+                          Gaps.v10,
+                          IconButton(
+                            color: _flashMode == FlashMode.auto
+                                ? Colors.amber.shade200
+                                : Colors.white,
+                            onPressed: () => _setFlashMode(FlashMode.auto),
+                            icon: const Icon(
+                              Icons.flash_auto_rounded,
+                            ),
+                          ),
+                          Gaps.v10,
+                          IconButton(
+                            color: _flashMode == FlashMode.torch
+                                ? Colors.amber.shade200
+                                : Colors.white,
+                            onPressed: () => _setFlashMode(FlashMode.torch),
+                            icon: const Icon(
+                              Icons.flashlight_on_rounded,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   Positioned(
-                    bottom: Sizes.size20,
+                    bottom: Sizes.size40,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       children: [
                         const Spacer(),
                         GestureDetector(
-                          onTapDown: _startRecording,
-                          onTapUp: (detail) => _stopRecording(),
+                          onTapDown: _starRecording,
+                          onTapUp: (details) => _stopRecording(),
                           child: ScaleTransition(
                             scale: _buttonAnimation,
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
                                 SizedBox(
-                                  width: Sizes.size60 + Sizes.size10,
-                                  height: Sizes.size60 + Sizes.size10,
+                                  width: Sizes.size80 + Sizes.size14,
+                                  height: Sizes.size80 + Sizes.size14,
                                   child: CircularProgressIndicator(
                                     color: Colors.red.shade400,
-                                    strokeWidth: 3,
+                                    strokeWidth: Sizes.size6,
                                     value: _progressAnimationController.value,
                                   ),
                                 ),
                                 Container(
-                                  width: Sizes.size60,
-                                  height: Sizes.size60,
+                                  width: Sizes.size80,
+                                  height: Sizes.size80,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.red,
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 2,
-                                    ),
+                                    color: Colors.red.shade400,
                                   ),
                                 ),
                               ],
@@ -282,15 +313,15 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                             child: IconButton(
                               onPressed: _onPickVideoPressed,
                               icon: const FaIcon(
-                                FontAwesomeIcons.images,
+                                FontAwesomeIcons.image,
                                 color: Colors.white,
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
       ),

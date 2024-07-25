@@ -12,12 +12,12 @@ import 'package:tictok_clone/utils.dart';
 import 'package:tictok_clone/generated/l10n.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static const routeUrl = "/";
+  static const routeURL = "/";
   static const routeName = "signUp";
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
-    context.push(LoginScreen.routeName);
+    context.pushNamed(LoginScreen.routeName);
   }
 
   @override
@@ -54,10 +54,10 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v40,
                   if (orientation == Orientation.portrait) ...[
-                    AuthButton(
-                      icon: const FaIcon(FontAwesomeIcons.user),
+                    const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.user),
                       text: "Use email & password",
-                      link: UsernameScreen.routeName,
+                      link: UsernameScreen(),
                     ),
                     Gaps.v16,
                     const AuthButton(
@@ -66,18 +66,18 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                   if (orientation == Orientation.landscape)
-                    Row(
+                    const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                           child: AuthButton(
-                            icon: const FaIcon(FontAwesomeIcons.user),
+                            icon: FaIcon(FontAwesomeIcons.user),
                             text: "Use email & password",
-                            link: UsernameScreen.routeName,
+                            link: UsernameScreen(),
                           ),
                         ),
                         Gaps.h16,
-                        const Expanded(
+                        Expanded(
                           child: AuthButton(
                             icon: FaIcon(FontAwesomeIcons.apple),
                             text: "Continue with Apple",

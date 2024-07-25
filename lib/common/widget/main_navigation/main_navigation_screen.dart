@@ -4,8 +4,8 @@ import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/discover/discover_screen.dart';
 import 'package:tictok_clone/features/inbox/inbox_screen.dart';
-import 'package:tictok_clone/features/main_navigation/widgets/nav_tab.dart';
-import 'package:tictok_clone/features/main_navigation/widgets/post_video_button.dart';
+import 'package:tictok_clone/common/widget/main_navigation/widgets/nav_tab.dart';
+import 'package:tictok_clone/common/widget/main_navigation/widgets/post_video_button.dart';
 import 'package:tictok_clone/features/videos/video_timeline_screen.dart';
 import 'package:tictok_clone/users/user_profile_screen.dart';
 
