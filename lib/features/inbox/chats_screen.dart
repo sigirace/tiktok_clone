@@ -102,10 +102,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: _addItem,
-              icon: const FaIcon(
-                FontAwesomeIcons.plus,
-              ))
+            onPressed: _addItem,
+            icon: const FaIcon(
+              FontAwesomeIcons.plus,
+            ),
+          ),
         ],
       ),
       body: AnimatedList(

@@ -1737,3 +1737,66 @@ Future<void> _setFlashMode(FlashMode flashMode) async {
     setState(() {});
   }
 ```
+
+### 19.5 Recording Animation
+
+- GestureDetector
+  - onToaDown, onTapUp
+    - 두 함수는 detail을 argument로 줘야함
+- CircularProgressIndicator
+  - 값을 명시하지 않으면 로딩처럼 무한 뺑뻉이
+  - 값을 명시하면 해당 지점까지 고정
+- TickerProviderStateMixin
+  - 컨트롤러가 여러개일 경우 사용
+  - 애니메이션들이 모두 유사하게 진행될 경우 하나의 컨트롤러 > SingleProviderMixin
+- addStatusListener
+  - Listener는 value가 바뀐 것을 알려줌
+  - statuslistener는 animation이 끝난 것을 알려줌
+
+📍 **익명 함수(람다, 클로저)**
+
+- 이름이 없는 함수로 콜백이나 이벤트 핸들러로 사용
+- 람다 또는 클로저로도 말함
+
+```dart
+// 구조 1
+(parameters) {
+  // 함수 본문
+};
+
+// 구조 2
+(parameters) => expression;
+```
+
+🌈 **exmaple**
+
+- GestureDetector parameters
+  - onTapDwon: {void Function(TapDownDetails)? onTapDown}
+  - onTapUp: {void Function(TapUpDetails)? onTapUp}
+  - 두 parameter의 argument가 null일 수 있음
+  - null이 아니라면 detail을 parameter로 갖는 void type function을 argument로 사용해야함
+
+```dart
+
+void _onTapDown(TapDownDetails details) {
+  _buttonAnimationController.forward();
+  _progressAnimationController.forward();
+}
+
+void _stopRecording() {
+  _buttonAnimationController.reverse();
+  _progressAnimationController.reset();
+}
+
+//GestureDetector
+onTapDown: _onTapDown,
+onTapUp: (detail) => _stopRecording(),
+```
+
+- onTapDown: \_onTapDown,
+  - Dart가 자동으로 이벤트의 상세 정보(TapDownDetails)를 \_onTapDown 함수에 전달한다는 것
+  - \_onTapDown 함수는 이 정보를 매개변수로 받음
+- onTapUp: (detail) => \_stopRecording()
+  - 이 방식은 익명 함수(람다)를 사용하여 \_stopRecording 함수를 호출
+  - onTapUp 이벤트가 발생하면, Dart는 이벤트의 상세 정보(TapUpDetails)를 익명 함수의 detail 매개변수로 전달
+  - \_stopRecording 함수는 이 상세 정보를 사용하지 않고, 매개변수 없이 호출됨
