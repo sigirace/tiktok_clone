@@ -1909,3 +1909,58 @@ Podfile
 # 이 외로도 마이크 등 권한 필요
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 ```
+
+### 19.8 ImagePicker
+
+- Spacer
+  - 변형 가능한 공간을 만듦
+  - 일종의 빈 공간처럼 사용
+- Image Picker
+  - ImageSource
+    - gallery 일 경우 사진첩 연결
+    - camera 일 경우 기기 카메라 연결
+-
+
+📍 **Image Picker 설치**
+
+- user의 library에서 사진이나 비디오를 가져오게 해줌
+
+```yaml
+dependencies:
+  image_picker: 0.8.6+1
+```
+
+```plist
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Privacy Photo Library</string>
+```
+
+- 비디오에서 이미했으면 상관없음
+- 안드로이드는 안해도 됨
+
+⛔️ **context를 async 환경에서 사용하는 문제**
+
+```dart
+Future<void> loadData() async {
+  final data = await fetchData(); // 비동기 함수 호출
+  setState(() {
+    // 데이터를 사용하여 상태 업데이트
+  });
+}
+```
+
+- fetchData 함수가 데이터를 가져오는 동안 사용자가 현재 화면을 벗어나면, setState를 호출할 때 context가 더 이상 유효하지 않게 됨
+- 이는 setState가 호출되는 시점에 현재 위젯이 위젯 트리에 존재하지 않을 수 있기 때문
+
+☀️ **해결**
+
+```dart
+if (mounted) {
+  setState(() {
+    // 데이터를 사용하여 상태 업데이트
+  });
+}
+```
+
+- 비동기 작업이 완료된 후, 현재 위젯이 여전히 마운트되어 있는지 확인
+- Flutter에서는 mounted 속성을 사용하여 이를 확인할 수 있음

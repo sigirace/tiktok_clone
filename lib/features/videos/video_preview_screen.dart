@@ -9,10 +9,12 @@ import 'package:video_player/video_player.dart';
 
 class VideoPreviewScreen extends StatefulWidget {
   final XFile video;
+  final bool? isPicked;
 
   const VideoPreviewScreen({
     super.key,
     required this.video,
+    this.isPicked,
   });
 
   @override
@@ -32,7 +34,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     );
 
     await _videoPlayerController.initialize();
-    _videoPlayerController.setLooping(true);
+    await _videoPlayerController.setLooping(true);
 
     await _videoPlayerController.play();
     setState(() {});
@@ -41,6 +43,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   @override
   void initState() {
     super.initState();
+    _saveVideo = widget.isPicked ?? false;
     _initVideo();
   }
 
