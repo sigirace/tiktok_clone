@@ -1868,3 +1868,44 @@ _cameraController = CameraController(
 ```
 
 - android emulator에서 소리가 들어가면 재생되지 않는 버그가 간혹 있음
+
+### 19.7 GallerySaver
+
+- 유저의 gallery에 무언가를 저장할 수 있게 함
+
+```yaml
+dependencies:
+  gallery_saver: 2.3.2
+```
+
+🌈 **example**
+
+```dart
+await GallerySaver.saveVideo(
+  widget.video.path,
+  albumName: "TikTok Clone",
+);
+```
+
+📍 **GallerySaver 세팅**
+
+- IOS
+  - NSPhtoLibraryUsageDescription를 <project_root>/ios/Runner/Info.plist에 추가
+
+```
+plist
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Privacy Photo Library</string>
+
+Podfile
+## dart: PermissionGroup.photos
+'PERMISSION_PHOTOS=1',
+```
+
+- Android
+  - android.permission.WRITE_EXTERNAL_STARGE를 <project_root>/android/app/src/main/AndroidManifest에 추가
+
+```
+# 이 외로도 마이크 등 권한 필요
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+```
