@@ -1964,3 +1964,23 @@ if (mounted) {
 
 - 비동기 작업이 완료된 후, 현재 위젯이 여전히 마운트되어 있는지 확인
 - Flutter에서는 mounted 속성을 사용하여 이를 확인할 수 있음
+
+### 19.9 AppLifecycleState
+
+- camera 문서
+  - 플러그인은 lifecycle의 변화를 자동으로 handle하지 않음
+  - 수동으로 해주어야 함
+  - 즉, application이 background로 가는 것을 개발자가 감지해야함
+    - controller등을 제거
+- didChangeAppLifecycleState 라는 method를 override 해야함
+  - 이 함수는 WidgetsBindingObserver class에서만 제공
+  - mixin으로 사용함
+  - initstate에서 instance 생성
+
+⛔️ **권한 창이 application 앞에서 나타날 때**
+
+- flutter는 application이 비활성화 되었다고 생각함
+
+📍 **CameraAwesome**
+
+- https://pub.dev/packages/camerawesome

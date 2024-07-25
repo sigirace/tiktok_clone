@@ -43,6 +43,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   @override
   void initState() {
     super.initState();
+    print("kang");
     _saveVideo = widget.isPicked ?? false;
     _initVideo();
   }
