@@ -2020,3 +2020,55 @@ context.go("/home");
   - 그냥 그 경로로 감
   - 경로가 바뀌고 스택을 교체한다는 의미
   - 기존 스택은 신경 쓸 필요가 없음
+
+### 20.6-8 InheritedWidget
+
+- InheritedWidget
+  - 위젯 트리 맨 위에 정의된 값을 가져다 쓸 수 있음
+  - 부모에서 밑으로 내리는 개념이 아니라 직접 접근하는 것
+  - InheritedWidget은 작은 앱에는 좋지만 크고 요구사항이 많은 앱에는 별로
+  - child가 필요함
+  - updateShouldNotify
+    - 상속받는 위젯들을 rebuild 할지 말지 결정
+  - 앱 전체에 데이터를 공유하지만 업데이트하지는 못함
+  - 데이터와 데이터를 수정할 권한이 있음
+
+✏️ **Code**
+
+```dart
+// main.dart
+
+@override
+  Widget build(BuildContext context) {
+    // S.load(const Locale("en"));
+    return VideoConfig(
+      child: MaterialApp.router())}
+```
+
+- MaterialApp.router를 videoconfig로 감쌈
+  - videoconfig는 모든 앱의 부모가 됨
+- context를 사용해 videoconfig에 직접적인 링크 요청
+
+```dart
+final videoConfig = context.dependOnInheritedWidgetOfExactType<VideoConfig>();
+```
+
+- VideoConfig라는 타입의 InheritedWidget을 가져오라고 context에 명령함
+- inheritedwidget 중에 정확히 VideoConfig라는 타입을 찾음
+- 이러한 기능은 context에 있음
+  - 찾을수도 있고 못찾을 수도 있기에 !를 붙여줌
+
+```dart
+static VideoConfig of(BuildContext context) {
+  return context.dependOnInheritedWidgetOfExactType<VideoConfig>()!;
+}
+```
+
+- 위 표현은 너무 기니 class 내부에 static 함수로 만듦
+
+📍 **InheritedWidget with Statefulwidget**
+
+- InheritedWidget는 권한은 있으나 상태를 바꿀 수 없음
+- Statefulwidget이 InheritedWidget를 return하도록 하고, 인자로 공유하고 싶은 데이터, 속성들을 전달하여 해결
+- 너무 장황하고 위젯을 많이 만든다는 단점이 있음
+  - ChangeNotifier로 해결

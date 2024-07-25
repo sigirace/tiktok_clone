@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tictok_clone/common/widget/video_configuration/video_config.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/videos/widgets/video_button.dart';
@@ -170,6 +171,17 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
+          Positioned(
+            left: Sizes.size20,
+            top: Sizes.size40,
+            child: IconButton(
+              color: Colors.white,
+              icon: VideoConfigData.of(context).autoMute
+                  ? const FaIcon(FontAwesomeIcons.volumeHigh)
+                  : const FaIcon(FontAwesomeIcons.volumeXmark),
+              onPressed: VideoConfigData.of(context).toggleMuted,
+            ),
+          ),
           const Positioned(
             bottom: Sizes.size10,
             left: Sizes.size10,
@@ -200,15 +212,6 @@ class _VideoPostState extends State<VideoPost>
             right: Sizes.size10,
             child: Column(
               children: [
-                GestureDetector(
-                  onTap: () => _onVolumeChange(context),
-                  child: VideoButton(
-                    icon: _videoPlayerController.value.volume == 0
-                        ? FontAwesomeIcons.volumeOff
-                        : FontAwesomeIcons.volumeHigh,
-                    text: "",
-                  ),
-                ),
                 const CircleAvatar(
                   radius: Sizes.size24,
                   backgroundColor: Colors.black,
