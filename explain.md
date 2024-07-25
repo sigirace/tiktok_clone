@@ -1800,3 +1800,71 @@ onTapUp: (detail) => _stopRecording(),
   - 이 방식은 익명 함수(람다)를 사용하여 \_stopRecording 함수를 호출
   - onTapUp 이벤트가 발생하면, Dart는 이벤트의 상세 정보(TapUpDetails)를 익명 함수의 detail 매개변수로 전달
   - \_stopRecording 함수는 이 상세 정보를 사용하지 않고, 매개변수 없이 호출됨
+
+### 19.6 startVideoRecording
+
+- prepareForvideoRecording
+  - ios를 위한 video recording
+  - ios에서 영상과 오디오 싱크가 맞지 않는 경우 해결
+  - android에서는 아무것도 하지 않음
+
+```dart
+// initCamera
+
+await _cameraController.prepareForVideoRecording();
+```
+
+- recording 시작
+
+```dart
+await _cameraController.startVideoRecording();
+```
+
+- widget.video는 video_recording_screen에서 보낸 영상
+- widget.videosms XFile class
+
+  - Cross file이며 name과 path를 가지고 있음
+  - cross file에서 name과 path로 File 객체 생성
+
+📍 **비디오 재생**
+
+```dart
+Future<void> _initVideo() async {
+  _videoPlayerController = VideoPlayerController.file(
+    File(
+      widget.video.path,
+    ),
+  );
+
+  await _videoPlayerController.initialize();
+  _videoPlayerController.setLooping(true);
+
+  await _videoPlayerController.play();
+  setState(() {});
+}
+
+@override
+void initState() {
+  super.initState();
+  _initVideo();
+}
+
+// 재생 코드
+VideoPlayer(_videoPlayerController)
+```
+
+- \_videoPlayerController.setLooping(true);
+  - 비디오 플레이어가 비디오 재생을 무한 반복할지 여부를 설정
+  - true로 설정하면 비디오가 끝까지 재생된 후 자동으로 다시 시작하여 무한히 반복 재생
+
+📌 **android emulator bug**
+
+```dart
+_cameraController = CameraController(
+  cameras[_isSelfieMode ? 1 : 0],
+  ResolutionPreset.ultraHigh,
+  enableAudio: false,
+);
+```
+
+- android emulator에서 소리가 들어가면 재생되지 않는 버그가 간혹 있음

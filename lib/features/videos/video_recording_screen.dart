@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/videos/video_preview_screen.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   static const routeName = "video-recording";
@@ -54,9 +57,12 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     _cameraController = CameraController(
       cameras[_isSelfieMode ? 1 : 0],
       ResolutionPreset.ultraHigh,
+      enableAudio: false,
     );
 
     await _cameraController.initialize();
+
+    await _cameraController.prepareForVideoRecording();
   }
 
   Future<void> initPermissions() async {
@@ -98,6 +104,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void dispose() {
     _cameraController.dispose();
     _buttonAnimationController.dispose();
+    _progressAnimationController.dispose();
     super.dispose();
   }
 
@@ -113,14 +120,34 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     setState(() {});
   }
 
-  void _onTapDown(TapDownDetails details) {
+  void _startRecording(TapDownDetails details) async {
+    if (_cameraController.value.isRecordingVideo) {
+      return;
+    }
+
+    await _cameraController.startVideoRecording();
+
     _buttonAnimationController.forward();
     _progressAnimationController.forward();
   }
 
-  void _stopRecording() {
+  Future<void> _stopRecording() async {
+    if (!_cameraController.value.isRecordingVideo) {
+      return;
+    }
     _buttonAnimationController.reverse();
     _progressAnimationController.reset();
+
+    final video = await _cameraController.stopVideoRecording();
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VideoPreviewScreen(video: video),
+      ),
+    );
   }
 
   @override
@@ -179,7 +206,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                   Positioned(
                     bottom: Sizes.size20,
                     child: GestureDetector(
-                      onTapDown: _onTapDown,
+                      onTapDown: _startRecording,
                       onTapUp: (detail) => _stopRecording(),
                       child: ScaleTransition(
                         scale: _buttonAnimation,
