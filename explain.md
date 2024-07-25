@@ -1994,3 +1994,29 @@ late final bool _noCamera = kDebugMode && Platform.isIOS;
 ```
 
 - 세로 모드만 지원하려면 plist에서 landscape 관련 모두 지움
+
+### 20.2-5 Router part
+
+- route parameter
+  - 파라미터를 한정적으로 지정할 수 있음
+  - path: "/:tab(param1|param2|...)"
+
+```dart
+context.go("/home");
+```
+
+- initialLocation
+  - 시작 지점을 정할 수 있음 like url
+- routes
+  - 자식의 경로를 생성
+  - 자식의 url은 /로 싲가할 수 없음
+
+📍 **push vs go**
+
+- push
+  - 데이터 등을 스택 위에 추가
+  - push를 했으니 pop으로 뒤로가기 가능
+- go
+  - 그냥 그 경로로 감
+  - 경로가 바뀌고 스택을 교체한다는 의미
+  - 기존 스택은 신경 쓸 필요가 없음

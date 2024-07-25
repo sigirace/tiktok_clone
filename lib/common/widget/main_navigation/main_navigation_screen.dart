@@ -1,44 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/discover/discover_screen.dart';
 import 'package:tictok_clone/features/inbox/inbox_screen.dart';
 import 'package:tictok_clone/common/widget/main_navigation/widgets/nav_tab.dart';
 import 'package:tictok_clone/common/widget/main_navigation/widgets/post_video_button.dart';
+import 'package:tictok_clone/features/videos/video_recording_screen.dart';
 import 'package:tictok_clone/features/videos/video_timeline_screen.dart';
 import 'package:tictok_clone/users/user_profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  static const routeName = "main";
-  static const routeUrl = "main";
-  const MainNavigationScreen({super.key});
+  static const String routeName = "mainNavigation";
+  final String tab;
+  const MainNavigationScreen({
+    super.key,
+    required this.tab,
+  });
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
+  final List<String> _tabs = [
+    "home",
+    "discover",
+    "xxx",
+    "inbox",
+    "profile",
+  ];
+
   // 초기 화면 지정 index
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = _tabs.indexOf(widget.tab);
+  }
 
   void _onTap(int index) {
+    context.go("/${_tabs[index]}");
     setState(() {
       _selectedIndex = index;
     });
   }
 
   void _onPostVideoButtonTap() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: const Text('record videos'),
-          ),
-        ),
-        fullscreenDialog: true,
-      ),
-    );
+    context.pushNamed(VideoRecordingScreen.routeName);
   }
 
   @override

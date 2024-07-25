@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,8 +11,8 @@ import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/videos/video_preview_screen.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
-  static const routeName = "video-recording";
-  static const routeUrl = "/";
+  static const routeName = "postVideo";
+  static const routeUrl = "/upload";
   const VideoRecordingScreen({super.key});
 
   @override
@@ -74,12 +72,16 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void dispose() {
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
-    _cameraController.dispose();
+
+    if (!_noCamera) {
+      _cameraController.dispose();
+    }
     super.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (_noCamera) return;
     if (!_hasPermission) return;
     if (!_cameraController.value.isInitialized) return;
     if (state == AppLifecycleState.inactive) {
@@ -92,6 +94,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> initCamera() async {
+    if (_noCamera) return;
     final cameras = await availableCameras();
 
     if (cameras.isEmpty) {
@@ -143,6 +146,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _starRecording(TapDownDetails _) async {
+    if (_noCamera) return;
     if (_cameraController.value.isRecordingVideo) return;
 
     await _cameraController.startVideoRecording();
@@ -152,6 +156,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _stopRecording() async {
+    if (_noCamera) return;
     if (!_cameraController.value.isRecordingVideo) return;
 
     _buttonAnimationController.reverse();
@@ -216,6 +221,16 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 children: [
                   if (!_noCamera && _cameraController.value.isInitialized)
                     CameraPreview(_cameraController),
+                  Positioned(
+                    top: Sizes.size20,
+                    left: Sizes.size20,
+                    child: CloseButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
                   if (!_noCamera)
                     Positioned(
                       top: Sizes.size20,
