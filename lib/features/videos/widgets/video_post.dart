@@ -27,6 +27,9 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   bool _isPaused = false;
+
+  bool _autoMute = videoConfig.autoMute;
+
   final Duration _animationDuration = const Duration(milliseconds: 300);
 
   late final AnimationController _animationController;
@@ -68,6 +71,12 @@ class _VideoPostState extends State<VideoPost>
 
     _animationController.addListener(() {
       setState(() {});
+    });
+
+    videoConfig.addListener(() {
+      setState(() {
+        _autoMute = videoConfig.autoMute;
+      });
     });
   }
 
@@ -119,15 +128,6 @@ class _VideoPostState extends State<VideoPost>
     _onTogglePause();
   }
 
-  void _onVolumeChange(BuildContext context) async {
-    if (_videoPlayerController.value.volume == 0) {
-      await _videoPlayerController.setVolume(1);
-    } else {
-      await _videoPlayerController.setVolume(0);
-    }
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
@@ -176,10 +176,10 @@ class _VideoPostState extends State<VideoPost>
             top: Sizes.size40,
             child: IconButton(
               color: Colors.white,
-              icon: VideoConfigData.of(context).autoMute
-                  ? const FaIcon(FontAwesomeIcons.volumeHigh)
-                  : const FaIcon(FontAwesomeIcons.volumeXmark),
-              onPressed: VideoConfigData.of(context).toggleMuted,
+              icon: FaIcon(_autoMute
+                  ? FontAwesomeIcons.volumeXmark
+                  : FontAwesomeIcons.volumeHigh),
+              onPressed: videoConfig.toggleAutoMute,
             ),
           ),
           const Positioned(

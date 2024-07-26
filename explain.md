@@ -2072,3 +2072,29 @@ static VideoConfig of(BuildContext context) {
 - Statefulwidget이 InheritedWidget를 return하도록 하고, 인자로 공유하고 싶은 데이터, 속성들을 전달하여 해결
 - 너무 장황하고 위젯을 많이 만든다는 단점이 있음
   - ChangeNotifier로 해결
+
+### 20.9 ChangeNotifier
+
+- InheritedWidget과 Statefulwidget를 합침
+- 데이터를 들어냄
+- 데이터 변경 사항을 듣고 있는 화면들이 있음
+- notifyListeners()
+  - 데이터가 변경되었다고 청취자들에게 알려줌
+  - 청취자들은 변수를 사용하는 곳
+- 청취자로 만드는 법 1
+  - AnimateBuilder
+  - 애니메이션 기능 뿐아니라 change notifier에서도 사용
+  - 청취자는 해당 타일만 build 시키게 만듦
+- 청취자로 만드는 법 2
+  - initstate시에 Listener를 등록
+- ChangeNotifier는 API 로 부터 값을 받아올때 그 데이터가 많을 경우 유용함
+- 데이터가 1개밖에 없으면 다른방식 고려 (다음강)
+
+🌈 **example**
+
+```dart
+AnimatedBuilder(
+  animation: videoConfig, // config class
+  builder: (context, child) => Container// Widget = child
+)
+```
