@@ -2093,8 +2093,51 @@ static VideoConfig of(BuildContext context) {
 🌈 **example**
 
 ```dart
+// AnimatedBuilder
 AnimatedBuilder(
-  animation: videoConfig, // config class
-  builder: (context, child) => Container// Widget = child
-)
+  animation: videoConfig,
+  builder: (context, child) => SwitchListTile.adaptive(
+    value: videoConfig.value,
+    onChanged: (value) {
+      videoConfig.value = !videoConfig.value;
+    },
+    title: const Text("Auto Mute"),
+    subtitle: const Text("Videos will be muted by default."),
+  ),
+),
+
+// ValueListenableBuilder
+ValueListenableBuilder(
+              valueListenable: videoConfig,
+              builder: (context, value, child) => SwitchListTile.adaptive(
+                value: videoConfig.value,
+                onChanged: (value) {
+                  videoConfig.value = !videoConfig.value;
+                },
+                title: const Text("Auto Mute"),
+                subtitle: const Text("Videos will be muted by default."),
+              ),
+            ),
+```
+
+### 20.10 ValueNotifier
+
+- 간단한 값의 ChangeNotifier
+
+```dart
+//before
+class VideoConfig extends ChangeNotifier {
+  bool autoMute = false;
+
+  void toggleAutoMute() {
+    autoMute = !autoMute;
+    notifyListeners();
+  }
+}
+
+final videoConfig = VideoConfig();
+
+
+//after
+final videoConfig = ValueNotifier(false);
 ```
