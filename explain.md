@@ -2075,6 +2075,7 @@ static VideoConfig of(BuildContext context) {
 
 ### 20.9 ChangeNotifier
 
+- 데이터를 가지고 있을 수도 있고, 위젯이 그 데이터를 listen하게 할 수 있고, 데이터가 바뀔 때 위젯한테 알려줄 수 있음
 - InheritedWidget과 Statefulwidget를 합침
 - 데이터를 들어냄
 - 데이터 변경 사항을 듣고 있는 화면들이 있음
@@ -2229,3 +2230,18 @@ context.read<VideoConfig>().toggleIsMuted();
   - API한테 데이터를 요청함
   - 영상에 대한 모델을 build
   - 영상들을 view에 넘겨줌
+
+### 21.2 VideoPlaybackConfigRepository
+
+- view
+  - 사용자가 보는 부분
+- repo
+  - 데이터를 디스크에 persist하고 디스크에서 데이터를 가져오는 것
+    - 데이터 유지
+    - 데이터를 읽기
+    - persist: 데이터를 프로그램보다 오래 살리는 것
+  - shared_preferences 패키지 설치 필요
+
+```
+flutter pub add shared_preferences
+```
