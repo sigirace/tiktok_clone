@@ -2196,5 +2196,36 @@ context.read<VideoConfig>().toggleIsMuted();
 - provider
   - basic
   - 값이 무엇이던 값을 가지고 드러냄
-- ChangeNotifierProvider
-  -
+
+### 21.1 MVVM
+
+- MVVM
+  - Model View ModelView
+  - View
+    - UI 표현, 사용자 입력
+  - Model
+    - 데이터
+  - View Model
+    - ChangeNotifier
+    - View가 ViewModel한테 얘기하고
+    - ViewModel이 Data를 수정
+    - ViewModel이 View에게 데이터가 바뀌었다고 알려줌
+  - Repository
+    - 데이터 저장
+    - 파이어베이스 통신
+    - 데이터 기기 저장
+
+✏️ **아키텍처가 왜 필요할까?**
+
+- 코드를 패턴에 맞춰서 정리해야 함
+- 그러히 않으면 스파케티 코드됨
+
+🌈 **Example**
+
+- view
+  - 영상 타임라인
+  - 무한 스크롤 기능
+- viewmodel
+  - API한테 데이터를 요청함
+  - 영상에 대한 모델을 build
+  - 영상들을 view에 넘겨줌
