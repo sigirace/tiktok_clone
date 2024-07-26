@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tictok_clone/common/widget/video_configuration/video_config.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -33,16 +34,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         body: ListView(
           children: [
-            ValueListenableBuilder(
-              valueListenable: videoConfig,
-              builder: (context, value, child) => SwitchListTile.adaptive(
-                value: videoConfig.value,
-                onChanged: (value) {
-                  videoConfig.value = !videoConfig.value;
-                },
-                title: const Text("Auto Mute"),
-                subtitle: const Text("Videos will be muted by default."),
-              ),
+            SwitchListTile.adaptive(
+              value: context.watch<VideoConfig>().isMuted,
+              onChanged: (vaule) => context.read<VideoConfig>().toggleIsMuted(),
+              title: const Text("Auto Muted!"),
+              subtitle: const Text("They will be quite."),
             ),
             SwitchListTile.adaptive(
               value: _notifications,

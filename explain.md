@@ -2141,3 +2141,60 @@ final videoConfig = VideoConfig();
 //after
 final videoConfig = ValueNotifier(false);
 ```
+
+### 20.11 Provider
+
+- Provider
+  - inheritedwidget을 감쌈
+  - 더 쉽고 빠르게 사용하기 위함
+  - 앱에 많은 것을 제공하고 어디서나 열람할 수 있게 함
+  - example
+    - changeNotifier를 드러내는 provider
+    - 변경되지 않는 데이터가 있는 단순한 클래스를 드러내는 provider
+
+```yaml
+dependencies:
+  provider: 6.0.5
+```
+
+🌈 **Example**
+
+```dart
+// class
+class VideoConfig extends ChangeNotifier {
+  bool isMuted = false;
+  bool isAutoplay = false;
+
+  void toggleIsMuted() {
+    isMuted = !isMuted;
+    notifyListeners();
+  }
+
+  void toggleAutoplay() {
+    isAutoplay = !isAutoplay;
+    notifyListeners();
+  }
+}
+
+// main -> 앱을 provider로 감쌈
+return MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => VideoConfig(),
+      )
+    ],)
+
+// screen data -> 접근
+context.watch<VideoConfig>().isMuted
+
+// screen function -> 접근
+context.read<VideoConfig>().toggleIsMuted();
+```
+
+📍 **Provider 종류**
+
+- provider
+  - basic
+  - 값이 무엇이던 값을 가지고 드러냄
+- ChangeNotifierProvider
+  -

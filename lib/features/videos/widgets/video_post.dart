@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tictok_clone/common/widget/video_configuration/video_config.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
@@ -27,8 +28,6 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   bool _isPaused = false;
-
-  bool _autoMute = videoConfig.value;
 
   final Duration _animationDuration = const Duration(milliseconds: 300);
 
@@ -71,12 +70,6 @@ class _VideoPostState extends State<VideoPost>
 
     _animationController.addListener(() {
       setState(() {});
-    });
-
-    videoConfig.addListener(() {
-      setState(() {
-        _autoMute = videoConfig.value;
-      });
     });
   }
 
@@ -176,11 +169,11 @@ class _VideoPostState extends State<VideoPost>
             top: Sizes.size40,
             child: IconButton(
               color: Colors.white,
-              icon: FaIcon(_autoMute
+              icon: FaIcon(context.watch<VideoConfig>().isMuted
                   ? FontAwesomeIcons.volumeXmark
                   : FontAwesomeIcons.volumeHigh),
               onPressed: () {
-                videoConfig.value = !videoConfig.value;
+                context.read<VideoConfig>().toggleIsMuted();
               },
             ),
           ),
