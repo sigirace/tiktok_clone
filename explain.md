@@ -2235,6 +2235,11 @@ context.read<VideoConfig>().toggleIsMuted();
 
 - view
   - 사용자가 보는 부분
+- view_model
+  - changenotifier
+    - 데이터를 갖고 있을 수 있고
+    - 위젯이 그 데이터를 listen하게 할 수 있고
+    - 데이터가 바뀔 때 알려줄 수 있음
 - repo
   - 데이터를 디스크에 persist하고 디스크에서 데이터를 가져오는 것
     - 데이터 유지
@@ -2245,3 +2250,41 @@ context.read<VideoConfig>().toggleIsMuted();
 ```
 flutter pub add shared_preferences
 ```
+
+### 21.3 PlaybackConfigViewModel
+
+📌 **View Model에서 하는일**
+
+- Step1. 생성자
+  - repository를 통해 viewmodel 생성
+  - model은 repository가 있어야 생성됨 > late final
+- Step2. 함수 공개
+  - repository에 값 저장
+  - model 값 변경
+  - 위젯들에게 알림
+- Step3. 데이터 공개
+  - reopository와 model을 직접 공개하지 않음
+  - view model을 통해 데이터 접근하도록 함
+
+```dart
+// main.dart > main function
+final preferences = await SharedPreferences.getInstance();
+final repository = PlaybackConfigRepository(preferences);
+```
+
+- viewmodel을 위한 repository를 main에서 초기화함
+
+```dart
+// main.dart > main function
+runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => PlaybackConfigViewModel(repository))
+      ],
+      child: const TikTokApp(),
+    ),
+  );
+```
+
+- provider를 main에서 감쌈
