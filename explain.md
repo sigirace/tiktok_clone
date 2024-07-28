@@ -2340,4 +2340,50 @@ dependencies:
     - 두가지 타입 필요
       1. expose하고 싶은 provider => viewmodel
       2. expose하고 싶은 data => model
-    -
+
+### 22.2 ConsumerWidget
+
+[settings_screen]
+
+- stateful widget
+  - 상태가 없는 위젯으로 변경
+  - 기존에 stateful로 해 준 이유는 business logic을 사용하고 있기 때문
+
+```dart
+bool _notifications = false;
+
+  void _onNotificationsChanged(bool? newValue) {
+    if (newValue == null) return;
+    setState(() {
+      _notifications = newValue;
+    });
+  }
+```
+
+- riverpod에서 ui를 업데이트하는 business 로직이 있다면 그것은 다른 곳에 두어야 함
+
+📌 **CunsumerWidget 사용**
+
+- riverpod의 provider로부터 데이터를 listen하기 위한 방법
+- extend로 consumerwidget 사용
+  - build method의 parameter로 widgetref 받음
+  - 아래와 같이 사용
+
+```dart
+ref.watch(playbackConfigProvider).muted
+```
+
+- read하거나 watch할 수 있는 것
+  - provider가 expose하는 데이터 뿐
+    - model (=data)
+  - method에 접근하려면 아래와 같이 수행
+
+```dart
+ref.read(playbackConfigProvider.notifier).setMuted(value)
+```
+
+☀️ **Tip**
+
+- Extension 설치
+  - riverpod snippets
+  - start하기 쉽게 만들어줌
