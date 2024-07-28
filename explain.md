@@ -2288,3 +2288,23 @@ runApp(
 ```
 
 - provider를 main에서 감쌈
+
+### 21.4 Views
+
+- 코드 완성
+
+### 22.0 Introduction
+
+- Riverpod
+  - provider의 애너그램으로 후속작정도로 보임
+  - 관심사를 분리해주는 점에서 provider와 비슷
+  - view 로직과 business 로직을 각기 달느 곳에 위치하게 함
+  - depoendency 들을 주입시켜서 provider를 어디에서나 읽을 수 있게 함
+  - 위젯트리 밖에서 사용 가능
+    - 상속받지 않는 개념
+  - riverpod 사용이 더 간소화시킬 수 있음
+
+```yaml
+dependencies:
+  flutter_riverpod: ^2.1.3
+```
