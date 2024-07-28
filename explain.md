@@ -2387,3 +2387,23 @@ ref.read(playbackConfigProvider.notifier).setMuted(value)
 - Extension 설치
   - riverpod snippets
   - start하기 쉽게 만들어줌
+
+### 22.3 Recap
+
+📌 **ConsumerStatefulWidget 변경**
+
+- stateful을 아래와 같이 변경
+- ref를 사용할 수 있게 함
+
+```dart
+class VideoPost extends ConsumerStatefulWidget {
+  /*
+  생략
+  */
+  @override
+  VideoPostState createState() => VideoPostState();
+}
+
+class VideoPostState extends ConsumerState<VideoPost>
+    with SingleTickerProviderStateMixin {}
+```
