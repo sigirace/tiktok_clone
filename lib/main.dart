@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictok_clone/features/videos/repos/playback_config_repo.dart';
 import 'package:tictok_clone/features/videos/view_models/playback_config_vm.dart';
@@ -21,13 +21,11 @@ void main() async {
   final repository = PlaybackConfigRepository(preferences);
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-            create: (context) => PlaybackConfigViewModel(repository))
-      ],
-      child: const TikTokApp(),
-    ),
+    ProviderScope(overrides: [
+      playbackConfigProvider.overrideWith(
+        () => PlaybackConfigViewModel(repository),
+      ),
+    ], child: const TikTokApp()),
   );
 }
 

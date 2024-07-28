@@ -2295,6 +2295,8 @@ runApp(
 
 ### 22.0 Introduction
 
+- https://riverpod.dev/ko/docs/from_provider/motivation
+
 - Riverpod
   - provider의 애너그램으로 후속작정도로 보임
   - 관심사를 분리해주는 점에서 provider와 비슷
@@ -2308,3 +2310,34 @@ runApp(
 dependencies:
   flutter_riverpod: ^2.1.3
 ```
+
+### 22.1 NotifierProvider
+
+- main의 runapp안의 widget을 ProviderScope로 감싸면 준비 완료
+- riverpod은 위젯트리에 있지 않기에 context. 같은 기능을 사용하지 않음
+- ViewModel
+  - view model의 로직은 view로부터 이벤트를 받아서 데이터를 수정하고, view에게 데이터가 변했다는 것을 알림
+  - 이를 changenotifier를 통해서 했는데 이제는 필요하지 않음
+- Notifier
+  - changenotifier와 유사한 기능
+    - 변화를 listen하고 있는 listener들에게 변화를 통지
+  - Notifier는 notifyListener를 가지고 있지 않음
+  - build method가 필요
+    - build는 자동으로 호출됨
+    - 사용자가 보게 되는 UI의 형태로 사용자에게 전달됨
+    - build method가 반환하는 것은 사용자가 보게 될, 즉, 화면이 갖게되는 초기의 데이터
+    - <> 안에 타입을 넣어 어떤 형태로 데이터를 노출시킬지 결정함
+      - listen 하고 watch 하길 원하는 데이터
+    - Notifier는 state를 가질 것이고, state는 사용자에게 노출시키고 싶은 데이터
+      - 단, state는 update가 아닌 새로 만듦
+  - 위 과정을 통해 providerconfigviewmodel을 만듦
+  - 이제 이를 활용할 provider를 만들어야함
+- provider
+  - 데이터를 얻기 위해 사용
+  - 함수들을 사용하기 위해 사용
+  - viewmodel 파일 가장 아래 provider 생성
+  - Notifier를 사용하였으니 NotifierProvider 객체 사용
+    - 두가지 타입 필요
+      1. expose하고 싶은 provider => viewmodel
+      2. expose하고 싶은 data => model
+    -
