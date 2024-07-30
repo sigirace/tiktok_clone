@@ -11,8 +11,8 @@ import 'package:tictok_clone/constants/sizes.dart';
 import 'package:tictok_clone/features/videos/views/video_preview_screen.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
-  static const routeName = "postVideo";
-  static const routeUrl = "/upload";
+  static const String routeName = "postVideo";
+  static const String routeURL = "/upload";
   const VideoRecordingScreen({super.key});
 
   @override
@@ -72,7 +72,6 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void dispose() {
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
-
     if (!_noCamera) {
       _cameraController.dispose();
     }
@@ -85,16 +84,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     if (!_hasPermission) return;
     if (!_cameraController.value.isInitialized) return;
     if (state == AppLifecycleState.inactive) {
-      print("inactive");
       _cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
-      print("resumed");
       initCamera();
     }
   }
 
   Future<void> initCamera() async {
-    if (_noCamera) return;
     final cameras = await availableCameras();
 
     if (cameras.isEmpty) {
@@ -146,7 +142,6 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _starRecording(TapDownDetails _) async {
-    if (_noCamera) return;
     if (_cameraController.value.isRecordingVideo) return;
 
     await _cameraController.startVideoRecording();
@@ -156,7 +151,6 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _stopRecording() async {
-    if (_noCamera) return;
     if (!_cameraController.value.isRecordingVideo) return;
 
     _buttonAnimationController.reverse();
@@ -221,14 +215,11 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 children: [
                   if (!_noCamera && _cameraController.value.isInitialized)
                     CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size20,
+                  const Positioned(
+                    top: Sizes.size40,
                     left: Sizes.size20,
                     child: CloseButton(
                       color: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
                     ),
                   ),
                   if (!_noCamera)

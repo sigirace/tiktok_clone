@@ -343,6 +343,7 @@ PageView.builder(
 
 - PageView.builder 위젯의 onPageChanged 콜백은 페이지 뷰가 스크롤되어 새 페이지가 중앙에 위치할 때마다 호출됩니다.
 - page 매개변수는 현재 중앙에 위치한 페이지의 인덱스를 나타냅니다.
+- 콜백이 인덱스를 매개변수로 받는 함수여야 함
 
 ### 7.2 PageController
 
@@ -2341,6 +2342,11 @@ dependencies:
       1. expose하고 싶은 provider => viewmodel
       2. expose하고 싶은 data => model
 
+📌 **Provider 상속**
+
+- provider는 state를 받음
+- provider 뒤에 붙은 것이 관리하는 상태의 타입
+
 ### 22.2 ConsumerWidget
 
 [settings_screen]
@@ -2362,6 +2368,10 @@ bool _notifications = false;
 
 - riverpod에서 ui를 업데이트하는 business 로직이 있다면 그것은 다른 곳에 두어야 함
 
+📍 **WidgetRef**
+
+- Provider를 가져오거나 읽을 수 있는 reference
+
 📌 **CunsumerWidget 사용**
 
 - riverpod의 provider로부터 데이터를 listen하기 위한 방법
@@ -2374,6 +2384,8 @@ ref.watch(playbackConfigProvider).muted
 ```
 
 - read하거나 watch할 수 있는 것
+  - watch: 변화를 감지
+  - read: 단순히 읽음
   - provider가 expose하는 데이터 뿐
     - model (=data)
   - method에 접근하려면 아래와 같이 수행
@@ -2407,3 +2419,16 @@ class VideoPost extends ConsumerStatefulWidget {
 class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {}
 ```
+
+### 22.4 AsyncNotifierProvider
+
+- AsyncNotifier
+  - AsyncNotifier를 extend할 땐 반드시 어떤 메서드를 구현해야함 > build method
+  - FutureOr
+    - async method
+    - await를 통해 API로부터 데이터를 받아옴
+  - provider 사용
+    - asycn provider를 사용하기 위해서는 데이터를 기다려야함
+    - ref.watch(provider).when();
+      - loading: api를 기다리는 중에 나타날 위젯
+  - asyncnotifier일 경우 state의 update는 asyncValue.data 사용
