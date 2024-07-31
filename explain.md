@@ -2506,3 +2506,24 @@ source ~/.bash_profile
 - provider의 state는 내가 원하는 형태로 지정해도 됨
   - 그러나 관리를 위해 Model로 만들어 놓는 방법을 선호
 - StateProvider는 당장 data를 expose하지 않고 추후에 widget에서 받아옴
+
+### 24.1 signOut
+
+- stream
+  - 실시간 연결
+  - 유저의 인증 상태가 바뀔 때 앱을 실시간으로 새로고침
+
+```dart
+Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
+
+final authState = StreamProvider(
+  (ref) {
+    final repo = ref.read(authRepo);
+    return repo.authStateChanges();
+  },
+);
+```
+
+- repo의 authStateChange 함수를 호출하면 연결을 맺어 실시간 상태를 추적함
+  - router의 watch를 통해서 변화를 감지할 수 있음
+  - router는 provider이기 때문에, 이 변화를 통해 다시 빌드되고 수행됨

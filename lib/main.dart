@@ -28,11 +28,14 @@ void main() async {
   final repository = PlaybackConfigRepository(preferences);
 
   runApp(
-    ProviderScope(overrides: [
-      playbackConfigProvider.overrideWith(
-        () => PlaybackConfigViewModel(repository),
-      ),
-    ], child: const TikTokApp()),
+    ProviderScope(
+      overrides: [
+        playbackConfigProvider.overrideWith(
+          () => PlaybackConfigViewModel(repository),
+        ),
+      ],
+      child: const TikTokApp(),
+    ),
   );
 }
 
