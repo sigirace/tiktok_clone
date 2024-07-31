@@ -2432,3 +2432,65 @@ class VideoPostState extends ConsumerState<VideoPost>
     - ref.watch(provider).when();
       - loading: api를 기다리는 중에 나타날 위젯
   - asyncnotifier일 경우 state의 update는 asyncValue.data 사용
+
+### 23.1 Firebase Installation
+
+📌 **Firebase CLI 설치**
+
+```bash
+curl -sL https://firebase.tools | bash
+
+firebase login
+
+dart pub global activate flutterfire_cli
+
+flutter-proj$ flutterfire configure
+
+flutter pub add firebase_core
+
+flutter pub add firebase_auth
+
+flutter pub add cloud_firestore
+
+flutter pub add firebase_storage
+```
+
+- flutterfire_cli: flutter 프로젝트에서 firebase에 대해 얘기할 수 있게 해줌
+- flutterfire configure: flutter app에 firebase 적용
+  - 유일한 이름으로 설정
+  - os 중 필요한 것만 체크 (체크해제는 스페이스바)
+- firebase 플로그인을 추가할 때마다 flutterfire configure 실행
+
+```dart
+// main.dart
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+```
+
+📌 **flutterfire_cli warnings**
+
+```
+Warning: Pub installs executables into $HOME/.pub-cache/bin, which is not on your path. You can fix that by adding this to your shell's config file (.bashrc, .bash_profile, etc.):
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+Activated flutterfire_cli 1.0.0.
+```
+
+- 이 경고 메시지는 flutterfire_cli를 설치한 후 실행 파일이 $HOME/.pub-cache/bin 디렉토리에 설치되었지만, 이 디렉토리가 현재 PATH 환경 변수에 포함되어 있지 않기 때문에 발생
+- 다음 명령어를 사용하여 PATH 환경 변수에 해당 디렉토리를 추가해야 함
+
+```bash
+# 파일 열기
+nano ~/.bash_profile
+
+# 파일 끝 추가
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# 저장
+# Ctrl + X, Y, Enter 순서
+
+# 적용
+source ~/.bash_profile
+```

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,11 +7,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictok_clone/features/videos/repos/playback_config_repo.dart';
 import 'package:tictok_clone/features/videos/view_models/playback_config_vm.dart';
+import 'package:tictok_clone/firebase_options.dart';
 import 'package:tictok_clone/generated/l10n.dart';
 import 'package:tictok_clone/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
