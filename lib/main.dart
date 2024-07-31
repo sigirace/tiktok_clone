@@ -43,7 +43,7 @@ class TikTokApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // S.load(const Locale("en"));
     return MaterialApp.router(
-      routerConfig: ref.watch(routerProvider),
+      routerConfig: ref.read(routerProvider),
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,

@@ -4,9 +4,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class AuthenticationRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  User? get user => _firebaseAuth.currentUser;
+  User? get user {
+    return _firebaseAuth.currentUser;
+  }
 
-  bool get isLoggedIn => user != null;
+  bool get isLoggedIn {
+    return user != null;
+  }
+
+  Future<void> signUp(String email, String password) {
+    return _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
 }
 
-final authRepo = Provider((ref) => AuthenticationRepository());
+final authRepo = Provider((ref) {
+  return AuthenticationRepository();
+});

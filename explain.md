@@ -2499,5 +2499,10 @@ source ~/.bash_profile
 
 - router를 provider로 변경하여 사용
 - router 내에서 provider에 접근하여 연산가능
-- main에서 firebase를 초기화하였기에 빌드시 firebase 관련 함수들이 실행됨
-  - isLoggedIn을 authRepo에서 읽어와 redirect 사용
+
+### 24.0 createUserWithEmailAndPassword
+
+- provider는 최초 접근시에 초기화됨
+- provider의 state는 내가 원하는 형태로 지정해도 됨
+  - 그러나 관리를 위해 Model로 만들어 놓는 방법을 선호
+- StateProvider는 당장 data를 expose하지 않고 추후에 widget에서 받아옴
