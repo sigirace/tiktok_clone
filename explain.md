@@ -2494,3 +2494,10 @@ export PATH="$PATH:$HOME/.pub-cache/bin"
 # 적용
 source ~/.bash_profile
 ```
+
+### 23.2 AuthenticationRepository
+
+- router를 provider로 변경하여 사용
+- router 내에서 provider에 접근하여 연산가능
+- main에서 firebase를 초기화하였기에 빌드시 firebase 관련 함수들이 실행됨
+  - isLoggedIn을 authRepo에서 읽어와 redirect 사용
