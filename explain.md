@@ -2606,3 +2606,14 @@ Valid until: 2054년 7월 17일 금요일
   - model을 json으로 변환함
   - .doc() => authentication의 id
   - .set() => 데이터를 넣음
+
+### 25.4 findProfile
+
+- firestore에서 데이터를 get
+
+```
+A value of type 'Map<String, dynamic>?' can't be returned from the method 'findProfile' because it has a return type of 'Future<void>'
+```
+
+- return type이 Map<String, dynamic>?여야 한다는 에러
+- Map<Stirng, dynamic>은 json 형태로 이를 다시 가지고있는 Model 형태로 변환 필요

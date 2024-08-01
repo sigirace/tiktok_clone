@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserProfileModel {
   final String uid;
   final String name;
@@ -29,4 +31,11 @@ class UserProfileModel {
       "email": email,
     };
   }
+
+  UserProfileModel.fromJson(Map<String, dynamic> json)
+      : uid = json["uid"],
+        name = json["name"],
+        bio = json["bio"],
+        link = json["link"],
+        email = json["email"];
 }
