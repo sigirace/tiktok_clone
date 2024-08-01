@@ -727,13 +727,12 @@ textSelectionTheme: const TextSelectionThemeData(
 - RichText
   - main TextSpan이외에 children으로 textspan들의 리스트를 가질 수 있음
 
-📌 **클릭에 대한 효과를 제거하고 싶을 때**
-
-```dart
-// Main > ThemeData
+📌 \*\*클릭에 대한 효cd android
+./gradlew signinReport ThemeData
 splashColor: Colors.transparent,
 highlightColor: Colors.transparent,
-```
+
+````
 
 📍 **Text vs TextSpan**
 
@@ -830,7 +829,7 @@ highlightColor: Colors.transparent,
 ```dart
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
   crossAxisAlignment: CrossAxisAlignment.end,
-```
+````
 
 ### 11.2 AnimatedList
 
@@ -2539,3 +2538,37 @@ final authState = StreamProvider(
   - snackbar를 보여주려면 widget tree의 context에 접근할 수 있어야 함
     - 매개변수로 context를 받아야함
   - snack을 utils로 빼서 관리함
+
+### 24.3 Social Auth Config
+
+- github Auth: https://github.com/settings/applications/new
+
+```
+flutter pub add firebase_auth
+```
+
+[ios]
+
+- 제휴 ID 및 소셜 가이드
+  - https://firebase.google.com/docs/auth/flutter/federated-auth?hl=ko
+
+[android]
+
+```
+cd android
+./gradlew signinReport
+```
+
+```
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: /Users/sigi/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: E7:99:87:60:86:CC:71:93:72:24:9C:47:47:E9:9F:AB
+SHA1: 68:79:4E:CE:26:25:5A:C4:F1:46:86:60:69:38:8E:E8:F5:DB:36:0A
+SHA-256: A2:99:54:D0:BB:56:1E:78:62:50:31:18:8B:D4:4D:C4:07:92:DA:42:7F:DD:1A:AB:37:32:10:E8:5D:2F:D9:4B
+Valid until: 2054년 7월 17일 금요일
+```
+
+- 디지털 지문에 추가
