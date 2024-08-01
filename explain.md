@@ -2527,3 +2527,15 @@ final authState = StreamProvider(
 - repo의 authStateChange 함수를 호출하면 연결을 맺어 실시간 상태를 추적함
   - router의 watch를 통해서 변화를 감지할 수 있음
   - router는 provider이기 때문에, 이 변화를 통해 다시 빌드되고 수행됨
+
+### 24.2 signInWithEmailAndPassword
+
+- AsyncValue.guard
+  - error시에 state에 error를 저장
+- SnackBar
+  - notification bar
+  - material theme을 따르는 flutter app에 있음
+  - 그냥 widget이고 보여줄지 말지만 정함
+  - snackbar를 보여주려면 widget tree의 context에 접근할 수 있어야 함
+    - 매개변수로 context를 받아야함
+  - snack을 utils로 빼서 관리함
