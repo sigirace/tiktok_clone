@@ -2201,7 +2201,7 @@ context.read<VideoConfig>().toggleIsMuted();
 ### 21.1 MVVM
 
 - MVVM
-  - Model View ModelView
+  - Model View ViewModel
   - View
     - UI 표현, 사용자 입력
   - Model
@@ -2577,3 +2577,25 @@ Valid until: 2054년 7월 17일 금요일
 
 - signInWithProvider
   - 다양한 프로바이더를 사용할 수 있음
+
+### 25.0 Introduction
+
+- Cloud Firestore
+  - region: seoul
+  - test mode
+- Build > storage
+  - test mode
+
+### 25.1 FireStore Intro
+
+- Firestore는 document db 구조임
+
+### 25.2 UserProfileModel
+
+- repo > model > view model 순으로 작성
+
+📌 **createProfile 만드는 순서**
+
+- createProfile은 UserProfileModel을 저장하기 위함
+- UserCredential을 Parameter로 가지는 함수 생성
+  - UserCredential는 authentication_repo의 emailSingUp에서 리턴
