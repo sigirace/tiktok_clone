@@ -1826,6 +1826,10 @@ await _cameraController.startVideoRecording();
   - Cross file이며 name과 path를 가지고 있음
   - cross file에서 name과 path로 File 객체 생성
 
+👀 **Xfile**
+
+> XFile은 image_picker 패키지에서 제공하는 클래스로, 파일의 경로, 이름, 크기 등의 정보를 포함하고 있으며, 파일을 읽거나 쓸 수 있는 다양한 메서드를 제공함
+
 📍 **비디오 재생**
 
 ```dart
@@ -2443,6 +2447,14 @@ firebase login
 
 dart pub global activate flutterfire_cli
 
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.zshrc
+source ~/.zshrc
+
+```
+
+```
+
 flutter-proj$ flutterfire configure
 
 flutter pub add firebase_core
@@ -2617,3 +2629,52 @@ A value of type 'Map<String, dynamic>?' can't be returned from the method 'findP
 
 - return type이 Map<String, dynamic>?여야 한다는 에러
 - Map<Stirng, dynamic>은 json 형태로 이를 다시 가지고있는 Model 형태로 변환 필요
+
+### 25.5 AvatarViewModel
+
+[user_profile_screen]
+
+- scaffold를 retunr 하는 대신 ref.watch를 Return
+  - when을 통해 상황별 화면 표시
+  - data를 통해 위젯 표현
+
+📌 **이미지 용량을 줄이는 팁**
+
+- 갤러리에서 사진을 불러올 때
+  - ImagePicker().pickImage(source: ImageSource.gallery, imageQuality:40);
+  - imageQuality를 조정함
+- firebase storage에 접근할때는 reference를 사용
+  - .ref(): riverpod의 ref가 아닌 reference를 의미
+  - .child(): reference에 대한 상대 경로의 reference를 리턴함
+  - 단 이러한 기능은 repository로 가야함
+  - view model의 기능은 로딩 상태를 거쳐 성공 또는 에러 상태로 변경하는 것
+
+📌 **Future<void> async error**
+
+🌈 **example**
+
+```dart
+Future<void> Function() {}
+```
+
+⛔️ **error**
+
+```
+The body might complete normally, causing 'null' to be returned, but the return type, 'Future<void>', is a potentially non-nullable type. Try adding either a return or a throw statement at the end.dartbody_might_complete_normally
+```
+
+- Future<void> 타입의 메서드는 반드시 Future<void>를 반환해야 함
+- 현재 코드에서는 반환문이 없어서 Dart는 메서드가 null을 반환할 수 있다고 판단
+
+☀️ **해결방법**
+
+```dart
+//1
+Future<void> Function() {
+  return Future.value(); // 정상 완료를 나타내는 Future 반환
+}
+
+//2
+Future<void> Function() async {
+}
+```

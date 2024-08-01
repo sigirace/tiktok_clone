@@ -10,7 +10,8 @@ Checking for npm/bin/npm-cli install at /Users/sigi/.cache/firebase/tools/lib/no
 Checking for npm/bin/npm-cli install at /Users/sigi/.cache/firebase/tools/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /snapshot/firepit/node_modules/npm/bin/npm-cli
 Found npm/bin/npm-cli install.
-ShellJSInternalError: ENOENT: no such file or directory, unlink '/Users/sigi/.cache/firebase/runtime/node'
+ShellJSInternalError: ENOENT: no such file or directory, unlink '/Users/sigi/.cache/firebase/runtime/node.bat'
+ShellJSInternalError: ENOENT: no such file or directory, unlink '/Users/sigi/.cache/firebase/runtime/npmrc'
 Runtime binaries created.
 /usr/local/bin/firebase
 /usr/local/bin/firebase,/snapshot/firepit/firepit.js,--version
@@ -22,4 +23,4 @@ Checking for npm/bin/npm-cli install at /Users/sigi/.cache/firebase/tools/lib/no
 Checking for npm/bin/npm-cli install at /Users/sigi/.cache/firebase/tools/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /snapshot/firepit/node_modules/npm/bin/npm-cli
 Found npm/bin/npm-cli install.
-ShellJSInternalError: ENOENT: no such file or directory, chmod '/Users/sigi/.cache/firebase/runtime/shell'
+ShellJSInternalError: ENOENT: no such file or directory, chmod '/Users/sigi/.cache/firebase/runtime/shell.js'
