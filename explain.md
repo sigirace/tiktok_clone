@@ -2572,3 +2572,8 @@ Valid until: 2054년 7월 17일 금요일
 ```
 
 - 디지털 지문에 추가
+
+### 24.4 Github Login
+
+- signInWithProvider
+  - 다양한 프로바이더를 사용할 수 있음

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/authentication/view_models/signup_view_model.dart';
+import 'package:tictok_clone/features/authentication/view_models/social_auth_view_model.dart';
 
-class AuthButton extends StatelessWidget {
+class AuthButton extends ConsumerWidget {
   final String text;
   final FaIcon icon;
   final Widget? link;
@@ -14,37 +17,23 @@ class AuthButton extends StatelessWidget {
     this.link,
   });
 
-  void _onTap(BuildContext context) {
-    if (link == null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('경고'),
-          content: const Text('링크가 없습니다.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('확인'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
-    } else {
+  void _onTap(BuildContext context, WidgetRef ref) {
+    if (link != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => link!,
         ),
       );
+    } else {
+      ref.read(socialAuthProvider.notifier).githubSignIn(context);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () => _onTap(context),
+      onTap: () => _onTap(context, ref),
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Container(
