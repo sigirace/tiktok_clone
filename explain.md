@@ -2599,3 +2599,10 @@ Valid until: 2054년 7월 17일 금요일
 - createProfile은 UserProfileModel을 저장하기 위함
 - UserCredential을 Parameter로 가지는 함수 생성
   - UserCredential는 authentication_repo의 emailSingUp에서 리턴
+
+### 25.3 createProfile
+
+- firestore에 저장
+  - model을 json으로 변환함
+  - .doc() => authentication의 id
+  - .set() => 데이터를 넣음
