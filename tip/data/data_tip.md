@@ -14,6 +14,18 @@
 
 # Riverpod
 
-📌 **state**
+## state
 
-- state가 새로운 state로 변경되면, 이를 구독하고 있는 Widget들이 다시 빌드되도록 함
+📌 **state의 값 변경**
+
+- 구독하고 있는 Widget들이 다시 빌드되도록 함
+
+# Cloud Function
+
+## firestore
+
+📌 **필드 값을 1 증가**
+
+> admin.firestore.FieldValue.increment(1)
+
+- 감소는 -1

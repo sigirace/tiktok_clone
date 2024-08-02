@@ -40,6 +40,8 @@ class VideosRepository {
     final like = await query.get();
     if (!like.exists) {
       await query.set({"createdAt": DateTime.now().microsecondsSinceEpoch});
+    } else {
+      await query.delete();
     }
   }
 }

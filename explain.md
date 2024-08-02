@@ -2849,3 +2849,11 @@ await spawn("ffmpeg", [
 - document db이기에 조회에 대한 트릭이 필요함
 - 모든 것을 다 뒤지기에는 요금이 부과됨
 - doc에 pk를 동적으로 생성하여 해결
+
+### 27.5 dislikeVideo
+
+📌 **cloud function > firestore 필드 값을 1 증가**
+
+> admin.firestore.FieldValue.increment(1)
+
+- 감소는 -1
