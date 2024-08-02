@@ -1,1 +1,47 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tiktok-clone-sigirace","appId":"1:955816575532:android:09b7e3bad92beeb044c789","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"tiktok-clone-sigirace","appId":"1:955816575532:ios:45ec02ee364312bc44c789","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"tiktok-clone-sigirace","configurations":{"android":"1:955816575532:android:09b7e3bad92beeb044c789","ios":"1:955816575532:ios:45ec02ee364312bc44c789","web":"1:955816575532:web:f717b7f0693501e944c789"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tiktok-clone-sigirace",
+          "appId": "1:955816575532:android:09b7e3bad92beeb044c789",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "tiktok-clone-sigirace",
+          "appId": "1:955816575532:ios:45ec02ee364312bc44c789",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "tiktok-clone-sigirace",
+          "configurations": {
+            "android": "1:955816575532:android:09b7e3bad92beeb044c789",
+            "ios": "1:955816575532:ios:45ec02ee364312bc44c789",
+            "web": "1:955816575532:web:f717b7f0693501e944c789"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}

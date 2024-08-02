@@ -2705,3 +2705,31 @@ Future<void> Function() async {
 📌 **Xfile to File**
 
 - File(widget.video.path)
+
+### 26.3 Cloud Function
+
+firebase init functions
+
+```
+? Please select an option: Use an existing project
+? Select a default Firebase project for this directory: tiktok-clone-sigirace (tiktok-clone-sigirace)
+i  Using project tiktok-clone-sigirace (tiktok-clone-sigirace)
+
+=== Functions Setup
+Let's create a new codebase for your functions.
+A directory corresponding to the codebase will be created in your project
+with sample code pre-configured.
+
+See https://firebase.google.com/docs/functions/organize-functions for
+more information on organizing your functions using codebases.
+
+Functions can be deployed with firebase deploy.
+
+? What language would you like to use to write Cloud Functions? TypeScript
+? Do you want to use ESLint to catch probable bugs and enforce style? No
+✔  Wrote functions/package.json
+✔  Wrote functions/tsconfig.json
+✔  Wrote functions/src/index.ts
+✔  Wrote functions/.gitignore
+? Do you want to install dependencies with npm now? Yes
+```
