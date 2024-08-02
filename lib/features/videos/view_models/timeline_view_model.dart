@@ -2,26 +2,23 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tictok_clone/features/videos/models/video_model.dart';
+import 'package:tictok_clone/features/videos/repos/videos_repo.dart';
 
 class TimeLineViewModel extends AsyncNotifier<List<VideoModel>> {
+  late final VideosRepository _repository;
   List<VideoModel> _list = [];
-
-  void uploadVideo() async {
-    state = const AsyncValue.loading();
-    await Future.delayed(const Duration(seconds: 2));
-    _list = [..._list];
-
-    state = AsyncValue.data(_list);
-  }
 
   @override
   FutureOr<List<VideoModel>> build() async {
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-      return _list;
-    } catch (e) {
-      throw Exception("OMG cna`t fetch data");
-    }
+    _repository = ref.read(videosRepo);
+    final result = await _repository.fetchVideos();
+    final newList = result.docs.map(
+      (video) => VideoModel.fromJson(
+        video.data(),
+      ),
+    );
+    _list = newList.toList();
+    return _list;
   }
 }
 

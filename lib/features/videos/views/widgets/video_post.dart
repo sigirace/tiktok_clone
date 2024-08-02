@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/videos/models/video_model.dart';
 import 'package:tictok_clone/features/videos/view_models/playback_config_vm.dart';
 
 import 'package:tictok_clone/features/videos/views/widgets/video_button.dart';
@@ -16,11 +17,13 @@ import 'package:visibility_detector/visibility_detector.dart';
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
   final int index;
+  final VideoModel videoData;
 
   const VideoPost({
     super.key,
     required this.onVideoFinished,
     required this.index,
+    required this.videoData,
   });
 
   @override
@@ -142,8 +145,9 @@ class VideoPostState extends ConsumerState<VideoPost>
           Positioned.fill(
             child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
-                : Container(
-                    color: Colors.white,
+                : Image.network(
+                    widget.videoData.thumbnailUrl,
+                    fit: BoxFit.cover,
                   ),
           ),
           Positioned.fill(
@@ -186,15 +190,15 @@ class VideoPostState extends ConsumerState<VideoPost>
               onPressed: _onPlaybackConfigChanged,
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: Sizes.size10,
             left: Sizes.size10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "@시기",
-                  style: TextStyle(
+                  "@${widget.videoData.creator}",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: Sizes.size24,
@@ -202,8 +206,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v16,
                 Text(
-                  "This is my house in ulgiro",
-                  style: TextStyle(
+                  widget.videoData.description,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size16,
                   ),
@@ -216,21 +220,21 @@ class VideoPostState extends ConsumerState<VideoPost>
             right: Sizes.size10,
             child: Column(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: Sizes.size24,
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   foregroundImage: NetworkImage(
-                    "https://avatars.githubusercontent.com/u/31294995?v=4",
+                    "https://firebasestorage.googleapis.com/v0/b/tiktok-clone-sigirace.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media",
                   ),
                   child: Text(
-                    "Sigi",
+                    widget.videoData.creator,
                   ),
                 ),
                 Gaps.v32,
                 VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(30000000000000),
+                  text: S.of(context).likeCount(widget.videoData.likes),
                 ),
                 Gaps.v24,
                 GestureDetector(

@@ -2816,3 +2816,11 @@ await spawn("ffmpeg", [
    - 이 메서드는 업로드된 파일의 액세스 제어 목록(ACL)을 업데이트하여, 해당 파일을 공용(public)으로 설정합니다. 이렇게 하면, 파일에 대한 읽기 권한이 누구에게나 부여됩니다.
 2. 공개 URL 생성:
    - 파일을 공개로 설정하면, 파일에 접근할 수 있는 URL이 생성됩니다. 이를 통해 외부 사용자나 애플리케이션이 해당 파일에 쉽게 접근할 수 있습니다.
+
+### 27.1 VideoPost
+
+- get
+  - Future<QuerySnapshot<Map<String, dynamic>>> get([GetOptions? options])
+  - querysnapshot은 기본적으로 Map<String, dynamic> , Json 구조임
+- map
+  - map을 새로운 리스트로 생성

@@ -41,7 +41,11 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
         }
       },
     );
-    context.pushReplacement("/home");
+
+    if (!context.mounted) return;
+
+    context.pop();
+    context.pop();
   }
 }
 
