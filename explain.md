@@ -2685,3 +2685,10 @@ Future<void> Function() async {
 - firebase의 storage에 이미지를 저장 후 불러올때 alt=media 사용
   - alt=media가 없다면 이미지의 정보만을 불러옴
 - %2F 뒷 부분이 ID가 됨
+
+### 25.7 NetworkImage
+
+- NetworkImage
+  - 이미지를 얻고 캐싱하고 있음
+  - fetch는 한번만함
+  - url에 가짜 정보를 심어서 매번 새로운 url로 보이게함
