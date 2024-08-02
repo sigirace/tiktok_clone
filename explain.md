@@ -2648,6 +2648,7 @@ A value of type 'Map<String, dynamic>?' can't be returned from the method 'findP
   - .child(): reference에 대한 상대 경로의 reference를 리턴함
   - 단 이러한 기능은 repository로 가야함
   - view model의 기능은 로딩 상태를 거쳐 성공 또는 에러 상태로 변경하는 것
+- file reference에 put 함수를 통해 저장 가능
 
 📌 **Future<void> async error**
 
@@ -2678,3 +2679,9 @@ Future<void> Function() {
 Future<void> Function() async {
 }
 ```
+
+### 25.6 onAvatarUpload
+
+- firebase의 storage에 이미지를 저장 후 불러올때 alt=media 사용
+  - alt=media가 없다면 이미지의 정보만을 불러옴
+- %2F 뒷 부분이 ID가 됨
