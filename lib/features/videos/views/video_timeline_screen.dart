@@ -12,7 +12,7 @@ class VideoTimelineScreen extends ConsumerStatefulWidget {
 }
 
 class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
-  int _itemCount = 4;
+  int _itemCount = 0;
 
   final PageController _pageController = PageController();
 
@@ -26,8 +26,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       curve: _scrollCurve,
     );
     if (page == _itemCount - 1) {
-      _itemCount = _itemCount + 4;
-      setState(() {});
+      ref.read(timelineProvider.notifier).fetchNextPage();
     }
   }
 
@@ -57,18 +56,20 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   @override
   Widget build(BuildContext context) {
     return ref.watch(timelineProvider).when(
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text(
-              "could not load videos $error",
-              style: const TextStyle(
-                color: Colors.white,
+        loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+        error: (error, stackTrace) => Center(
+              child: Text(
+                "could not load videos $error",
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          data: (videos) => RefreshIndicator(
+        data: (videos) {
+          _itemCount = videos.length;
+          return RefreshIndicator(
             displacement: Sizes.size32,
             edgeOffset: Sizes.size32,
             onRefresh: _onRefresh,
@@ -76,7 +77,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
               controller: _pageController,
               scrollDirection: Axis.vertical,
               onPageChanged: _onPageChanged,
-              itemCount: videos.length,
+              itemCount: _itemCount,
               itemBuilder: (context, index) {
                 final videoData = videos[index];
                 return VideoPost(
@@ -86,7 +87,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                 );
               },
             ),
-          ),
-        );
+          );
+        });
   }
 }

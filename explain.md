@@ -2824,3 +2824,10 @@ await spawn("ffmpeg", [
   - querysnapshot은 기본적으로 Map<String, dynamic> , Json 구조임
 - map
   - map을 새로운 리스트로 생성
+
+### 27.2 Infinite Firebase
+
+- startAfter
+  - orderby시에 첫번째 순서를 지정함
+- Infinite scroll
+  - fetchvideo와 nextpage를 구분하여 무한 스크롤 구현
