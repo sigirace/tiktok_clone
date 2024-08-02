@@ -2708,6 +2708,8 @@ Future<void> Function() async {
 
 ### 26.3 Cloud Function
 
+[installation]
+
 firebase init functions
 
 ```
@@ -2732,4 +2734,41 @@ Functions can be deployed with firebase deploy.
 ✔  Wrote functions/src/index.ts
 ✔  Wrote functions/.gitignore
 ? Do you want to install dependencies with npm now? Yes
+```
+
+- cloud function settings
+  - firebase admin import
+    - package.json > admin 확인
+
+```json
+"dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  }
+```
+
+[index.js]
+
+```javascript
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+
+admin.initializeApp();
+export const onVideoCreated = functions.firestore
+  .document("videos/{videoId")
+  .onCreate(async (snapshot, context) => {
+    snapshot.ref.update({ hello: "from functions" });
+  });
+```
+
+- cloud function 작성
+
+```
+firebase deploy --only functions
+```
+
+- firebase 배포
+
+```
+firebase deploy --only functions
 ```
