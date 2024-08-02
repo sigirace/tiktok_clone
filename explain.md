@@ -2843,3 +2843,9 @@ await spawn("ffmpeg", [
     - 두번째 인자는 전달한 데이터인 Arg
 - provider
   - AsyncNotifierProvider.family<out NotifierT extends AsyncNotifier<T>, State, Arg>
+
+### 27.4 likeVideo
+
+- document db이기에 조회에 대한 트릭이 필요함
+- 모든 것을 다 뒤지기에는 요금이 부과됨
+- doc에 pk를 동적으로 생성하여 해결
