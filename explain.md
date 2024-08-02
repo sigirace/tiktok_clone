@@ -2831,3 +2831,15 @@ await spawn("ffmpeg", [
   - orderby시에 첫번째 순서를 지정함
 - Infinite scroll
   - fetchvideo와 nextpage를 구분하여 무한 스크롤 구현
+
+### 27.3 FamilyAsyncNotifier
+
+📌 **외부의 데이터로부터 provider를 초기화**
+
+- class
+  - FamilyAsyncNotifier<State, Arg>
+    - Notifier에게 인자를 전달할 수 있음
+    - 첫번째 인자는 관리할 데이터인 State
+    - 두번째 인자는 전달한 데이터인 Arg
+- provider
+  - AsyncNotifierProvider.family<out NotifierT extends AsyncNotifier<T>, State, Arg>

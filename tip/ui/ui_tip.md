@@ -4,8 +4,8 @@
 
 > Image.network(..., fit: Boxfit.cover)
 
-## Riverpod
+## RefreshIndicator
 
-📌 **state**
+📌 **onRefresh**
 
-- state가 새로운 state로 변경되면, 이를 구독하고 있는 Widget들이 다시 빌드되도록 함
+- return Future<void>
