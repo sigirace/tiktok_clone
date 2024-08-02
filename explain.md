@@ -2789,17 +2789,30 @@ npm i child-process-promise
 
 ```typescript
 // spawn 생성
-const spawn = require('chid-process-promise').spawn;
+const spawn = require("chid-process-promise").spawn;
 // (명령어, 파라미터)
 await spawn("ffmpeg", [
-      "-i", // input
-      video.fileUrl, // file location
-      "-ss", // move timeline
-      "00:00:01.00", // start time
-      "vframes", // frame
-      "1", // frame count
-      "vf", // video filter
-      "scale=150:-1", // 가로 150, 세로 -1 영상 너비에 맞춰서 높이 설정
-      `/tmp/${snapshot.id}.jpg`
-    ]);
+  "-i", // input
+  video.fileUrl, // file location
+  "-ss", // move timeline
+  "00:00:01.00", // start time
+  "vframes", // frame
+  "1", // frame count
+  "vf", // video filter
+  "scale=150:-1", // 가로 150, 세로 -1 영상 너비에 맞춰서 높이 설정
+  `/tmp/${snapshot.id}.jpg`,
+]);
 ```
+
+### 26.5 publicUrl
+
+- upload : Promise<UploadResponse>
+  - type UploadResponse = [File, unknown];
+- 반정규: 모든 영상에서 사용자를 찾는것 보다 사용자에 영상 인덱스를 복사해놓는게 저렴함
+
+📌 **file.makePublic()의 역할**
+
+1. 파일을 공개로 설정:
+   - 이 메서드는 업로드된 파일의 액세스 제어 목록(ACL)을 업데이트하여, 해당 파일을 공용(public)으로 설정합니다. 이렇게 하면, 파일에 대한 읽기 권한이 누구에게나 부여됩니다.
+2. 공개 URL 생성:
+   - 파일을 공개로 설정하면, 파일에 접근할 수 있는 URL이 생성됩니다. 이를 통해 외부 사용자나 애플리케이션이 해당 파일에 쉽게 접근할 수 있습니다.
