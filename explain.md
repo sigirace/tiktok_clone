@@ -2692,3 +2692,8 @@ Future<void> Function() async {
   - 이미지를 얻고 캐싱하고 있음
   - fetch는 한번만함
   - url에 가짜 정보를 심어서 매번 새로운 url로 보이게함
+
+### 26.1 VideosRepository
+
+- upload의 결과인 UploadTask가 있으면 정상적으로 업로드 된 것
+  - task.ref.getDownloadURL()
