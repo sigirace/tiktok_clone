@@ -2762,13 +2762,44 @@ export const onVideoCreated = functions.firestore
 ```
 
 - cloud function 작성
-
-```
-firebase deploy --only functions
-```
-
 - firebase 배포
 
 ```
 firebase deploy --only functions
+```
+
+### 26.4 ffmpeg
+
+- cloud function이 구글 서버에서 실행시
+  - 서버에는 system packages inclouded in Cloud Functions가 설치되어있음
+  - 이는 내 function이 실행할 서버에 설치된 패키지를 호출할 수 있음
+  - 즉, 임시의 접근 권한 개념
+  - 임시 폴더에도 접근 가능 (function 종료시 삭제)
+- ffmpeg
+  - 미디어에 대한 다양한 처리가 가능
+- child-process-promise
+  - 코드가 실행되는 서버에 프로세스를 실행시킬 수 있는 패키지
+
+```
+cd functions
+npm i child-process-promise
+```
+
+[사용법]
+
+```typescript
+// spawn 생성
+const spawn = require('chid-process-promise').spawn;
+// (명령어, 파라미터)
+await spawn("ffmpeg", [
+      "-i", // input
+      video.fileUrl, // file location
+      "-ss", // move timeline
+      "00:00:01.00", // start time
+      "vframes", // frame
+      "1", // frame count
+      "vf", // video filter
+      "scale=150:-1", // 가로 150, 세로 -1 영상 너비에 맞춰서 높이 설정
+      `/tmp/${snapshot.id}.jpg`
+    ]);
 ```
