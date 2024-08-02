@@ -2697,3 +2697,11 @@ Future<void> Function() async {
 
 - upload의 결과인 UploadTask가 있으면 정상적으로 업로드 된 것
   - task.ref.getDownloadURL()
+
+### 26.2 uploadVideoProvider
+
+- cloud function이 영상을 다운로드받고, 이미지를 추출해서 썸네일을 등록할 것임
+
+📌 **Xfile to File**
+
+- File(widget.video.path)
