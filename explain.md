@@ -2887,3 +2887,9 @@ await spawn("ffmpeg", [
   - 즉, 내 collection의 변경된 부분만 받아옴
 - map
   - array를 다른 모양의 array로 변형시킴
+
+### 28.3 autoDispose
+
+- riverpod은 widget tree가 아닌 다른 곳에 위치함
+  - flutter에 의존하지 않음
+  - autodispose하지 않으면 provider가 계속 살아있게 됨

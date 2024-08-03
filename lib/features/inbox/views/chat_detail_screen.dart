@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tictok_clone/constants/gaps.dart';
 import 'package:tictok_clone/constants/sizes.dart';
+import 'package:tictok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tictok_clone/features/inbox/view_models/messages_view_model.dart';
 
 class ChatDetailScreen extends ConsumerStatefulWidget {
@@ -123,68 +124,74 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       ),
       body: Stack(
         children: [
-          GestureDetector(
-            onTap: _outFocus,
-            child: ListView.separated(
-              padding: const EdgeInsets.only(
-                top: Sizes.size10,
-                bottom: Sizes.size96,
-                left: Sizes.size16,
-                right: Sizes.size16,
-              ),
-              itemBuilder: (context, index) {
-                final isMine = index % 2 == 0;
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment:
-                      isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(
-                        Sizes.size24,
+          ref.watch(chatProvider).when(
+                error: (error, StackTrace) => Center(
+                  child: Text(
+                    error.toString(),
+                  ),
+                ),
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                data: (messages) {
+                  return GestureDetector(
+                    onTap: _outFocus,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.only(
+                        top: Sizes.size10,
+                        bottom: Sizes.size96,
+                        left: Sizes.size16,
+                        right: Sizes.size16,
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(
-                            Sizes.size20,
-                          ),
-                          topRight: const Radius.circular(
-                            Sizes.size20,
-                          ),
-                          bottomLeft: isMine
-                              ? const Radius.circular(
-                                  Sizes.size20,
-                                )
-                              : const Radius.circular(
-                                  Sizes.size1,
+                      itemBuilder: (context, index) {
+                        final message = messages[index];
+                        final isMine =
+                            message.userId == ref.read(authRepo).user!.uid;
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: isMine
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Container(
+                                padding: const EdgeInsets.all(Sizes.size24),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft:
+                                        const Radius.circular(Sizes.size20),
+                                    topRight:
+                                        const Radius.circular(Sizes.size20),
+                                    bottomLeft: isMine
+                                        ? const Radius.circular(Sizes.size20)
+                                        : const Radius.circular(Sizes.size1),
+                                    bottomRight: isMine
+                                        ? const Radius.circular(Sizes.size1)
+                                        : const Radius.circular(Sizes.size20),
+                                  ),
+                                  color: isMine
+                                      ? Colors.blue
+                                      : Theme.of(context).primaryColor,
                                 ),
-                          bottomRight: isMine
-                              ? const Radius.circular(
-                                  Sizes.size1,
-                                )
-                              : const Radius.circular(
-                                  Sizes.size20,
+                                child: Text(
+                                  message.text,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Sizes.size16,
+                                  ),
+                                  softWrap: true,
                                 ),
-                        ),
-                        color: isMine
-                            ? Colors.blue
-                            : Theme.of(context).primaryColor,
-                      ),
-                      child: const Text(
-                        "this is a message.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Sizes.size16,
-                        ),
-                      ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) => Gaps.v10,
+                      itemCount: messages.length,
                     ),
-                  ],
-                );
-              },
-              separatorBuilder: (context, index) => Gaps.v10,
-              itemCount: 10,
-            ),
-          ),
+                  );
+                },
+              ),
           Positioned(
             bottom: 0,
             width: MediaQuery.of(context).size.width,

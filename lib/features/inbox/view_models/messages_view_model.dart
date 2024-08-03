@@ -40,7 +40,7 @@ final messagesProvider = AsyncNotifierProvider<MessageViewModel, void>(
   () => MessageViewModel(),
 );
 
-final chatProvider = StreamProvider<List<MessageModel>>((ref) {
+final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
   // firestore 접근
   final db = FirebaseFirestore.instance;
 
