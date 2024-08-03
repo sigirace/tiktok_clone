@@ -2932,3 +2932,11 @@ await spawn("ffmpeg", [
   - 메세지로 앱이 열릴때 해당 알람을 받음
     - 단, 디버그는 현재상황에서 불가능
     - context를 활용함
+
+### 29.4 ShellRoute
+
+- route를 감싸는 wrapper
+- go route는 route가 현재 무엇을 보여주고 있는지 지켜봄
+  - 해당 화면으로 갔을 때 goroute가 shellroute의 child로 만들어버림
+  - 단, return하기 전에 하고싶은 것 모든지 할 수 있음
+  - 특히, context 제약에 관련된 것들
