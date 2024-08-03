@@ -2908,3 +2908,17 @@ await spawn("ffmpeg", [
 - build에서 token을 받음
   - token을 통해 특정 유저에게 메세지를 보냄
 - notification provider는 Main에서 초기화
+
+### 29.2 Foreground Notifications
+
+- 어플이 가질 수 있는 상태 3가지
+
+  - Foreground
+  - Background
+  - Terminated: 디바이스가 잠겨있거나 꺼진 경우
+
+- permission
+  - authorized: 오케이
+  - denied: 유저가 거부함
+  - notDetermined: 유저에게 요청을 보냄
+  - provisional: 일단 당장은 허락
