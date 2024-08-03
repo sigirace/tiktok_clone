@@ -2902,3 +2902,9 @@ await spawn("ffmpeg", [
 
 - 메세지 유형
   - push 알람을 앱 밖, 앱 안 둘 다 만들어 줘야함
+
+### 29.1 getToken
+
+- build에서 token을 받음
+  - token을 통해 특정 유저에게 메세지를 보냄
+- notification provider는 Main에서 초기화
