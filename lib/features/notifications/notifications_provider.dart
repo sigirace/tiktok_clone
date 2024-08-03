@@ -19,11 +19,24 @@ class NotificationsProvider extends AsyncNotifier {
     if (permission.authorizationStatus == AuthorizationStatus.denied) {
       return;
     }
+
+    //foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("Got a message whilst in the foreground!");
       print(
           "Message also contained a notification: ${message.notification?.title}");
     });
+
+    //background
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print(message.data['screen']);
+    });
+
+    //terminated
+    final initialMessage = await _messaging.getInitialMessage();
+    if (initialMessage != null) {
+      print(initialMessage.data['screen']);
+    }
   }
 
   @override

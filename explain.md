@@ -2922,3 +2922,13 @@ await spawn("ffmpeg", [
   - denied: 유저가 거부함
   - notDetermined: 유저에게 요청을 보냄
   - provisional: 일단 당장은 허락
+
+### 29.3 Background Notification
+
+- onMessageOpenedApp
+  - 앱이 background 상태에서 열렸을 때 보내짐
+- getInitialMessage
+  - terminated 상태에서 알림을 누르면 메세지가 return됨
+  - 메세지로 앱이 열릴때 해당 알람을 받음
+    - 단, 디버그는 현재상황에서 불가능
+    - context를 활용함
