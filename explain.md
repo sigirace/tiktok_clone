@@ -2893,3 +2893,12 @@ await spawn("ffmpeg", [
 - riverpod은 widget tree가 아닌 다른 곳에 위치함
   - flutter에 의존하지 않음
   - autodispose하지 않으면 provider가 계속 살아있게 됨
+
+### 29.0 Push Notifications, Introduction
+
+- https://firebase.google.com/docs/cloud-messaging/flutter/client?hl=ko
+
+> flutter pub add firebase_messaging
+
+- 메세지 유형
+  - push 알람을 앱 밖, 앱 안 둘 다 만들어 줘야함

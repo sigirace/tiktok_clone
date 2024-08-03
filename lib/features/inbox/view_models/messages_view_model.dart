@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tictok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tictok_clone/features/inbox/models/message.dart';
 import 'package:tictok_clone/features/inbox/repos/messages_repo.dart';
