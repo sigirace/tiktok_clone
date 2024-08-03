@@ -2909,6 +2909,12 @@ await spawn("ffmpeg", [
   - token을 통해 특정 유저에게 메세지를 보냄
 - notification provider는 Main에서 초기화
 
+📍 **Iphone**
+
+- https://velog.io/@tygerhwang/Flutter-Firebase-FCMFirebase-Cloud-Message-사용해-보기
+- 이 블로그에 나와있는것처럼 하니까 push알람이 잘 오네요
+- 그리고 애플 기기로 하시려면 무조건 Apple Developer 구독(1년 129,000원)을 해야 가능합니다
+
 ### 29.2 Foreground Notifications
 
 - 어플이 가질 수 있는 상태 3가지
@@ -2940,3 +2946,17 @@ await spawn("ffmpeg", [
   - 해당 화면으로 갔을 때 goroute가 shellroute의 child로 만들어버림
   - 단, return하기 전에 하고싶은 것 모든지 할 수 있음
   - 특히, context 제약에 관련된 것들
+
+### 29.5 Targeted Notification
+
+- firebase admin sdk의 messaging class
+  - admin sdk는 god mode
+- sendtodevice
+  - registrationTokenOrTokens
+  - Message Payload
+- index.ts에 cloud function으로 정의
+
+  - sendtodivice는 이제 사용안되고 send 사용
+
+- https://console.cloud.google.com/welcome?project=tiktok-clone-sigirace
+  - api 서비스 > 라이브러리 > messaging > firebase cloud messaging api > manage button to api 사용설정됨
