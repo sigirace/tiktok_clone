@@ -45,7 +45,7 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   void _onSendPress() {
     final text = _editingController.text;
     if (text == "") return;
-    ref.read(messagesProvider.notifier).sendMessage(text);
+    ref.read(messagesProvider.notifier).sendMessage(text, context);
     _editingController.text = "";
     _onStartWriting();
   }

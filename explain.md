@@ -2873,3 +2873,17 @@ await spawn("ffmpeg", [
 > final isLoading = ref.watch(messagesProvider).isLoading;
 
 - watch로 loading중인 것을 알 수 있음
+
+### 28.2 StreamProvider
+
+- steam
+  - app과 backend의 연결
+  - firebase가 documents의 steam을 제공함
+- StreamProvider
+  - return을 stream으로 해야함
+  - query에서 get이 아닌 snapshot을 하면 stream을 return함
+- snapshot
+  - Firestore에서 데이터베이스의 상태를 나타내는 객체로, 특정 시점의 데이터를 포함
+  - 즉, 내 collection의 변경된 부분만 받아옴
+- map
+  - array를 다른 모양의 array로 변형시킴
