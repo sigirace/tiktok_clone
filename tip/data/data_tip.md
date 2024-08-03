@@ -20,6 +20,16 @@
 
 - 구독하고 있는 Widget들이 다시 빌드되도록 함
 
+📌 **isLoading**
+
+> state = const AsyncValue.loading();
+
+- state가 loading중일 떄
+
+> final isLoading = ref.watch(messagesProvider).isLoading;
+
+- watch로 loading중인 것을 알 수 있음
+
 # Cloud Function
 
 ## firestore

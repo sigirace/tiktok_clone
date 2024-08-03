@@ -2857,3 +2857,19 @@ await spawn("ffmpeg", [
 > admin.firestore.FieldValue.increment(1)
 
 - 감소는 -1
+
+### 28.1 Send Message
+
+📌 **필드에 입력된 값을 이용하기**
+
+- 알맞은 Controller 사용
+
+📌 **isLoading**
+
+> state = const AsyncValue.loading();
+
+- state가 loading중일 떄
+
+> final isLoading = ref.watch(messagesProvider).isLoading;
+
+- watch로 loading중인 것을 알 수 있음
