@@ -2967,3 +2967,53 @@ await spawn("ffmpeg", [
   - 일종의 언어
   - 누가 데이터를 일고 쓰고 지우거나 등 하는지 특정할 수 있음
   - backend, firestore, file system을 안전하게 할 수 있음
+
+### 30.1 Security Rules
+
+👀 **Security Rules**
+
+> firebase가 확인하는 규칙
+
+- request는 누가하는가
+- resource는 어떤 document를 변경하려고 하는지
+- firestore database > 규칙
+
+[before]
+
+```js
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2024, 8, 31);
+    }
+  }
+}
+```
+
+- 모든 사용자에게 동일한 권한
+
+[after]
+
+```js
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{document=**} {
+      allow read, write, update, create: if request.auth != null && resource.id == request.auth.uid;
+      allow delete : if request.auth.uid == "sigi";
+    }
+  }
+}
+```
+
+- match /users/{document=\*\*}
+  - /users 그리고 사용자 id의 document에 대해서
+  - \*\*는 이 경로 하위의 모든 것에 대한 매칭을 뜻함(허용)
+- if request.auth != null
+  - 로그인 체크
+- resource.id == request.auth.uid
+  - resource는 생성될 document
+  - 본인 계정만 허용
