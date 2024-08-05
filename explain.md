@@ -3034,3 +3034,15 @@ service cloud.firestore {
 ```
 
 - get 방식으로 collection의 값을 알아낼 수 있음
+
+### 30.3 Unit Testing
+
+- test folder
+  - 파일명이 test로 끝나야함
+- testing의 첫번째 규칙은 깨뜨리기
+  - 일부러 에러 발생
+- group을 만들어서 테스트 할 수 있음
+
+📌 **테스트의 범위**
+
+- 이론적으로는 가능한 많이 테스트하되, 주로 사용자가 상호작용할 주요 부분에 초점을 맞춤
