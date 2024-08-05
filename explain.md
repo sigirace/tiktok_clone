@@ -3046,3 +3046,18 @@ service cloud.firestore {
 📌 **테스트의 범위**
 
 - 이론적으로는 가능한 많이 테스트하되, 주로 사용자가 상호작용할 주요 부분에 초점을 맞춤
+
+### 30.4 Widget Testing part One
+
+- pumpWidget
+  - 주어진 widget으로부터 UI를 그림
+- 상상으로 화면에 그려진다고 생각하고 이를 테스팅함
+
+```dart
+expect(find.text("Next"), findsOneWidget);
+```
+
+- 위젯에서 Next라는 글자가 한 개 있을 것이라고 예측
+- tester.firstWidget
+  - 위젯에 접근해 속성을 테스팅
+  - tester를 이용해 finder에 맞는 첫번째 widget을 얻음
