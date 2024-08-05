@@ -3003,7 +3003,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{document=**} {
       allow read, write, update, create: if request.auth != null && resource.id == request.auth.uid;
-      allow delete : if request.auth.uid == "sigi";
+      allow delete : if request.auth.uid == "sigikang";
     }
   }
 }
@@ -3012,8 +3012,25 @@ service cloud.firestore {
 - match /users/{document=\*\*}
   - /users 그리고 사용자 id의 document에 대해서
   - \*\*는 이 경로 하위의 모든 것에 대한 매칭을 뜻함(허용)
+  - 세심하게 컨트롤하고 싶으면 doucmentId를 적어줌 users/{userId}, users/{userId}/videos 등
 - if request.auth != null
   - 로그인 체크
 - resource.id == request.auth.uid
   - resource는 생성될 document
   - 본인 계정만 허용
+
+### 30.2 Security Querying
+
+```js
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /likes/{document=**}{
+      allow create: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.token != ""
+    }
+  }
+}
+```
+
+- get 방식으로 collection의 값을 알아낼 수 있음
