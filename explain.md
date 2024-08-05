@@ -2960,3 +2960,10 @@ await spawn("ffmpeg", [
 
 - https://console.cloud.google.com/welcome?project=tiktok-clone-sigirace
   - api 서비스 > 라이브러리 > messaging > firebase cloud messaging api > manage button to api 사용설정됨
+
+### 30.0 Security And Testing, Introduction
+
+- Firebase security rule
+  - 일종의 언어
+  - 누가 데이터를 일고 쓰고 지우거나 등 하는지 특정할 수 있음
+  - backend, firestore, file system을 안전하게 할 수 있음
