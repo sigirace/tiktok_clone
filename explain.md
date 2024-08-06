@@ -3061,3 +3061,7 @@ expect(find.text("Next"), findsOneWidget);
 - tester.firstWidget
   - 위젯에 접근해 속성을 테스팅
   - tester를 이용해 finder에 맞는 첫번째 widget을 얻음
+
+### 30.5 Widget Testing part Two
+
+- MediaQuery와 같은 상위 widget이 존재한다면 wrap으로 수행
