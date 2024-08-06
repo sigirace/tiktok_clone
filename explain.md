@@ -3065,3 +3065,41 @@ expect(find.text("Next"), findsOneWidget);
 ### 30.5 Widget Testing part Two
 
 - MediaQuery와 같은 상위 widget이 존재한다면 wrap으로 수행
+
+### 30.6 Integration Testing part One
+
+- 모든 부분을 통합하여 테스트하는 것
+- 사람이 어플을 사용하는 걸 시뮬레이션 하는 것
+- 테스트의 3단계
+  1. setUp: 테스트가 본격적으로 시작되기 전에 돌아가는 함수
+  2. unittest, grouptest 등
+  3. tearDown: 테스트가 완료된 다음에 돌아가는 함수
+
+```dart
+await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+```
+
+- Firebase 어플리케이션의 초기화
+
+```dart
+await FirebaseAuth.instance.signOut();
+```
+
+- 로그아웃한 상태
+
+```dart
+await tester.pumpWidget(
+      const ProviderScope(
+        child: TikTokApp(),
+      ),
+    );
+```
+
+- 앱 전체를 렌더링하기 때문에 오래걸림
+
+📍 **pumpAndSettle**
+
+- 애니메이션 효과나 화면 전환 등으로 인해 나오는 프레임은 넘어가고 화면의 최종 프레임을 렌더링
+- tester.tap을 통해서 다른 화면으로의 전환 발생
