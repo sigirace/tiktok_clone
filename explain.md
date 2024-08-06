@@ -3103,3 +3103,7 @@ await tester.pumpWidget(
 
 - 애니메이션 효과나 화면 전환 등으로 인해 나오는 프레임은 넘어가고 화면의 최종 프레임을 렌더링
 - tester.tap을 통해서 다른 화면으로의 전환 발생
+
+### 30.7 Integration Testing part Two
+
+- testing에서의 textfild 작성
